@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COSPLATFORM</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <img src="src/logo.png?height=60&width=60" alt="COS PLAT FORM Logo" class="logo">
+            <a href="#about">ABOUT</a>
+            <a href="#talent">TALENT</a>
+            <a href="#cosplay">COSPLAY</a>
+            <a href="#contact">CONTACT</a>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                </a>
+            </div>
+        </nav>
+        <main>
+            <section class="hero">
+                <div class="slideshow-container">
+                    <div class="slide fade">
+                        <img src="src/top1.jpg?height=1080&width=1920" alt="スライド 1">
+                        <div class="slide-content">
+                            <h1>TOP/バナー 1</h1>
+                            <p>(仮装、夢見コスプレ/原宿～3Dフォトブース)</p>
+                            <button>詳細を見る</button>
+                        </div>
+                    </div>
+                    <div class="slide fade">
+                        <img src="src/top2.jpg?height=1080&width=1920" alt="スライド 2">
+                        <div class="slide-content">
+                            <h1>TOP/バナー 2</h1>
+                            <p>コスプレイヤーの皆様へ</p>
+                            <button>詳細を見る</button>
+                        </div>
+                    </div>
+                    <div class="slide fade">
+                        <img src="src/top3.jpg?height=1080&width=1920" alt="スライド 3">
+                        <div class="slide-content">
+                            <h1>TOP/バナー 3</h1>
+                            <p>新しいイベント情報</p>
+                            <button>詳細を見る</button>
+                        </div>
+                    </div>
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <div class="dot-container">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+            </section>
+            <!-- 以下のセクションは変更なし -->
+            <section class="connect">
+                <h2>コスプレで<br>世界と<br>コネクト</h2>
+                <p>日本発のコスプレコミュニティーを広げていくサービス。アニメ、マンガ、ゲームなどの作品が好きな人たちが、コスプレを通じて繋がっていく。</p>
+            </section>
+            <section id="talent" class="talent">
+                <h2>TALENT</h2>
+                <div class="talent-grid">
+                    <div class="talent-item">
+                        <img src="src/supe.png?height=200&width=200" alt="スペシャルウィーク">
+                        <p>名前 1</p>
+                    </div>
+                    <div class="talent-item">
+                        <img src="src/suzu.png?height=200&width=200" alt="サイレンススズカ">
+                        <p>名前 2</p>
+                    </div>
+                    <div class="talent-item">
+                        <img src="src/tai.png?height=200&width=200" alt="トウカイテイオー">
+                        <p>名前 3</p>
+                    </div>
+                    <div class="talent-item">
+                        <img src="/placeholder.svg?height=200&width=200" alt="タレント 4">
+                        <p>名前 4</p>
+                    </div>
+                    <div class="see-more">
+                        <a href="talent.html" class="arrow-button" aria-label="タレント一覧をもっと見る">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section id="cosplay" class="cosplay">
+                <h2>COSPLAY</h2>
+                <div class="cosplay-grid">
+                    <img src="src/supe1.png?height=300&width=300" alt="コスプレ 1">
+                    <img src="src/suzu2.png?height=300&width=300" alt="コスプレ 2">
+                    <img src="/placeholder.svg?height=300&width=300" alt="コスプレ 3">
+                    <img src="/placeholder.svg?height=300&width=300" alt="コスプレ 4">
+                    <img src="/placeholder.svg?height=300&width=300" alt="コスプレ 5">
+                    <img src="/placeholder.svg?height=300&width=300" alt="コスプレ 6">
+                </div>
+                <p>コスプレイベントの様子や、撮影会の写真などがご覧いただけます。</p>
+            </section>
+            <section id="news" class="news">
+                <h2>NEWS</h2>
+                <div class="news-list">
+                    <div class="news-item">
+                        <div>
+                            <p class="date">2024.10.11</p>
+                            <p class="title">ニュースタイトル 1</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                    <div class="news-item">
+                        <div>
+                            <p class="date">2024.10.12</p>
+                            <p class="title">ニュースタイトル 2</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                    <div class="news-item">
+                        <div>
+                            <p class="date">2024.10.13</p>
+                            <p class="title">ニュースタイトル 3</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
