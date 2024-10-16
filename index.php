@@ -15,7 +15,7 @@
                 <div class="slideshow-container">
                     <?php
                     $slides = [
-                        ['title' => 'TOP/バナー 1', 'description' => '(仮装、夢見ゴスプレ/原宿～3Dフォトブース)'],
+                        ['title' => '', 'description' => ''],
                         ['title' => 'TOP/バナー 2', 'description' => 'コスプレイヤーの皆様へ'],
                         ['title' => 'TOP/バナー 3', 'description' => '新しいイベント情報']
                     ];
@@ -51,20 +51,17 @@
                 <h2>TALENT</h2>
                 <div class="talent-grid">
                     <?php
-                    $talents = [
-                        ['name' => 'スペシャルウィーク'],
-                        ['name' => 'サイレンススズカ'],
-                        ['name' => 'トウカイテイオー'],
-                        ['name' => '名前 4']
-                    ];
-                    $counter = 0;
-                    foreach ($talents as $talent) {
-                        $counter++;
-                        echo '<div class="talent-item">';
-                        echo '<img src="src/talent' . $counter . '.png" alt="タレント ' . $talent['name'] . '">';
-                        echo '<p>' . $talent['name'] . '</p>';
-                        echo '</div>';
-                    }
+                        
+                        require_once('dbaccess.php'); 
+                        $obj = new DbController();
+                        $row = $obj->getTalentMain();
+
+                        foreach ($row as $row) {
+                            echo '<div class="talent-item">';
+                            echo '<img src="src/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '">';
+                            echo '<p>' . $row['layer_name'] . '</p>';
+                            echo '</div>';
+                        }
                     ?>
                     <div class="see-more">
                         <a href="talent.php" class="arrow-button" aria-label="タレント一覧をもっと見る">
@@ -81,9 +78,11 @@
                 <h2>COSPLAY</h2>
                 <div class="cosplay-grid">
                     <?php
-                    for ($i = 1; $i <= 6; $i++) {
-                        echo '<img src="src/cos' . $i . '.png" alt="コスプレ ' . $i . '">';
-                    }
+                        $row = $obj->getGalleryMain();
+
+                        foreach ($row as $row) {
+                            echo '<img src="src/' . $row['gallery_img'] . '" alt="コスプレ ' . $row['gallery_id'] . '">';
+                        }
                     ?>
                 </div>
                 <p>コスプレイベントの様子や、撮影会の写真などがご覧いただけます。</p>
