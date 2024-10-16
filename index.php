@@ -52,7 +52,7 @@
                 <div class="talent-grid">
                     <?php
                         
-                        require_once('dbaccess.php'); 
+                        require_once('db.php'); 
                         $obj = new DbController();
                         $row = $obj->getTalentMain();
 

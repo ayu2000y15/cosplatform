@@ -15,7 +15,7 @@
                 <h1>TALENT</h1>
                 <div class="talent-grid">
                     <?php
-                        require_once('dbaccess.php'); 
+                        require_once('db.php'); 
                         $obj = new DbController();
                         $row = $obj->getTalentList();
                         
