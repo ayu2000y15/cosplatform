@@ -18,7 +18,7 @@
                         require_once('dbaccess.php'); 
                         $obj = new DbController();
                         $row = $obj->getTalentList();
-
+                        
                         foreach ($row as $row) {
                             echo '<div class="talent-item">';
                             echo '<img src="src/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '">';
