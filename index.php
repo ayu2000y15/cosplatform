@@ -1,3 +1,12 @@
+<?php
+    $slides = [
+        ['title' => '', 'description' => '', 'filename' => 'top1.jpg', 'alt' => 'スライド1'],
+        ['title' => 'TOP/バナー 2', 'description' => 'コスプレイヤーの皆様へ', 'filename' => 'top2.jpg', 'alt' => ''],
+        ['title' => 'TOP/バナー 3', 'description' => '新しいイベント情報' , 'filename' => 'top3.jpg', 'alt' => '']
+    ];
+
+    $connect_item = ['filename' => 'src/top1.jpg', 'alt' => 'コスプレ'];
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -23,14 +32,9 @@
 
     <div class="slideshow-container">
         <?php
-        $slides = [
-            ['title' => '', 'description' => ''],
-            ['title' => 'TOP/バナー 2', 'description' => 'コスプレイヤーの皆様へ'],
-            ['title' => 'TOP/バナー 3', 'description' => '新しいイベント情報']
-        ];
         foreach ($slides as $index => $slide) {
             echo '<div class="slide fade">';
-            echo '<img src="src/top' . ($index + 1) . '.jpg" alt="スライド ' . ($index + 1) . '">';
+            echo '<img src="src/' . $slide['filename'] . '" alt="' . $slide['alt'] . '">';
             echo '<div class="slide-content">';
             echo '<h1>' . $slide['title'] . '</h1>';
             echo '<p>' . $slide['description'] . '</p>';
@@ -54,7 +58,9 @@
 
     <main>
         <section class="connect-image">
-            <img src="src/top1.jpg" alt="コスプレで世界とコネクト" class="full-width-image">
+            <?php
+                echo '<img src="' . $connect_item['filename'] . '" alt="' . $connect_item['alt'] .'" class="full-width-image">'
+            ?>
         </section>
         <section id="talent" class="talent">
             <h2>TALENT</h2>
@@ -132,4 +138,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+</html
