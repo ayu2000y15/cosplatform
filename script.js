@@ -13,19 +13,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // スクロール時のヘッダー表示/非表示
     window.addEventListener('scroll', function() {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop) {
-            header.classList.add('hidden');
-        } else {
+        if (window.innerWidth <= 768) {
+            // モバイル版では常に表示
             header.classList.remove('hidden');
+        } else {
+            if (scrollTop > lastScrollTop) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
         }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     }, false);
 
     // ウィンドウサイズ変更時の処理
     window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
+        if (window.innerWidth >= 769) {
             mainNav.classList.remove('active');
             menuToggle.setAttribute('aria-expanded', 'false');
+            mainNav.style.display = 'flex'; // PC版でナビゲーションを表示
+        } else {
+                   mainNav.style.display = 'none'; // モバイル版でナビゲーションを非表示
         }
     });
 
@@ -64,3 +71,39 @@ document.addEventListener('DOMContentLoaded', function() {
         plusSlides(1);
     }, 5000);
 });
+// ハンバーガーメニューのスタイル
+const style = document.createElement('style');
+style.textContent = `
+    .menu-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #333;
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+`;
+document.head.appendChild(style);
