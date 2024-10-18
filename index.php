@@ -1,6 +1,6 @@
 <?php
     $slides = [
-        ['title' => '', 'description' => '', 'filename' => 'top1.jpg', 'alt' => 'スライド1'],
+        ['title' => 'TOP/バナー 1', 'description' => '何か文字を入れる', 'filename' => 'top1.jpg', 'alt' => 'スライド1'],
         ['title' => 'TOP/バナー 2', 'description' => 'コスプレイヤーの皆様へ', 'filename' => 'top2.jpg', 'alt' => ''],
         ['title' => 'TOP/バナー 3', 'description' => '新しいイベント情報' , 'filename' => 'top3.jpg', 'alt' => '']
     ];
@@ -14,23 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ホーム - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* 既存のスタイル */
-        .connect-image {
-            margin-top: -4px; /* ヒーローセクションとの間隔を削除 */
-        }
-        .full-width-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-    </style>
 </head>
 <body>
     <?php include 'header.php'; ?>
 
-    <div class="container">
-        <main>
+    <main>
+        <div id="back">
             <section class="hero">
                 <div class="slideshow-container">
                     <?php
@@ -40,7 +29,7 @@
                         echo '<div class="slide-content">';
                         echo '<h1>' . $slide['title'] . '</h1>';
                         echo '<p>' . $slide['description'] . '</p>';
-                        echo '<button>詳細を見る</button>';
+                        //echo '<button>詳細を見る</button>';
                         echo '</div>';
                         echo '</div>';
                     }
@@ -63,11 +52,10 @@
                 ?>
             </section>
 
-            <section id="talent" class="talent">
+            <section id="talent" class="container-box">
                 <h2>TALENT</h2>
                 <div class="talent-grid">
                     <?php
-                        
                         require_once('db.php'); 
                         $obj = new DbController();
                         $row = $obj->getTalentMain();
@@ -89,8 +77,9 @@
                     </div>
                 </div>
             </section>
-
-            <section id="cosplay" class="cosplay">
+        </div>
+        <div class="container">
+            <section id="cosplay" class="container-box cosplay">
                 <h2>COSPLAY</h2>
                 <div class="cosplay-grid">
                     <?php
@@ -100,11 +89,19 @@
                             echo '<img src="src/' . $row['gallery_img'] . '" alt="コスプレ ' . $row['gallery_id'] . '">';
                         }
                     ?>
+                    <div class="see-more">
+                        <a href="cosplay.php" class="arrow-button" aria-label="コスプレ一覧をもっと見る">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
                 <p>コスプレイベントの様子や、撮影会の写真などがご覧いただけます。</p>
             </section>
 
-            <section id="news" class="news">
+            <section id="news" class="container-box">
                 <h2>NEWS</h2>
                 <div class="news-list">
                     <?php
@@ -122,11 +119,12 @@
                         echo '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
                         echo '</div>';
                     }
-                    ?>
+                ?>
                 </div>
             </section>
-        </main>
-    </div>
+        </div>
+    </main>
+    
 
     <?php include 'footer.php'; ?>
 
