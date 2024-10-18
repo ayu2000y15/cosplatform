@@ -6,9 +6,9 @@
                 <p>COSPLATFORM</p>
             </div>
             <nav class="footer-nav">
-                <a href="#about">ABOUT</a>
-                <a href="#talent">TALENT</a>
-                <a href="#cosplay">COSPLAY</a>
+                <a href="about.php">ABOUT</a>
+                <a href="talent.php">TALENT</a>
+                <a href="cosplay.php">COSPLAY</a>
                 <a href="#contact">CONTACT</a>
             </nav>
             <div class="footer-social">

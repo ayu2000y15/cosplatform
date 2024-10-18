@@ -21,7 +21,7 @@
         }
 
         public function getGalleryMain(){
-            //Mainページのgalleryテーブル取得するSQL
+            //Mainページのtalentテーブル取得するSQL
             $sql = 'SELECT gallery_id, gallery_img FROM gallery where del_flg = 0 LIMIT 8';
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
@@ -40,6 +40,5 @@
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
-
     }
 ?>

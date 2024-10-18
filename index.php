@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="style.css">
     <style>
         /* 既存のスタイル */
-
         .connect-image {
             margin-top: -4px; /* ヒーローセクションとの間隔を削除 */
         }
@@ -30,112 +29,107 @@
 <body>
     <?php include 'header.php'; ?>
 
-    <div class="slideshow-container">
-        <?php
-        foreach ($slides as $index => $slide) {
-            echo '<div class="slide fade">';
-            echo '<img src="src/' . $slide['filename'] . '" alt="' . $slide['alt'] . '">';
-            echo '<div class="slide-content">';
-            echo '<h1>' . $slide['title'] . '</h1>';
-            echo '<p>' . $slide['description'] . '</p>';
-            echo '<button>詳細を見る</button>';
-            echo '</div>';
-            echo '</div>';
-        }
-        ?>
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        <section class="hero">
-            <div class="dot-container">
-                <?php
-                for ($i = 0; $i < count($slides); $i++) {
-                    echo '<span class="dot" onclick="currentSlide(' . ($i + 1) . ')"></span>';
-                }
-                ?>
-            </div>
-        </section>
-    </div>
-
-    <main>
-        <section class="connect-image">
-            <?php
-                echo '<img src="' . $connect_item['filename'] . '" alt="' . $connect_item['alt'] .'" class="full-width-image">'
-            ?>
-        </section>
-        <section id="talent" class="talent">
-            <h2>TALENT</h2>
-            <div class="talent-grid">
-                <?php
-                    
-                    require_once('db.php'); 
-                    $obj = new DbController();
-                    $row = $obj->getTalentMain();
-
-                    foreach ($row as $row) {
-                        echo '<div class="talent-item">';
-                        echo '<img src="src/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '">';
-                        echo '<p>' . $row['layer_name'] . '</p>';
+    <div class="container">
+        <main>
+            <section class="hero">
+                <div class="slideshow-container">
+                    <?php
+                    foreach ($slides as $index => $slide) {
+                        echo '<div class="slide fade">';
+                        echo '<img src="src/' . $slide['filename'] . '" alt="' . $slide['alt'] . '">';
+                        echo '<div class="slide-content">';
+                        echo '<h1>' . $slide['title'] . '</h1>';
+                        echo '<p>' . $slide['description'] . '</p>';
+                        echo '<button>詳細を見る</button>';
+                        echo '</div>';
                         echo '</div>';
                     }
-                ?>
-                <div class="see-more">
-                    <a href="talent.php" class="arrow-button" aria-label="タレント一覧をもっと見る">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </a>
+                    ?>
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 </div>
-            </div>
-        </section>
-
-        <section id="cosplay" class="cosplay">
-            <h2>COSPLAY</h2>
-            <div class="cosplay-grid">
-                <?php
-                    $row = $obj->getGalleryMain();
-
-                    foreach ($row as $row) {
-                        echo '<img src="src/' . $row['gallery_img'] . '" alt="コスプレ ' . $row['gallery_id'] . '">';
+                <div class="dot-container">
+                    <?php
+                    for ($i = 0; $i < count($slides); $i++) {
+                        echo '<span class="dot" onclick="currentSlide(' . ($i + 1) . ')"></span>';
                     }
-                ?>
-            </div>
-            <p>コスプレイベントの様子や、撮影会の写真などがご覧いただけます。</p>
-            <div class="see-more">
-                <a href="cosplay.php" class="arrow-button" aria-label="コスプレ写真をもっと見る">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-            </div>
-        </section>
+                    ?>
+                </div>
+            </section>
 
-        <section id="news" class="news">
-            <h2>NEWS</h2>
-            <div class="news-list">
+            <section class="connect-image">
                 <?php
-                $news_items = [
-                    ['date' => '2024.10.11', 'title' => 'ニュースタイトル 1'],
-                    ['date' => '2024.10.12', 'title' => 'ニュースタイトル 2'],
-                    ['date' => '2024.10.13', 'title' => 'ニュースタイトル 3']
-                ];
-                foreach ($news_items as $item) {
-                    echo '<div class="news-item">';
-                    echo '<div>';
-                    echo '<p class="date">' . $item['date'] . '</p>';
-                    echo '<p class="title">' . $item['title'] . '</p>';
-                    echo '</div>';
-                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
-                    echo '</div>';
-                }
+                    echo '<img src="' . $connect_item['filename'] . '" alt="' . $connect_item['alt'] .'" class="full-width-image">'
                 ?>
-            </div>
-        </section>
-    </main>
+            </section>
+
+            <section id="talent" class="talent">
+                <h2>TALENT</h2>
+                <div class="talent-grid">
+                    <?php
+                        
+                        require_once('db.php'); 
+                        $obj = new DbController();
+                        $row = $obj->getTalentMain();
+
+                        foreach ($row as $row) {
+                            echo '<div class="talent-item">';
+                            echo '<img src="src/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '">';
+                            echo '<p>' . $row['layer_name'] . '</p>';
+                            echo '</div>';
+                        }
+                    ?>
+                    <div class="see-more">
+                        <a href="talent.php" class="arrow-button" aria-label="タレント一覧をもっと見る">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cosplay" class="cosplay">
+                <h2>COSPLAY</h2>
+                <div class="cosplay-grid">
+                    <?php
+                        $row = $obj->getGalleryMain();
+
+                        foreach ($row as $row) {
+                            echo '<img src="src/' . $row['gallery_img'] . '" alt="コスプレ ' . $row['gallery_id'] . '">';
+                        }
+                    ?>
+                </div>
+                <p>コスプレイベントの様子や、撮影会の写真などがご覧いただけます。</p>
+            </section>
+
+            <section id="news" class="news">
+                <h2>NEWS</h2>
+                <div class="news-list">
+                    <?php
+                    $news_items = [
+                        ['date' => '2024.10.11', 'title' => 'ニュースタイトル 1'],
+                        ['date' => '2024.10.12', 'title' => 'ニュースタイトル 2'],
+                        ['date' => '2024.10.13', 'title' => 'ニュースタイトル 3']
+                    ];
+                    foreach ($news_items as $item) {
+                        echo '<div class="news-item">';
+                        echo '<div>';
+                        echo '<p class="date">' . $item['date'] . '</p>';
+                        echo '<p class="title">' . $item['title'] . '</p>';
+                        echo '</div>';
+                        echo '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <?php include 'footer.php'; ?>
 
     <script src="script.js"></script>
 </body>
-</html
+</html>
