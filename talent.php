@@ -10,6 +10,7 @@
             background-image: url('src/top3.jpg');
         }
     </style>
+
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -28,7 +29,10 @@
                             
                             foreach ($row as $row) {
                                 echo '<div class="talent-item">';
-                                echo '<img src="src/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '">';
+                                echo '<div class="image-container">';
+                                echo '<img src="src/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '" class="main-image">';
+                                echo '<img src="src/talent1.png" alt="タレント ' . $row['layer_name'] . '" class="hover-image">';            
+                                echo '</div>';
                                 echo '<h2>' .   $row['layer_name'] . '</h2>';
                                 echo '<p>' . $row['comment'] . '</p>';
                                 echo '</div>';
@@ -44,5 +48,29 @@
     <?php include 'footer.php'; ?>
 
     <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const talentItems = document.querySelectorAll('.talent-item');
+            talentItems.forEach(item => {
+                const mainImage = item.querySelector('.main-image');
+                const hoverImage = item.querySelector('.hover-image');
+                
+                // Preload hover image
+                const img = new Image();
+                img.src = hoverImage.src;
+                
+                item.addEventListener('mouseenter', () => {
+                    mainImage.style.opacity = '0';
+                    hoverImage.style.opacity = '1';
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    mainImage.style.opacity = '1';
+                    hoverImage.style.opacity = '0';
+                });
+            });
+        });
+    </script>
 </body>
 </html>

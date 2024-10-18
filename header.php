@@ -12,7 +12,7 @@
             <a href="about.php">ABOUT</a>
             <a href="talent.php">TALENT</a>
             <a href="cosplay.php">COSPLAY</a>
-            <a href="#contact">CONTACT</a>
+            <a href="contact.php">CONTACT</a>
         </nav>
         <div class="social-icons">
             <a href="#" aria-label="Facebook">

@@ -52,7 +52,7 @@
                 ?>
             </section>
 
-            <section id="talent" class="container-box">
+            <section id="talent" class="container-box talent">
                 <h2>TALENT</h2>
                 <div class="talent-grid">
                     <?php
@@ -61,7 +61,7 @@
                         $row = $obj->getTalentMain();
 
                         foreach ($row as $row) {
-                            echo '<div class="talent-item">';
+                            echo '<div class="talent-item-main">';
                             echo '<img src="src/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '">';
                             echo '<p>' . $row['layer_name'] . '</p>';
                             echo '</div>';
