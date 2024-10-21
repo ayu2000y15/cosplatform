@@ -19,7 +19,7 @@ body {
 
     margin: 0;
     padding: 0;
-    background-image:url(src/background.png);
+    background-image:url(img/hp/background.png);
     background-size: cover;               /* 全画面 */
     background-position: center center;   /* 縦横中央 */
 }

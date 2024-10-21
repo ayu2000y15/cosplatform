@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .subpage-hero{
-            background-image: url('src/top3.jpg');
+            background-image: url('img/hp/top3.jpg');
         }
         
         .about-diagram {
@@ -45,7 +45,7 @@
             <div class="container-box">
                 <section class="about-content">
                     <h2>コスプレで世界とコネクト</h2>
-                    <img src="src/top3.jpg" alt="COS PLAT FORM Diagram" class="about-diagram">
+                    <img src="img/hp/top3.jpg" alt="COS PLAT FORM Diagram" class="about-diagram">
                     <p>日本のポップカルチャーとして浸透しているアニメ、ゲーム、マンガ。そこから生まれた新たな文化"コスプレ"を通じて世界とつながる。</p>
                     <p>COS PLAT FORMは、コスプレを通じて世界中のファンとクリエイターを繋ぐプラットフォームです。私たちは以下の3つの柱を中心に活動しています。</p>
                     <p><strong>TALENT:</strong> 才能あるコスプレイヤーの発掘と支援</p>

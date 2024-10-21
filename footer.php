@@ -2,7 +2,7 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="src/logo.png" alt="COSPLATFORM Logo">
+                <img src="img/hp/logo.png" alt="COSPLATFORM Logo">
                 <p>COSPLATFORM</p>
             </div>
             <nav class="footer-nav">

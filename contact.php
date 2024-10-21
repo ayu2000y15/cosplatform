@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .subpage-hero {
-            background-image: url('src/top3.jpg');
+            background-image: url('img/hp/top3.jpg');
         }
     </style>
 </head>

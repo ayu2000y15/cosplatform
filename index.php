@@ -1,11 +1,11 @@
 <?php
     $slides = [
-        ['title' => 'TOP/バナー 1', 'description' => '何か文字を入れる', 'filename' => 'top1.jpg', 'alt' => 'スライド1'],
-        ['title' => 'TOP/バナー 2', 'description' => 'コスプレイヤーの皆様へ', 'filename' => 'top2.jpg', 'alt' => ''],
-        ['title' => 'TOP/バナー 3', 'description' => '新しいイベント情報' , 'filename' => 'top3.jpg', 'alt' => '']
+        ['title' => 'TOP/バナー 1', 'description' => '何か文字を入れる', 'filename' => 'img/hp/top1.jpg', 'alt' => 'スライド1'],
+        ['title' => 'TOP/バナー 2', 'description' => 'コスプレイヤーの皆様へ', 'filename' => 'img/hp/top2.jpg', 'alt' => ''],
+        ['title' => 'TOP/バナー 3', 'description' => '新しいイベント情報' , 'filename' => 'img/hp/top3.jpg', 'alt' => '']
     ];
 
-    $connect_item = ['filename' => 'src/top1.jpg', 'alt' => 'コスプレ'];
+    $connect_item = ['filename' => 'img/hp/top1.jpg', 'alt' => 'コスプレ'];
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -25,7 +25,7 @@
                     <?php
                     foreach ($slides as $index => $slide) {
                         echo '<div class="slide fade">';
-                        echo '<img src="src/' . $slide['filename'] . '" alt="' . $slide['alt'] . '">';
+                        echo '<img src="' . $slide['filename'] . '" alt="' . $slide['alt'] . '">';
                         echo '<div class="slide-content">';
                         echo '<h1>' . $slide['title'] . '</h1>';
                         echo '<p>' . $slide['description'] . '</p>';
@@ -62,7 +62,7 @@
 
                         foreach ($row as $row) {
                             echo '<div class="talent-item-main">';
-                            echo '<img src="src/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '">';
+                            echo '<img src="img/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '">';
                             echo '<p>' . $row['layer_name'] . '</p>';
                             echo '</div>';
                         }
@@ -86,7 +86,7 @@
                         $row = $obj->getGalleryMain();
 
                         foreach ($row as $row) {
-                            echo '<img src="src/' . $row['gallery_img'] . '" alt="コスプレ ' . $row['gallery_id'] . '">';
+                            echo '<img src="img/' . $row['gallery_img'] . '" alt="コスプレ ' . $row['gallery_id'] . '">';
                         }
                     ?>
                     <div class="see-more">

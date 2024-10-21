@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .subpage-hero {
-            background-image: url('src/top3.jpg');
+            background-image: url('img/hp/top3.jpg');
         }
     </style>
 
@@ -30,8 +30,8 @@
                             foreach ($row as $row) {
                                 echo '<div class="talent-item">';
                                 echo '<div class="image-container">';
-                                echo '<img src="src/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '" class="main-image">';
-                                echo '<img src="src/talent1.png" alt="タレント ' . $row['layer_name'] . '" class="hover-image">';            
+                                echo '<img src="img/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '" class="main-image">';
+                                echo '<img src="img/talent1.png" alt="タレント ' . $row['layer_name'] . '" class="hover-image">';            
                                 echo '</div>';
                                 echo '<h2>' .   $row['layer_name'] . '</h2>';
                                 echo '<p>' . $row['comment'] . '</p>';

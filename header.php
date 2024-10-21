@@ -1,7 +1,7 @@
 <header class="header" id="header">
     <div class="header-container">
         <a href="index.php" class="logo">
-            <img src="src/logo.png" alt="COSPLATFORM Logo">
+            <img src="img/hp/logo.png" alt="COSPLATFORM Logo">
         </a>
         <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false">
             <span></span>

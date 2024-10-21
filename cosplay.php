@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .subpage-hero {
-            background-image: url('src/top3.jpg');
+            background-image: url('img/hp/top3.jpg');
         }
     </style>
 </head>
@@ -29,7 +29,7 @@
                             
                             foreach ($row as $row) {
                                 echo '<div class="cosplay-item">';
-                                echo '<img src="src/' . $row['gallery_img'] . '" alt="コスプレ ' . $row['gallery_id'] . '">';
+                                echo '<img src="img/' . $row['gallery_img'] . '" alt="コスプレ ' . $row['gallery_id'] . '">';
                                 //echo '<h2>' . $row['layer_name'] . '</h2>';
                                 //echo '<p>' . $row['comment'] . '</p>';
                                 echo '</div>';
