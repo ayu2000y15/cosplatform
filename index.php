@@ -2,8 +2,8 @@
 
     require_once('db.php'); 
     $obj = new DbController();
-    $talent = $obj->getTalentImgTop();
-    $cosplay = $obj->getCosplayImgTop();
+    $talent = $obj->getTopImgValue('01', 4);
+    $cosplay = $obj->getTopImgValue('02', 6);
     $slides = $obj->getSlideImg();
     $slidesCnt = $obj->getSlideCnt();
     $topImg = $obj->getTopImg('200');
@@ -100,7 +100,7 @@
                 <p>コスプレイベントの様子や、撮影会の写真などがご覧いただけます。</p>
             </section>
 
-            <section id="news" class="container-box">
+            <section id="news" class="container-box news">
                 <h2>NEWS</h2>
                 <div class="news-list">
                     <?php

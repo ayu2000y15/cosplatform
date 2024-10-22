@@ -34,22 +34,26 @@
                 <h2>お問い合わせフォーム</h2>
                 <form class="contact-form" action="submit_contact.php" method="POST">
                     <div class="form-group">
-                        <label htmlFor="name">お名前</label>
+                        <label for="name">お名前<span class="required">必須</span></label>
                         <input type="text" id="name" name="name" required />
                     </div>
                     <div class="form-group">
-                        <label htmlFor="email">メールアドレス</label>
+                        <label for="email">メールアドレス<span class="required">必須</span></label>
                         <input type="email" id="email" name="email" required />
                     </div>
                     <div class="form-group">
-                        <label htmlFor="subject">件名</label>
+                        <label for="subject">件名<span class="required">必須</span></label>
                         <input type="text" id="subject" name="subject" required />
                     </div>
                     <div class="form-group">
-                        <label htmlFor="message">メッセージ</label>
+                        <label for="message">メッセージ<span class="required">必須</span></label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="submit-button">送信</button>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="privacy-policy" name="privacy-policy" required />
+                        <label for="privacy-policy">プライバシーポリシーに同意する</label>
+                    </div>
+                    <button type="submit" class="submit-button">送信する</button>
                 </form>
             </div>
         </div>

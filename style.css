@@ -284,17 +284,24 @@ button:hover {
 
 .subpage-hero {
     margin-top: 4rem;
-    height: 400px;
+    margin-: 4rem;
+    height: 300px;
     background-size: cover;
     background-position: center;
-    display: flex;
-    align-items: flex-end;
-    padding: 2rem;
+    position: relative;
 }
+
 .subpage-hero h1 {
+    position: absolute;
+    bottom: -120px;
+    left: 0;
+    right: 0;
+    text-align: center;
     color: white;
     font-size: 3rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    padding: 10rem 0 0;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgb(0,0,0,0.5)
 }
 
 #back{
@@ -342,7 +349,7 @@ button:hover {
 
 .talent-item img {
     width: 200px;
-    height: 200px;
+    height: 400px;
     object-fit: cover;
     margin-bottom: 1rem;
     border-radius: 10px;
@@ -356,36 +363,20 @@ button:hover {
     margin-bottom: 1rem;
 }
 
-.talent-item .main-image,
-.talent-item .hover-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    transition: opacity 0.3s ease;
-}
-
-.talent-item .hover-image {
-    opacity: 0;
-}
-
-.talent-item:hover .main-image {
-    opacity: 0;
-}
-
-.talent-item:hover .hover-image {
-    opacity: 1;
-}
-
 .container-box {
     color:#583F99;
     background-color: rgba(255, 255, 255, 0.6);
     padding: 2rem 2rem 1rem 2rem;
-    margin: 2rem 0rem;
+    margin: 10rem 0rem 4rem;
     border-radius:20px;
+}
+
+.container-box.news {
+    margin-top: 4rem;
+}
+
+.container-box.cosplay {
+    margin-top: 4rem;
 }
 
 
@@ -396,7 +387,7 @@ button:hover {
 
 .cosplay-grid img {
     width: 100%;
-    height: 300px;
+    height: 400px;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -462,6 +453,7 @@ button:hover {
 .talent-page .talent-item h2 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    word-break: break-word;
 }
 
 .talent-page .talent-item p {
@@ -546,10 +538,17 @@ button:hover {
     color: #999;
 }
 
+.form-description {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
 }
 .form-group {
     display: flex;
@@ -561,13 +560,29 @@ button:hover {
 }
 .form-group input,
 .form-group textarea {
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
 }
+
+.required {
+    color: #ff69b4;
+    margin-left: 0.5rem;
+}
+
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group input {
+    width: auto;
+}
+
 .submit-button {
-    align-self: flex-start;
+    align-self: center;
     padding: 0.75rem 1.5rem;
     background-color: #ff69b4;
     color: white;
@@ -579,6 +594,11 @@ button:hover {
 }
 .submit-button:hover {
     background-color: #ff1493;
+}
+
+.pill {
+    border-top: 1px solid #583F99;
+    border-bottom: 1px solid #583F99;
 }
 
 @media (max-width: 768px) {
@@ -663,8 +683,8 @@ button:hover {
     }
 
     .talent-item img {
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
     }
 
     .cosplay-grid img {
@@ -677,6 +697,10 @@ button:hover {
 
     h2 {
         font-size: 1.75rem;
+    }
+
+    .contact-form {
+        max-width: 100%;
     }
 
     .footer-content {

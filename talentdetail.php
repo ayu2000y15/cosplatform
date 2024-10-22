@@ -2,15 +2,15 @@
 
     require_once('db.php'); 
     $obj = new DbController();
-    $topImg = $obj->getTopImg('202');
-    $cosplayImg = $obj->getCosplayImg();
+    $topImg = $obj->getTopImg('201');
+    $talentImg = $obj->getTalentImg();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COSPLAY - COSPLATFORM</title>
+    <title>TALENT - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .subpage-hero {
@@ -27,20 +27,23 @@
 
     <main>
         <section class="subpage-hero">
-            <h1>COSPLAY</h1>
+            <h1>TALENT</h1>
         </section>
         <div class="container">
             <div class="container-box">
-                <section class="cosplay-page">
-                    <div class="cosplay-grid">
+                <section class="talent-page">
+                    <div class="talent-grid">
                         <?php
                             
-                            foreach ($cosplayImg as $row) {
-                                echo '<div class="cosplay-item">';
-                                echo '<img src="' . $row['FILE_PATH'] . $row['FILE_NAME'] . '" alt="' . $row['ALT'] . '">';
-                                //echo '<h2>' . $row['layer_name'] . '</h2>';
-                                //echo '<p>' . $row['comment'] . '</p>';
+                            foreach ($talentImg as $row) {
+                                
+                                echo '<div class="talent-item">';
+                                echo '<a href="#" target="_blank">';
+                                echo '<img src="' . $row['FILE_PATH1'] . $row['FILE_NAME1'] . '" onmouseover="this.src=\'' . $row['FILE_PATH2'] . $row['FILE_NAME2'] . '\'" onmouseout="this.src=\'' . $row['FILE_PATH1'] . $row['FILE_NAME1'] . '\'">';
+                                echo '</a>';
+                                echo '<h2>' . $row['LAYER_NAME'] . '</h2>';
                                 echo '</div>';
+                                
                             }
                         ?>
                     </div>

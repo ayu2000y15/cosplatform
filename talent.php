@@ -2,8 +2,8 @@
 
     require_once('db.php'); 
     $obj = new DbController();
-    $topImg = $obj->getTopImg('202');
-
+    $topImg = $obj->getTopImg('201');
+    $talentImg = $obj->getTalentImg();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -21,10 +21,10 @@
             ?>
         }
     </style>
-
 </head>
 <body>
     <?php include 'header.php'; ?>
+
     <main>
         <section class="subpage-hero">
             <h1>TALENT</h1>
@@ -33,22 +33,23 @@
             <div class="container-box">
                 <section class="talent-page">
                     <div class="talent-grid">
+                        <form method="post" name="form1" action="talentdetail.php">
                         <?php
-                            require_once('db.php'); 
-                            $obj = new DbController();
-                            $row = $obj->getTalentList();
                             
-                            foreach ($row as $row) {
+                            foreach ($talentImg as $row) {
+                                
                                 echo '<div class="talent-item">';
-                                echo '<div class="image-container">';
-                                echo '<img src="img/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '" class="main-image">';
-                                echo '<img src="img/talent1.png" alt="タレント ' . $row['layer_name'] . '" class="hover-image">';            
+                                echo '<input type="hidden" name="talent_id" value="' . $row['TALENT_ID'] . '">';
+                                echo '<a href="javascript:form1.submit()" >';
+                                echo '<img src="' . $row['FILE_PATH1'] . $row['FILE_NAME1'] . '" onmouseover="this.src=\'' . $row['FILE_PATH2'] . $row['FILE_NAME2'] . '\'" onmouseout="this.src=\'' . $row['FILE_PATH1'] . $row['FILE_NAME1'] . '\'">';
+                                echo '</a>';
+                                echo '</form>';
+                                echo '<h2>' . $row['LAYER_NAME'] . '</h2>';
                                 echo '</div>';
-                                echo '<h2>' .   $row['layer_name'] . '</h2>';
-                                echo '<p>' . $row['comment'] . '</p>';
-                                echo '</div>';
+                                
                             }
                         ?>
+                        
                     </div>
                 </section>
             </div>
@@ -59,29 +60,5 @@
     <?php include 'footer.php'; ?>
 
     <script src="script.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const talentItems = document.querySelectorAll('.talent-item');
-            talentItems.forEach(item => {
-                const mainImage = item.querySelector('.main-image');
-                const hoverImage = item.querySelector('.hover-image');
-                
-                // Preload hover image
-                const img = new Image();
-                img.src = hoverImage.src;
-                
-                item.addEventListener('mouseenter', () => {
-                    mainImage.style.opacity = '0';
-                    hoverImage.style.opacity = '1';
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    mainImage.style.opacity = '1';
-                    hoverImage.style.opacity = '0';
-                });
-            });
-        });
-    </script>
 </body>
 </html>

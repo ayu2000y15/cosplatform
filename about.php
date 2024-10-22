@@ -3,6 +3,7 @@
     require_once('db.php'); 
     $obj = new DbController();
     $topImg = $obj->getTopImg('201');
+    $company = $obj->getCompany();
 
 ?>
 <!DOCTYPE html>
@@ -36,6 +37,7 @@
 
         .google-map {
             height: 300px;
+            width: 100%;
             background-color: #ddd;
             display: flex;
             justify-content: center;
@@ -63,35 +65,40 @@
                     <p><strong>COSPLAY:</strong> コスプレイベントの企画と運営</p>
                     <p><strong>COSTUME:</strong> 高品質なコスチュームの制作と販売</p>
                     <p>私たちは、コスプレを通じて文化の架け橋となり、創造性と多様性を称える世界を目指しています。COS PLAT FORMで、あなたの想像力を現実に変えましょう。</p>
-                    
+                    <br>
+                    <hr class="pill">
                     <div class="company-info">
                         <h3>会社概要</h3>
                         <table>
-                            <tr>
-                                <th>社名</th>
-                                <td>株式会社 コスプラットフォーム</td>
-                            </tr>
-                            <tr>
-                                <th>設立</th>
-                                <td>2020年10月</td>
-                            </tr>
-                            <tr>
-                                <th>代表者</th>
-                                <td>山田 太郎</td>
-                            </tr>
-                            <tr>
-                                <th>所在地</th>
-                                <td>〒000-0000 東京都渋谷区○○町0-00-000</td>
-                            </tr>
-                            <tr>
-                                <th>事業内容</th>
-                                <td>タレントマネジメント、衣装販売、レンタル、製作</td>
-                            </tr>
+                            <?php
+                                foreach ($company as $row) {
+                                    echo '<tr>';
+                                    echo '   <th>社名</th>';
+                                    echo '   <td>' . $row['COMPANY_NAME'] . '</td>';
+                                    echo '</tr>';
+                                    echo '<tr>';
+                                    echo '   <th>設立</th>';
+                                    echo '   <td>' . $row['ESTABLISHMENT_DATE'] . '</td>';
+                                    echo '</tr>';
+                                    echo '<tr>';
+                                    echo '    <th>代表者</th>';
+                                    echo '    <td>' . $row['DIRECTOR'] . '</td>';
+                                    echo '</tr>';
+                                    echo '<tr>';
+                                    echo '    <th>所在地</th>';
+                                    echo '    <td>〒' . $row['POST_CODE'] . ' ' . $row['LOCATION'] . '</td>';
+                                    echo '</tr>';
+                                    echo '<tr>';
+                                    echo '    <th>事業内容</th>';
+                                    echo '    <td>' . $row['CONTENT'] . '</td>';
+                                    echo '</tr>';
+                                    }
+                            ?>
                         </table>
                     </div>
                     
                     <div class="google-map">
-                        <p>Google Map プレースホルダー</p>
+                        <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.037965847441!2d139.7522089744507!3d35.65143623161238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bc9aa4d5501%3A0xe102ca70d90a035!2z44CSMTA1LTAwMTQg5p2x5Lqs6YO95riv5Yy66Iqd77yR5LiB55uu77yZ4oiS77ySIOODmeODq-ODoeOCvuODs-iKnQ!5e0!3m2!1sja!2sjp!4v1729588892291!5m2!1sja!2sjp"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </section>
             </div>
