@@ -1,3 +1,10 @@
+<?php
+
+    require_once('db.php'); 
+    $obj = new DbController();
+    $topImg = $obj->getTopImg('201');
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,7 +14,11 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .subpage-hero{
-            background-image: url('img/hp/top3.jpg');
+            <?php
+            foreach ($topImg as $row) {
+                echo 'background-image: url("' . $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+            }
+            ?>
         }
         
         .about-diagram {

@@ -2,7 +2,15 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-logo">
-                <img src="img/hp/logo.png" alt="COSPLATFORM Logo">
+            <?php
+            require_once('db.php'); 
+            $obj = new DbController();
+            $row = $obj->getLogoImg();
+            
+            foreach ($row as $row) {
+                echo '<img src="'. $row['FILE_PATH'] . $row['FILE_NAME'] . '" alt="' . $row['ALT'] . '">';
+            }
+        ?>
                 <p>COSPLATFORM</p>
             </div>
             <nav class="footer-nav">

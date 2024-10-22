@@ -1,11 +1,13 @@
 <?php
-    $slides = [
-        ['title' => 'TOP/バナー 1', 'description' => '何か文字を入れる', 'filename' => 'img/hp/top1.jpg', 'alt' => 'スライド1'],
-        ['title' => 'TOP/バナー 2', 'description' => 'コスプレイヤーの皆様へ', 'filename' => 'img/hp/top2.jpg', 'alt' => ''],
-        ['title' => 'TOP/バナー 3', 'description' => '新しいイベント情報' , 'filename' => 'img/hp/top3.jpg', 'alt' => '']
-    ];
 
-    $connect_item = ['filename' => 'img/hp/top1.jpg', 'alt' => 'コスプレ'];
+    require_once('db.php'); 
+    $obj = new DbController();
+    $talent = $obj->getTalentImgTop();
+    $cosplay = $obj->getCosplayImgTop();
+    $slides = $obj->getSlideImg();
+    $slidesCnt = $obj->getSlideCnt();
+    $topImg = $obj->getTopImg('200');
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -23,12 +25,12 @@
             <section class="hero">
                 <div class="slideshow-container">
                     <?php
-                    foreach ($slides as $index => $slide) {
+                    foreach ($slides as $slide) {
                         echo '<div class="slide fade">';
-                        echo '<img src="' . $slide['filename'] . '" alt="' . $slide['alt'] . '">';
+                        echo '<img src="' . $slide['FILE_PATH'] . $slide['FILE_NAME'] . '" alt="' . $slide['ALT'] . '">';
                         echo '<div class="slide-content">';
-                        echo '<h1>' . $slide['title'] . '</h1>';
-                        echo '<p>' . $slide['description'] . '</p>';
+                        echo '<h1>' . $slide['TITLE'] . '</h1>';
+                        echo '<p>' . $slide['DISCRIPTION'] . '</p>';
                         //echo '<button>詳細を見る</button>';
                         echo '</div>';
                         echo '</div>';
@@ -39,7 +41,7 @@
                 </div>
                 <div class="dot-container">
                     <?php
-                    for ($i = 0; $i < count($slides); $i++) {
+                    for ($i = 0; $i < 3; $i++) {
                         echo '<span class="dot" onclick="currentSlide(' . ($i + 1) . ')"></span>';
                     }
                     ?>
@@ -48,7 +50,9 @@
 
             <section class="connect-image">
                 <?php
-                    echo '<img src="' . $connect_item['filename'] . '" alt="' . $connect_item['alt'] .'" class="full-width-image">'
+                foreach ($topImg as $row) {
+                    echo '<img src="' . $row['FILE_PATH'] . $row['FILE_NAME'] . '" alt="' . $row['ALT'] .'" class="full-width-image">';
+                }
                 ?>
             </section>
 
@@ -56,14 +60,11 @@
                 <h2>TALENT</h2>
                 <div class="talent-grid">
                     <?php
-                        require_once('db.php'); 
-                        $obj = new DbController();
-                        $row = $obj->getTalentMain();
 
-                        foreach ($row as $row) {
+                        foreach ($talent as $row) {
                             echo '<div class="talent-item-main">';
-                            echo '<img src="img/' . $row['talent_img'] . '" alt="タレント ' . $row['layer_name'] . '">';
-                            echo '<p>' . $row['layer_name'] . '</p>';
+                            echo '<img src="' . $row['FILE_PATH'] . $row['FILE_NAME'] . '" alt="タレント ' . $row['ALT'] . '">';
+                            echo '<p>' . $row['LAYER_NAME'] . '</p>';
                             echo '</div>';
                         }
                     ?>
@@ -83,10 +84,8 @@
                 <h2>COSPLAY</h2>
                 <div class="cosplay-grid">
                     <?php
-                        $row = $obj->getGalleryMain();
-
-                        foreach ($row as $row) {
-                            echo '<img src="img/' . $row['gallery_img'] . '" alt="コスプレ ' . $row['gallery_id'] . '">';
+                        foreach ($cosplay as $row) {
+                            echo '<img src="' . $row['FILE_PATH'] . $row['FILE_NAME'] . '" alt="コスプレ ' . $row['ALT'] . '">';
                         }
                     ?>
                     <div class="see-more">
