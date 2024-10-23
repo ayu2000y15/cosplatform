@@ -7,7 +7,7 @@
             $row = $obj->getLogoImg();
             
             foreach ($row as $row) {
-                echo '<img src="'. $row['FILE_PATH'] . $row['FILE_NAME'] . '" alt="' . $row['ALT'] . '">';
+                echo '<img src="'. htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '" alt="' . htmlspecialchars($row['ALT']) . '">';
             }
         ?>
         </a>

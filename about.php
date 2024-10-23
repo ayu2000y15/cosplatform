@@ -74,23 +74,23 @@
                                 foreach ($company as $row) {
                                     echo '<tr>';
                                     echo '   <th>社名</th>';
-                                    echo '   <td>' . $row['COMPANY_NAME'] . '</td>';
+                                    echo '   <td>' . htmlspecialchars($row['COMPANY_NAME']) . '</td>';
                                     echo '</tr>';
                                     echo '<tr>';
                                     echo '   <th>設立</th>';
-                                    echo '   <td>' . $row['ESTABLISHMENT_DATE'] . '</td>';
+                                    echo '   <td>' . htmlspecialchars($row['ESTABLISHMENT_DATE']) . '</td>';
                                     echo '</tr>';
                                     echo '<tr>';
                                     echo '    <th>代表者</th>';
-                                    echo '    <td>' . $row['DIRECTOR'] . '</td>';
+                                    echo '    <td>' . htmlspecialchars($row['DIRECTOR']) . '</td>';
                                     echo '</tr>';
                                     echo '<tr>';
                                     echo '    <th>所在地</th>';
-                                    echo '    <td>〒' . $row['POST_CODE'] . ' ' . $row['LOCATION'] . '</td>';
+                                    echo '    <td>〒' . htmlspecialchars($row['POST_CODE']) . ' ' . htmlspecialchars($row['LOCATION']) . '</td>';
                                     echo '</tr>';
                                     echo '<tr>';
                                     echo '    <th>事業内容</th>';
-                                    echo '    <td>' . $row['CONTENT'] . '</td>';
+                                    echo '    <td>' . htmlspecialchars($row['CONTENT']) . '</td>';
                                     echo '</tr>';
                                     }
                             ?>

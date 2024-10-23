@@ -16,7 +16,7 @@
         .subpage-hero {
             <?php
             foreach ($topImg as $row) {
-                echo 'background-image: url("' . $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+                echo 'background-image: url("' . htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
             }
             ?>
         }
@@ -37,7 +37,7 @@
                             
                             foreach ($cosplayImg as $row) {
                                 echo '<div class="cosplay-item">';
-                                echo '<img src="' . $row['FILE_PATH'] . $row['FILE_NAME'] . '" alt="' . $row['ALT'] . '">';
+                                echo '<img src="' . htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '" alt="' . htmlspecialchars($row['ALT']) . '">';
                                 //echo '<h2>' . $row['layer_name'] . '</h2>';
                                 //echo '<p>' . $row['comment'] . '</p>';
                                 echo '</div>';

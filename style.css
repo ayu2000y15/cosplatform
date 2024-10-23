@@ -324,11 +324,13 @@ button:hover {
 .talent-item-main {
     text-align: center;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .talent-item-main img {
-    background-image: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(216, 236, 255, 1) 100%, rgba(149, 233, 243, 1));
-    padding: 10px;
     width: 200px;
     height: 250px;
     object-fit: cover;
@@ -338,7 +340,6 @@ button:hover {
 }
 
 .talent-item {
-    background: linear-gradient(to right, #ffd1dc, #e6e6fa);
     padding: 10px;
     border-radius: 20px;
     display: flex;
@@ -379,7 +380,6 @@ button:hover {
     margin-top: 4rem;
 }
 
-
 .container-box.cosplay p {
     text-align: center;
     margin-top: 2rem;
@@ -390,6 +390,7 @@ button:hover {
     height: 400px;
     object-fit: cover;
     border-radius: 8px;
+    margin-top:1rem;
 }
 
 .news-list {
@@ -436,7 +437,6 @@ button:hover {
 }
 
 .talent-page .talent-item {
-    background-color: white;
     border-radius: 8px;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -686,9 +686,14 @@ button:hover {
         width: 200px;
         height: 200px;
     }
+    .talent-item-main img {
+        width: 150px;
+        height: 187px;
+    }
 
     .cosplay-grid img {
-        height: 200px;
+        height: 400px;
+        margin-top:1rem;
     }
 
     h1 {

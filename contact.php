@@ -16,7 +16,7 @@
         .subpage-hero {
             <?php
             foreach ($topImg as $row) {
-                echo 'background-image: url("' . $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+                echo 'background-image: url("' . htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
             }
             ?>
         }
