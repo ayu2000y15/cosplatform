@@ -14,13 +14,13 @@ $talentImg = $obj->getTalentImg();
     <title>TALENT - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .subpage-hero {
-            <?php
-            foreach ($topImg as $row) {
-                echo 'background-image: url("' . htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
-            }
-            ?>
+    .subpage-hero {
+        <?php foreach ($topImg as $row) {
+            echo 'background-image: url("'. htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
         }
+
+        ?>
+    }
     </style>
 </head>
 
@@ -35,24 +35,22 @@ $talentImg = $obj->getTalentImg();
             <div class="container-box">
                 <section class="talent-page">
                     <div class="talent-grid">
-                    <form method="post" name="talentAction" action="talent-profile.php">
                         <?php foreach ($talentImg as $row): ?>
+                        <form method="post" name="<?php echo 'talent' . $row['TALENT_ID'] ?>"
+                            action="talent-profile.php">
                             <div class="talent-item">
-                                    <input type="hidden" name="TALENT_ID"
-                                        value="<?php echo htmlspecialchars($row['TALENT_ID']); ?>">
-                    </form>
-                                    <a href="javascript:talentAction.submit()">
-                                        <img style="background: linear-gradient(to right, #ffd1dc, #e6e6fa); border-radius: 10px; padding:10px;"
-                                            src="<?php echo htmlspecialchars($row['FILE_PATH1'] . $row['FILE_NAME1']); ?>"
-                                            onmouseover="this.src='<?php echo htmlspecialchars($row['FILE_PATH2'] . $row['FILE_NAME2']); ?>'"
-                                            onmouseout="this.src='<?php echo htmlspecialchars($row['FILE_PATH1'] . $row['FILE_NAME1']); ?>'">
-                                    </a>
-                                
+                                <input type="hidden" name="TALENT_ID"
+                                    value="<?php echo htmlspecialchars($row['TALENT_ID']); ?>">
+                                <a href="<?php echo 'javascript:talent' . $row['TALENT_ID'] . '.submit()'?>">
+                                    <img style="background: linear-gradient(to right, #ffd1dc, #e6e6fa); border-radius: 10px; padding:10px;"
+                                        src="<?php echo htmlspecialchars($row['FILE_PATH1'] . $row['FILE_NAME1']); ?>"
+                                        onmouseover="this.src='<?php echo htmlspecialchars($row['FILE_PATH2'] . $row['FILE_NAME2']); ?>'"
+                                        onmouseout="this.src='<?php echo htmlspecialchars($row['FILE_PATH1'] . $row['FILE_NAME1']); ?>'">
+                                </a>
                                 <h2><?php echo htmlspecialchars($row['LAYER_NAME']); ?></h2>
                             </div>
+                        </form>
                         <?php endforeach; ?>
-
-                    </div>
                 </section>
             </div>
         </div>

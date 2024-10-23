@@ -134,5 +134,91 @@
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
 
+        //TALENT詳細ページのタレント情報を取得するSQL
+        public function getTalentProfile(String $viewFlg='0', String $talentId='0'){
+            
+            $sql = $this->db->prepare("select              "
+                    . "  t.TALENT_ID TALENT_ID                   ,"
+                    . "  t.TALENT_NAME TALENT_NAME               ,"
+                    . "  t.TALENT_FURIGANA_JP TALENT_FURIGANA_JP ,"
+                    . "  t.TALENT_FURIGANA_EN TALENT_FURIGANA_EN ,"
+                    . "  t.LAYER_NAME LAYER_NAME                 ,"
+                    . "  t.LAYER_FURIGANA_JP LAYER_FURIGANA_JP   ,"
+                    . "  t.LAYER_FURIGANA_EN LAYER_FURIGANA_EN   ,"
+                    . "  t.FOLLOWERS FOLLOWERS                   ,"
+                    . "  t.STREAM_FLG STREAM_FLG                 ,"
+                    . "  t.COS_FLG COS_FLG                       ,"
+                    . "  t.HEIGHT HEIGHT                         ,"
+                    . "  t.AGE AGE                               ,"
+                    . "  t.BIRTHDAY BIRTHDAY                     ,"
+                    . "  t.THREE_SIZES_B THREE_SIZES_B           ,"
+                    . "  t.THREE_SIZES_W THREE_SIZES_W           ,"
+                    . "  t.THREE_SIZES_H THREE_SIZES_H           ,"
+                    . "  t.HOBBY_SPECIALTY HOBBY_SPECIALTY       ,"
+                    . "  t.COMMENT TALENT_COMMENT                ,"
+                    . "  t.AFFILIATION_DATE AFFILIATION_DATE     ,"
+                    . "  t.RETIREMENT_DATE RETIREMENT_DATE       ,"
+                    . "  t.MAIL MAIL                             ,"
+                    . "  t.TEL_NO TEL_NO                         ,"
+                    . "  t.SNS_1 SNS_1                           ,"
+                    . "  t.SNS_2 SNS_2                           ,"
+                    . "  t.SNS_3 SNS_3                           ,"
+                    . "  img.FILE_NAME FILE_NAME                 ,"
+                    . "  img.FILE_PATH FILE_PATH                 ,"
+                    . "  vi.COMMENT ALT                           "
+                    . " from TALENT t, IMG_LIST img, IMG_VIEW vi  "
+                    . " where t.TALENT_ID = img.TALENT_ID         "
+                    . " and img.FILE_NAME = vi.FILE_NAME          "
+                    . " and vi.VIEW_FLG = ?                       "
+                    . " and t.TALENT_ID = ?                       "
+                    . " order by vi.PRIORITY                      ");
+
+            // SQL文を実行
+            $sql->bindValue(1, $viewFlg);
+            $sql->bindValue(2, $talentId);
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
+
+        //TALENT詳細ページのタレントのタグを取得するSQL
+        public function getTalentTag(String $talentId='0'){
+            
+            $sql = $this->db->prepare("select mtag.TAG_NAME TAG_NAME from TALENT t, TALENT_TAG tag, M_TAG mtag"
+                            . "  where t.TALENT_ID = tag.TALENT_ID "
+                            . "  and tag.TAG_ID = mtag.TAG_ID "
+                            . "  and tag.TALENT_ID= ? ;");
+            // SQL文を実行
+            $sql->bindValue(1, $talentId);
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
+
+        //TALENT詳細ページのキャリアのカテゴリを取得するSQL
+        public function getCareerCategory(String $talentId='0'){
+            
+            $sql = $this->db->prepare("select distinct mcr.CAREER_CATEGORY_NAME CAREER_CATEGORY_NAME"
+                            . " from TALENT t, TALENT_CAREER cr, M_CAREER_CATEGORY mcr "
+                            . " where t.TALENT_ID = cr.TALENT_ID "
+                            . " and cr.CAREER_CATEGORY_ID = mcr.CAREER_CATEGORY_ID "
+                            . " and cr.TALENT_ID= ? ;");
+            // SQL文を実行
+            $sql->bindValue(1, $talentId);
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
+
+        //TALENT詳細ページのタレントのキャリアを取得するSQL
+        public function getTalentCareer(String $talentId='0'){
+            
+            $sql = $this->db->prepare("select mcr.CAREER_CATEGORY_NAME CAREER_CATEGORY_NAME, cr.CONTENT CONTENT"
+                            . " from TALENT t, TALENT_CAREER cr, M_CAREER_CATEGORY mcr "
+                            . " where t.TALENT_ID = cr.TALENT_ID "
+                            . " and cr.CAREER_CATEGORY_ID = mcr.CAREER_CATEGORY_ID "
+                            . " and cr.TALENT_ID= ? ;");
+            // SQL文を実行
+            $sql->bindValue(1, $talentId);
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
     }
 ?>

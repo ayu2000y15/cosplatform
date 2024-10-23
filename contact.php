@@ -7,21 +7,23 @@
 ?>
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CONTACT - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .subpage-hero {
-            <?php
-            foreach ($topImg as $row) {
-                echo 'background-image: url("' . htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
-            }
-            ?>
+    .subpage-hero {
+        <?php foreach ($topImg as $row) {
+            echo 'background-image: url("'. htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
         }
+
+        ?>
+    }
     </style>
 </head>
+
 <body>
     <?php include 'header.php'; ?>
 
@@ -53,14 +55,15 @@
                         <input type="checkbox" id="privacy-policy" name="privacy-policy" required />
                         <label for="privacy-policy">プライバシーポリシーに同意する</label>
                     </div>
-                    <button type="submit" class="submit-button">送信する</button>
+                    <button type="submit" class="button">送信する</button>
                 </form>
             </div>
         </div>
     </main>
-    
+
     <?php include 'footer.php'; ?>
 
     <script src="script.js"></script>
 </body>
+
 </html>
