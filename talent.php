@@ -42,7 +42,7 @@ $talentImg = $obj->getTalentImg();
                                 <input type="hidden" name="TALENT_ID"
                                     value="<?php echo htmlspecialchars($row['TALENT_ID']); ?>">
                                 <a href="<?php echo 'javascript:talent' . $row['TALENT_ID'] . '.submit()'?>">
-                                    <img style="background: linear-gradient(to right, #ffd1dc, #e6e6fa); border-radius: 10px; padding:10px;"
+                                    <img style="background: linear-gradient(to right, #ffd1dc, #e6e6fa); padding:10px;"
                                         src="<?php echo htmlspecialchars($row['FILE_PATH1'] . $row['FILE_NAME1']); ?>"
                                         onmouseover="this.src='<?php echo htmlspecialchars($row['FILE_PATH2'] . $row['FILE_NAME2']); ?>'"
                                         onmouseout="this.src='<?php echo htmlspecialchars($row['FILE_PATH1'] . $row['FILE_NAME1']); ?>'">

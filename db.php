@@ -183,7 +183,7 @@
         //TALENT詳細ページのタレントのタグを取得するSQL
         public function getTalentTag(String $talentId='0'){
             
-            $sql = $this->db->prepare("select mtag.TAG_NAME TAG_NAME from TALENT t, TALENT_TAG tag, M_TAG mtag"
+            $sql = $this->db->prepare("select mtag.TAG_NAME TAG_NAME, mtag.TAG_COLOR TAG_COLOR from TALENT t, TALENT_TAG tag, M_TAG mtag"
                             . "  where t.TALENT_ID = tag.TALENT_ID "
                             . "  and tag.TAG_ID = mtag.TAG_ID "
                             . "  and tag.TALENT_ID= ? ;");

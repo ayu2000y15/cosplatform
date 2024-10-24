@@ -84,7 +84,7 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 alt="<?php echo htmlspecialchars($talentInfo['LAYER_NAME']); ?>">
                         </div>
                         <div class="profile-info">
-                            <div class="social-icons">
+                            <div class="social-icons profile">
                                 <a href="<?php echo htmlspecialchars($talentInfo['SNS_1']); ?>"
                                     aria-label="X (Twitter)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -112,8 +112,7 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 </a>
                             </div>
                             <h2 class="talent-name"><?php echo htmlspecialchars($talentInfo['LAYER_NAME']); ?></h2>
-                            <p class="talent-name-en"><?php echo htmlspecialchars($talentInfo['LAYER_FURIGANA_EN']); ?>
-                            </p>
+                            <h3 class="talent-name-en"><?php echo htmlspecialchars($talentInfo['LAYER_FURIGANA_EN']); ?></h3>
                             <hr class="hr-line">
                             <div class="talent-details">
                                 <table>
@@ -122,24 +121,27 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                         <td><?php echo htmlspecialchars($talentInfo['BIRTHDAY']); ?></td>
                                     </tr>
                                     <tr>
-                                        <th>SIZE</th>
-                                        <td>Height:<?php echo htmlspecialchars($talentInfo['HEIGHT']); ?></td>
-                                        <td>B:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_B']); ?>
-                                            W:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_W']); ?>
-                                            H:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_H']); ?></td>
+                                        <th rowspan="2">SIZE</th>
+                                        <td colspan="1">Height:<?php echo htmlspecialchars($talentInfo['HEIGHT']); ?>
+                                        </td>
                                     </tr>
+                                    <tr>
+                                        <td colspan="1">B:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_B']); ?>
+                                            W:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_W']); ?>
+                                            H:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_H']); ?>
+                                        </td>
                                     <tr>
                                         <th>HOBBY / SPECIALTY</th>
                                         <td><?php echo htmlspecialchars($talentInfo['HOBBY_SPECIALTY']); ?></td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="tag">
-                            <?php
-                            foreach ($talentTag as $row) {
-                                echo '<p>' . '#' . htmlspecialchars($row['TAG_NAME']) . '</p>';
-                            }
-                            ?>
+                            <div class="tag-container">
+                                <?php
+                                foreach ($talentTag as $row) {
+                                    echo '<span class="tag" style="background-color: ' . htmlspecialchars($row['TAG_COLOR']) . ';">' . '#' . htmlspecialchars($row['TAG_NAME']) . '</span>';
+                                }
+                                ?>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -158,9 +160,18 @@ $talentCareer = $obj->getTalentCareer($talentId);
                         </div>
                     </div>
                     <div class="career-info" style="display: none;">
-                        <?php foreach ($careerCategory as $items): ?>
-                        <div class="career-category">
+                        <div class="career-categories">
+                            <?php 
+                            $count = 1;
+                            foreach ($careerCategory as $items): 
+                                if($count % 2 === 0) {
+                                    echo '<div class="career-category2">';
+                                }else{
+                                    echo '<div class="career-category">';
+                                }
+                            ?>
                             <h3><?php echo htmlspecialchars($items['CAREER_CATEGORY_NAME']); ?></h3>
+                            <hr class="hr-line">
                             <ul>
                                 <?php foreach ($talentCareer as $item){
                                     if($items['CAREER_CATEGORY_NAME'] === $item['CAREER_CATEGORY_NAME']){
@@ -169,8 +180,12 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 }
                                 ?>
                             </ul>
+                            <?php 
+                        echo '</div>';
+                        $count++; 
+                        endforeach;
+                        ?>
                         </div>
-                        <?php endforeach; ?>
                     </div>
                 </section>
             </div>

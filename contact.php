@@ -32,7 +32,7 @@
             <h1>CONTACT</h1>
         </section>
         <div class="container">
-            <div class="container-box">
+            <div class="container-box contact">
                 <h2>お問い合わせフォーム</h2>
                 <form class="contact-form" action="submit_contact.php" method="POST">
                     <div class="form-group">

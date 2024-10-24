@@ -83,9 +83,10 @@ $topImg = $obj->getTopImg('200');
                 </div>
             </section>
         </div>
-        <div class="container">
+        <div id="top" class="container" >
+            <h2>COSPLAY</h2>
             <section id="cosplay" class="container-box cosplay">
-                <h2>COSPLAY</h2>
+                
                 <div class="cosplay-grid">
                     <?php
                     foreach ($cosplay as $row) {
@@ -106,8 +107,9 @@ $topImg = $obj->getTopImg('200');
                 <p>コスプレイベントの様子や、撮影会の写真などがご覧いただけます。</p>
             </section>
 
+            <h2>NEWS</h2>
             <section id="news" class="container-box news">
-                <h2>NEWS</h2>
+                
                 <div class="news-list">
                     <?php
                     $news_items = [
