@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONTACT - COSPLATFORM</title>
+    <title>管理者ページ - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
     .subpage-hero {
@@ -25,7 +25,6 @@
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
 
     <main>
         <section class="subpage-hero">
@@ -61,9 +60,6 @@
         </div>
     </main>
 
-    <?php include 'footer.php'; ?>
-
-    <script src="script.js"></script>
 </body>
 
 </html>

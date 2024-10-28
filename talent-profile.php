@@ -112,28 +112,48 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 </a>
                             </div>
                             <h2 class="talent-name"><?php echo htmlspecialchars($talentInfo['LAYER_NAME']); ?></h2>
-                            <h3 class="talent-name-en"><?php echo htmlspecialchars($talentInfo['LAYER_FURIGANA_EN']); ?></h3>
+                            <h3 class="talent-name-en"><?php echo htmlspecialchars($talentInfo['LAYER_FURIGANA_EN']); ?>
+                            </h3>
                             <hr class="hr-line">
                             <div class="talent-details">
                                 <table>
+                                    <?php if($talentInfo['BIRTHDAY_FLG'] ==='1') :?>
                                     <tr>
                                         <th>Birthday</th>
-                                        <td><?php echo htmlspecialchars($talentInfo['BIRTHDAY']); ?></td>
+                                        <td><?php echo date('Y/n/j',strtotime($talentInfo['BIRTHDAY'])); ?></td>
                                     </tr>
+                                    <?php endif; ?>
+                                    <?php if($talentInfo['HEIGHT_FLG'] ==='1' || $talentInfo['THREE_SIZES_FLG'] ==='1') :?>
+                                    <?php  
+                                            $rowspan = 0;
+                                            if($talentInfo['HEIGHT_FLG'] ==='1'){
+                                                $rowspan++;
+                                            }if($talentInfo['THREE_SIZES_FLG'] ==='1'){
+                                                $rowspan++;
+                                            }
+                                        ?>
                                     <tr>
-                                        <th rowspan="2">SIZE</th>
+                                        <th rowspan="<?php echo $rowspan ?>">SIZE</th>
+                                        <?php if($talentInfo['HEIGHT_FLG'] ==='1'):?>
                                         <td colspan="1">Height:<?php echo htmlspecialchars($talentInfo['HEIGHT']); ?>
                                         </td>
+                                        <?php endif; ?>
                                     </tr>
+                                    <?php if($talentInfo['THREE_SIZES_FLG'] ==='1'):?>
                                     <tr>
                                         <td colspan="1">B:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_B']); ?>
                                             W:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_W']); ?>
                                             H:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_H']); ?>
                                         </td>
+                                    </tr>
+                                    <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php if($talentInfo['HOBBY_SPECIALTY_FLG'] ==='1'):?>
                                     <tr>
                                         <th>HOBBY / SPECIALTY</th>
                                         <td><?php echo htmlspecialchars($talentInfo['HOBBY_SPECIALTY']); ?></td>
                                     </tr>
+                                    <?php endif; ?>
                                 </table>
                             </div>
                             <div class="tag-container">

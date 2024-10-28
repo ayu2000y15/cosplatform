@@ -4,6 +4,7 @@
     $obj = new DbController();
     $topImg = $obj->getTopImg('201');
     $company = $obj->getCompany();
+    $aboutImg = $obj->getTopImg('401');
 
 ?>
 <!DOCTYPE html>
@@ -37,14 +38,18 @@
             <div class="container-box">
                 <section class="about-content">
                     <div class="company-philosophy">
-                        <h2>コスプレで世界とコネクト</h2>
-                        <img style="width:100%; height:auto;" src="img/hp/top3.jpg" alt="COS PLAT FORM Diagram" class="about-diagram">
-                        <p>日本のポップカルチャーとして浸透しているアニメ、ゲーム、マンガ。そこから生まれた新たな文化"コスプレ"を通じて世界とつながる。</p>
-                        <p>COS PLAT FORMは、コスプレを通じて世界中のファンとクリエイターを繋ぐプラットフォームです。私たちは以下の3つの柱を中心に活動しています。</p>
-                        <p><strong>TALENT:</strong> 才能あるコスプレイヤーの発掘と支援</p>
-                        <p><strong>COSPLAY:</strong> コスプレイベントの企画と運営</p>
-                        <p><strong>COSTUME:</strong> 高品質なコスチュームの制作と販売</p>
-                        <p>私たちは、コスプレを通じて文化の架け橋となり、創造性と多様性を称える世界を目指しています。COS PLAT FORMで、あなたの想像力を現実に変えましょう。</p>
+                        <h2 class="about-h2">コスプレで世界とコネクト</h2>
+                        <?php foreach ($aboutImg as $row): ?>
+                        <img style="width:100%; height:auto;" src="<?php echo htmlspecialchars($row['FILE_PATH'] . $row['FILE_NAME'] ); ?>" alt="<?php echo htmlspecialchars($row['ALT']); ?>" class="about-diagram">
+                        <?php endforeach; ?>
+                        <p>日本のポップカルチャーとして浸透しているアニメ、ゲーム、マンガ。</p>
+                        <p>そこから生まれた新たな文化"コスプレ"を通じて世界とつながる。</p>
+                        <p>あああああ</p>
+                        <p>あああああ</p>
+                        <br>
+                        <p>あああああ</p>
+                        <p>あああああ</p>
+
                     </div>
                     <br>
                     <hr class="hr-line">
@@ -67,7 +72,7 @@
                                 </tr>
                                 <tr>
                                     <th>所在地</th>
-                                    <td>〒<?php echo htmlspecialchars($row['POST_CODE']); ?>
+                                    <td>〒<?php echo htmlspecialchars($row['POST_CODE']); ?><br>
                                         <?php echo htmlspecialchars($row['LOCATION']); ?></td>
                                 </tr>
                                 <tr>
