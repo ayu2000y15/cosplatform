@@ -32,6 +32,7 @@
                 . " from IMG_LIST img, IMG_VIEW vi "
                 . " where img.FILE_NAME = vi.FILE_NAME "
                 . "   and vi.VIEW_FLG in ('101') "
+                . "   and img.DEL_FLG = '0'"
                 . " order by vi.PRIORITY; ";
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
@@ -45,6 +46,7 @@
                 . " from IMG_LIST img, IMG_VIEW vi "
                 . " where img.FILE_NAME = vi.FILE_NAME "
                 . "   and vi.VIEW_FLG in ('101') "
+                . "   and img.DEL_FLG = '0' "
                 . " order by vi.PRIORITY; ";
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
@@ -57,6 +59,7 @@
                 . " from IMG_LIST img, IMG_VIEW vi "
                 . " where img.FILE_NAME = vi.FILE_NAME "
                 . "   and vi.VIEW_FLG in ( ? ) "
+                . "   and img.DEL_FLG = '0'"
                 . " order by vi.PRIORITY; ");
             
             // SQL文を実行
@@ -76,12 +79,35 @@
                     . " where t.TALENT_ID = img.TALENT_ID "
                     . " and img.FILE_NAME = vi.FILE_NAME "
                     . " and vi.VIEW_FLG = ? "
+                    . " and img.DEL_FLG = '0'"
                     . " order by vi.PRIORITY "
                     . " limit ? ;");
 
             // SQL文を実行
             $sql->bindValue(1, $viewFlg);
             $sql->bindParam(2, $limit, PDO::PARAM_INT );
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
+
+        //TOPページのニュースを取得するSQL
+        public function getNewsTitle(){
+            
+            $sql = " select NEWS_ID, TITLE, POST_DATE from NEWS where DEL_FLG='0' order by POST_DATE limit 5; ";
+            
+            // SQL文を実行
+            return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
+        }
+
+        //NEWSページの情報を取得するSQL
+        public function getNewsContent($newsId='0'){
+            
+            $sql = $this->db->prepare(" select NEWS_ID, TITLE, POST_DATE, CONTENT from NEWS "
+                    . "where DEL_FLG = '0' "
+                    . "  and NEWS_ID = ?; ");
+            
+            // SQL文を実行
+            $sql->bindValue(1, $newsId);
             $sql->execute();
             return $row = $sql->fetchall(PDO::FETCH_ASSOC);
         }
@@ -113,6 +139,7 @@
                     . "and img2.FILE_NAME = vi2.FILE_NAME "
                     . "and vi1.VIEW_FLG = '03' "
                     . "and vi2.VIEW_FLG = '13' "
+                    . "and t.DEL_FLG = '0' "
                     . "order by vi1.PRIORITY ; ";
 
             // SQL文を実行
@@ -128,6 +155,7 @@
                     . " where t.TALENT_ID = img.TALENT_ID "
                     . " and img.FILE_NAME = vi.FILE_NAME "
                     . " and vi.VIEW_FLG = ? "
+                    . " and img.DEL_FLG = '0' "
                     . " order by vi.PRIORITY ");
 
             // SQL文を実行
@@ -181,6 +209,7 @@
                     . " and t.TALENT_ID = tctl.TALENT_ID          "
                     . " and vi.VIEW_FLG = ?                       "
                     . " and t.TALENT_ID = ?                       "
+                    . " and t.DEL_FLG = '0'                       "
                     . " order by vi.PRIORITY                      ");
 
             // SQL文を実行
@@ -196,6 +225,7 @@
             $sql = $this->db->prepare("select mtag.TAG_NAME TAG_NAME, mtag.TAG_COLOR TAG_COLOR from TALENT t, TALENT_TAG tag, M_TAG mtag"
                             . "  where t.TALENT_ID = tag.TALENT_ID "
                             . "  and tag.TAG_ID = mtag.TAG_ID "
+                            . "  and t.DEL_FLG = '0' "
                             . "  and tag.TALENT_ID= ? ;");
             // SQL文を実行
             $sql->bindValue(1, $talentId);
@@ -210,6 +240,7 @@
                             . " from TALENT t, TALENT_CAREER cr, M_CAREER_CATEGORY mcr "
                             . " where t.TALENT_ID = cr.TALENT_ID "
                             . " and cr.CAREER_CATEGORY_ID = mcr.CAREER_CATEGORY_ID "
+                            . " and t.DEL_FLG = '0' "
                             . " and cr.TALENT_ID= ? ;");
             // SQL文を実行
             $sql->bindValue(1, $talentId);
@@ -224,6 +255,7 @@
                             . " from TALENT t, TALENT_CAREER cr, M_CAREER_CATEGORY mcr "
                             . " where t.TALENT_ID = cr.TALENT_ID "
                             . " and cr.CAREER_CATEGORY_ID = mcr.CAREER_CATEGORY_ID "
+                            . " and t.DEL_FLG = '0' "
                             . " and cr.TALENT_ID= ? ;");
             // SQL文を実行
             $sql->bindValue(1, $talentId);

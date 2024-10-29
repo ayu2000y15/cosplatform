@@ -1,39 +1,3 @@
-<?php
-// ここでデータベースからタレント情報を取得すると仮定します
-$talent = [
-    'name' => '山田 花子',
-    'name_en' => 'Hanako Yamada',
-    'base' => 'Tokyo',
-    'size' => 'Height:166cm B76cm W59cm H83cm Shoes:23.5cm',
-    'hobby' => '散歩、カメラ',
-    'image' => 'img/talent1.png',
-    'social' => [
-        'twitter' => '#',
-        'instagram' => '#',
-        'tiktok' => '#'
-    ],
-    'career' => [
-        '雑誌' => [
-            'マガジンハウス「GINZA」',
-            'マガジンハウス「MEN\'S NON-NO」',
-            'カエルム「NYLON」',
-            '集英社「BAILA」「SPUR」'
-        ],
-        'WEB' => [
-            'VOGUE GIRL',
-            'NYLON.JP',
-            'GINZA web',
-            'FACETASM×蜷川実花「TOKYO SEQUENCE」',
-            'TOGA'
-        ],
-        'CM / MV' => [
-            '遠野美術株式会社「セブス・ハイ」',
-            'サカママ「非道徳と走馬燈」'
-        ]
-    ]
-];
-?>
-
 <?php 
 
 $talentId = (string)$_REQUEST['TALENT_ID'];

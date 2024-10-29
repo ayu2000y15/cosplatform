@@ -354,6 +354,12 @@ h2 {
     gap: 2rem;
 }
 
+.talent-grid-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
 .talent-item-main {
     text-align: center;
     border-radius: 20px;
@@ -443,6 +449,37 @@ h2 {
     margin-right: 8rem;
 }
 
+.container-box.contact h2{
+    text-align: center;
+}
+
+.container-box.contact p{
+    text-align: center;
+    font-size:2rem;
+}
+
+.container-box.contact {
+    margin-left: 8rem;
+    margin-right: 8rem;
+}
+
+.container-box.contact h2{
+    text-align: center;
+}
+
+.container-box.contact p{
+    text-align: center;
+    font-size:2rem;
+}
+.container-box.news-page {
+    margin-left: 8rem;
+    margin-right: 8rem;
+}
+
+.container-box.news-page p{
+    font-size:1rem;
+}
+
 .container-box.news {
     margin-top: 4rem;
 }
@@ -463,25 +500,95 @@ h2 {
     margin-top:1rem;
 }
 
+.news-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.news-page-header h2 {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.news-page-date{
+    text-align: right;
+    color: #666;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    margin-left: 1rem;
+}
+
+.section-content {
+    display: flex;
+    align-items: stretch;
+}
+
+.talent-list,
+.cosplay-list,
+.news-list {
+    flex-grow: 1;
+    margin-right: 2rem;
+}
+
+.see-more {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.talent-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10rem 0 2rem;
+    gap: 1rem;
+}
+
+.cosplay-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10rem 0 2rem;
+    gap: 1rem;
+}
+
 .news-list {
     display: flex;
     flex-direction: column;
+    margin: 0 10rem 0 2rem;
     gap: 1rem;
+}
+
+.news-list a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .news-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /*background-color: white;*/
     padding: 1rem;
-    border-radius: 28px;
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease; /* スムーズな色の変化のためのトランジション */
+    cursor: pointer; /* カーソルをポインターに変更してクリック可能であることを示す */
+}
+
+.news-item:hover {
+    background-color: rgba(255, 105, 180, 0.1); /* ホバー時の背景色（薄いピンク） */
+}
+
+.news-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 .news-item .date {
     color: #666;
     font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .news-item .title {
@@ -490,6 +597,12 @@ h2 {
 
 .news-item svg {
     color: #ff69b4;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.news-item:hover svg {
+    transform: translateX(5px); /* ホバー時にアイコンを少し右に移動 */
 }
 
 .about-content p{
@@ -742,22 +855,16 @@ h2 {
     object-fit: cover;
 }
 
-.see-more {
-    display: flex;
-    justify-content: center;
-    margin-top: 4rem;
-}
-
 .arrow-button {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
     background-color: #ff69b4;
-    color: white;
     border-radius: 50%;
     transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .arrow-button:hover {
@@ -766,8 +873,10 @@ h2 {
 }
 
 .arrow-button svg {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
+    stroke: white;
+    stroke-width: 2;
 }
 
 .footer {
@@ -950,6 +1059,55 @@ h2 {
         font-size: 2rem;
     }
 
+    .news-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .news-page-date {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+
+    .section-content {
+        flex-direction: column;
+    }
+
+    .talent-list,
+    .cosplay-list,
+    .news-list {
+        margin-right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .see-more {
+        justify-content: center;
+        margin-top:1rem;
+        margin-left: 0;
+    }
+
+    .arrow-button {
+        margin: 0 auto;
+    }
+
+    .talent-list {
+        margin:0;
+    }
+
+    .cosplay-list {
+        margin:0;
+    }
+
+    .news-list {
+        margin:0;
+    }
+
+    .news-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
     #talent {
         padding: 0 1rem 2rem;
     }
@@ -966,7 +1124,7 @@ h2 {
         margin-top:2rem;
     }
 
-    .talent-grid, .cosplay-grid {
+    .talent-grid, .cosplay-grid,.talent-grid-main {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 1rem;
     }
@@ -991,7 +1149,8 @@ h2 {
         margin-top:1rem;
     }
 
-    .container-box.profile {
+    .container-box.profile,
+    .container-box.news-page {
         padding-bottom: 4rem;
         margin-top: 10rem;
         margin-left: 0;
