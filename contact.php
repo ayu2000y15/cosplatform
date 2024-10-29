@@ -26,10 +26,6 @@
 
 <body>
     <?php include 'header.php'; ?>
-    <script type="text/javascript">
-		var submitted = false;
-	</script>
-
     <main>
         <section class="subpage-hero">
             <h1>CONTACT</h1>
@@ -43,23 +39,23 @@
                     method="POST" target="hidden_iframe" onsubmit="submitted=true;">
                     <div class="form-group">
                         <label for="name">お名前<span class="required">必須</span></label>
-                        <input type="text" id="name" name="entry.783831543" required />
+                        <input type="text" id="name" name="entry.783831543" placeholder="山田太郎" required />
                     </div>
                     <div class="form-group">
                         <label for="email">メールアドレス<span class="required">必須</span></label>
-                        <input type="email" id="email" name="entry.2031892057" required />
+                        <input type="email" id="email" name="entry.2031892057" placeholder="example@gmail.com"　required />
                     </div>
                     <div class="form-group">
-                        <label for="tell">電話番号<span class="required"></span></label>
-                        <input type="text" id="tell" name="entry.2108915669" />
+                        <label for="tel">電話番号<span class="required"></span></label>
+                        <input type="tel" id="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" name="entry.2108915669" placeholder="080-1234-5678" />
                     </div>
                     <div class="form-group">
                         <label for="subject">件名<span class="required">必須</span></label>
-                        <input type="text" id="subject" name="entry.1414443987" required />
+                        <input type="text" id="subject" name="entry.1414443987" placeholder="例、衣装制作について" required />
                     </div>
                     <div class="form-group">
                         <label for="content">質問内容<span class="required">必須</span></label>
-                        <textarea id="content" name="entry.1111380753" rows="5" required></textarea>
+                        <textarea id="content" name="entry.1111380753" rows="5" placeholder="問い合わせ内容をここに記載してください" required></textarea>
                     </div>
                     <!-- <div class="form-group checkbox-group">
                         <input type="checkbox" id="privacy-policy" name="privacy-policy" required />

@@ -49,7 +49,8 @@ $talentCareer = $obj->getTalentCareer($talentId);
                         </div>
                         <div class="profile-info">
                             <div class="social-icons profile">
-                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_1']); ?>"
+                                <?php if($talentInfo['SNS_1_FLG'] ==='1') :?>
+                                <a href="https://x.com/<?php echo htmlspecialchars($talentInfo['SNS_1']); ?>"
                                     aria-label="X (Twitter)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -58,7 +59,9 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                         <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
                                     </svg>
                                 </a>
-                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_2']); ?>" aria-label="Instagram">
+                                <?php endif; ?>
+                                <?php if($talentInfo['SNS_2_FLG'] ==='1') :?>
+                                <a href="https://www.instagram.com/<?php echo htmlspecialchars($talentInfo['SNS_2']); ?>" aria-label="Instagram">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -67,13 +70,16 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                         <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
                                     </svg>
                                 </a>
-                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_3']); ?>" aria-label="TikTok">
+                                <?php endif; ?>
+                                <?php if($talentInfo['SNS_3_FLG'] ==='1') :?>
+                                <a href="https://www.tiktok.com/<?php echo htmlspecialchars($talentInfo['SNS_3']); ?>" aria-label="TikTok">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
                                         <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
                                     </svg>
                                 </a>
+                                <?php endif; ?>
                             </div>
                             <h2 class="talent-name"><?php echo htmlspecialchars($talentInfo['LAYER_NAME']); ?></h2>
                             <h3 class="talent-name-en"><?php echo htmlspecialchars($talentInfo['LAYER_FURIGANA_EN']); ?>

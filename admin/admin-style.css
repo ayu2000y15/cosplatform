@@ -145,6 +145,10 @@ body {
     border-radius:40px;
 }
 
+.talent-list{
+    margin-left: 8rem;
+}
+
 .talent-form {
     display: flex;
     flex-direction: column;
@@ -161,7 +165,8 @@ body {
     font-weight: bold;
 }
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 4px;
