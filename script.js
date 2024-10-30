@@ -63,4 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(function() {
         plusSlides(1);
     }, 5000);
+
 });
+
+function checkSubmit(){
+    if(confirm('送信しますか？')){ 
+        return true; 
+    }else{
+        alert('キャンセルされました'); 
+        return false; 
+    }
+}

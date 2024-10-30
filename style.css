@@ -621,6 +621,15 @@ h2 {
     padding: 20px 0;
 }
 
+.about-diagram {
+    text-align: center;
+}
+
+.about-diagram img {
+    width: 100%;
+    
+}
+
 .center-content {
     display: flex;
     flex-direction: column;
@@ -842,17 +851,114 @@ h2 {
     clear: both;
 }
 
-.photos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+.photos-slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
-.photos-grid img {
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+    transform: scale(1.05);
+}
+
+.photo-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(142, 68, 173, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-item:hover::after {
+    opacity: 1;
+}
+
+.photos-grid {
+    display: flex;
+    transition: transform 0.3s ease;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.photo-item img {
     width: 100%;
-    height: 400px;
-    margin-top:1rem;
+    height: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+}
+
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(142, 68, 173, 0.8);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.slider-arrow:hover {
+    background-color: rgba(142, 68, 173, 1);
+}
+
+.slider-arrow svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.prev-arrow {
+    left: 1rem;
+}
+
+.next-arrow {
+    right: 1rem;
+}
+
+/* プレビュー機能のためのスタイルを追加 */
+.preview-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.preview-image {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.close-preview {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
 }
 
 .arrow-button {
@@ -950,10 +1056,12 @@ h2 {
     max-width: 600px;
     margin: 0 auto;
 }
+
 .form-group {
     display: flex;
     flex-direction: column;
 }
+
 .form-group label {
     margin-bottom: 0.5rem;
     font-weight: bold;
@@ -979,6 +1087,30 @@ h2 {
 
 .checkbox-group input {
     width: auto;
+}
+
+.radio-group {
+    margin-bottom: 1.5rem;
+}
+
+.radio-options {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+}
+
+.radio-option input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+.radio-option label {
+    margin-bottom: 0;
+    font-weight: normal;
 }
 
 .hr-line {
@@ -1164,6 +1296,7 @@ h2 {
         margin-right: 0;
     }
 
+    
     .profile-content {
         flex-direction: column;
     }
@@ -1236,5 +1369,48 @@ h2 {
     .footer-nav {
         flex-direction: column;
         gap: 0.5rem;
+    }
+}
+
+/* talent-profileの画像 */
+@media (min-width: 640px) {
+    .photo-item {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .photo-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .photo-item img {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+    }
+
+    .photos-slider-container {
+        padding: 0 1rem;
+    }
+    
+    .slider-arrow {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .preview-image {
+        max-width: 95%;
+        max-height: 95%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .photo-item {
+        flex: 0 0 25%;
+        max-width: 25%;
     }
 }

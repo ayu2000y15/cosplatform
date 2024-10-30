@@ -61,7 +61,8 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 </a>
                                 <?php endif; ?>
                                 <?php if($talentInfo['SNS_2_FLG'] ==='1') :?>
-                                <a href="https://www.instagram.com/<?php echo htmlspecialchars($talentInfo['SNS_2']); ?>" aria-label="Instagram">
+                                <a href="https://www.instagram.com/<?php echo htmlspecialchars($talentInfo['SNS_2']); ?>"
+                                    aria-label="Instagram">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -72,7 +73,8 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 </a>
                                 <?php endif; ?>
                                 <?php if($talentInfo['SNS_3_FLG'] ==='1') :?>
-                                <a href="https://www.tiktok.com/<?php echo htmlspecialchars($talentInfo['SNS_3']); ?>" aria-label="TikTok">
+                                <a href="https://www.tiktok.com/<?php echo htmlspecialchars($talentInfo['SNS_3']); ?>"
+                                    aria-label="TikTok">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -141,12 +143,30 @@ $talentCareer = $obj->getTalentCareer($talentId);
                         <button class="button career-button">CAREER</button>
                     </div>
                     <div class="photos-info" style="display: none;">
-                        <div class="photos-grid">
-                            <?php 
+                        <div class="photos-slider-container">
+                            <button class="slider-arrow prev-arrow" aria-label="前の画像へ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M15 18l-6-6 6-6" />
+                                </svg>
+                            </button>
+                            <div class="photos-grid">
+                                <?php 
                             foreach ($talentImg as $row) {
-                                echo '<img src="' . htmlspecialchars($row['FILE_PATH'] . $row['FILE_NAME']) . '" alt="' . htmlspecialchars($row['ALT']) . '">';
+                                echo '<div class="photo-item" tabindex="0" >';
+                                echo '<img src="' . htmlspecialchars($row['FILE_PATH'] . $row['FILE_NAME']) . '" alt="' . htmlspecialchars($row['ALT']) . '" loading="lazy">';
+                                echo '</div>';
                             }
                             ?>
+                            </div>
+                            <button class="slider-arrow next-arrow" aria-label="次の画像へ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M9 18l6-6-6-6" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
                     <div class="career-info" style="display: none;">
@@ -171,14 +191,18 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 ?>
                             </ul>
                             <?php 
-                        echo '</div>';
-                        $count++; 
-                        endforeach;
-                        ?>
+                            echo '</div>';
+                            $count++; 
+                            endforeach;
+                            ?>
                         </div>
                     </div>
                 </section>
             </div>
+        </div>
+        <div class="preview-overlay">
+            <img src="" alt="" class="preview-image">
+            <span class="close-preview">&times;</span>
         </div>
     </main>
     <?php include 'footer.php'; ?>
@@ -190,6 +214,22 @@ $talentCareer = $obj->getTalentCareer($talentId);
         const photosButton = document.querySelector('.photos-button');
         const careerInfo = document.querySelector('.career-info');
         const photosInfo = document.querySelector('.photos-info');
+        const sliderContainer = document.querySelector('.photos-slider-container');
+        const photosGrid = document.querySelector('.photos-grid');
+        const prevArrow = document.querySelector('.prev-arrow');
+        const nextArrow = document.querySelector('.next-arrow');
+        const photoItems = document.querySelectorAll('.photo-item');
+        const previewOverlay = document.querySelector('.preview-overlay');
+        const previewImage = document.querySelector('.preview-image');
+        const closePreview = document.querySelector('.close-preview');
+
+        let currentPosition = 0;
+        let startX = 0;
+        let scrollLeft = 0;
+        let isDragging = false;
+        let lastTouchX = 0;
+        let currentTouchX = 0;
+        let touchStartTime = 0;
 
         function hideAllSections() {
             careerInfo.style.display = 'none';
@@ -208,7 +248,153 @@ $talentCareer = $obj->getTalentCareer($talentId);
             hideAllSections();
             photosInfo.style.display = 'block';
             photosButton.classList.add('active');
+            updateSliderLayout();
         });
+
+        // プレビュー機能
+        photoItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                previewImage.src = img.src;
+                previewImage.alt = img.alt;
+                previewOverlay.style.display = 'flex';
+            });
+
+            item.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+
+        closePreview.addEventListener('click', function() {
+            previewOverlay.style.display = 'none';
+        });
+
+        previewOverlay.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+
+        function getVisibleSlides() {
+            if (window.innerWidth >= 1024) return 4;
+            if (window.innerWidth >= 768) return 3;
+            if (window.innerWidth >= 640) return 2;
+            return 1;
+        }
+
+        function updateSliderLayout() {
+            const visibleSlides = getVisibleSlides();
+            const slideWidth = 100 / visibleSlides;
+            photoItems.forEach(item => {
+                item.style.flex = `0 0 ${slideWidth}%`;
+                item.style.maxWidth = `${slideWidth}%`;
+            });
+            currentPosition = 0;
+            updateSlidePosition();
+            updateArrowVisibility();
+        }
+
+        function updateSlidePosition() {
+            photosGrid.style.transform = `translateX(-${currentPosition}%)`;
+        }
+
+        function moveSlider(direction) {
+            const slideWidth = 100 / getVisibleSlides();
+            const maxPosition = (photoItems.length - getVisibleSlides()) * slideWidth;
+            currentPosition = Math.max(0, Math.min(currentPosition + direction * slideWidth, maxPosition));
+            updateSlidePosition();
+            updateArrowVisibility();
+        }
+
+        function updateArrowVisibility() {
+            const maxPosition = (photoItems.length - getVisibleSlides()) * (100 / getVisibleSlides());
+            prevArrow.style.display = currentPosition <= 0 ? 'none' : 'flex';
+            nextArrow.style.display = currentPosition >= maxPosition ? 'none' : 'flex';
+        }
+
+        prevArrow.addEventListener('click', () => moveSlider(-1));
+        nextArrow.addEventListener('click', () => moveSlider(1));
+
+        // タッチイベントの処理
+        function handleTouchStart(e) {
+            isDragging = true;
+            startX = e.touches[0].pageX - sliderContainer.offsetLeft;
+            scrollLeft = currentPosition;
+            lastTouchX = e.touches[0].pageX;
+            touchStartTime = Date.now();
+            photosGrid.style.transition = 'none';
+        }
+
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+
+            currentTouchX = e.touches[0].pageX;
+            const touchDelta = lastTouchX - currentTouchX;
+            lastTouchX = currentTouchX;
+
+            const containerWidth = sliderContainer.offsetWidth;
+            const movePercent = (touchDelta / containerWidth) * 100;
+
+            currentPosition = Math.max(0, Math.min(currentPosition + movePercent, getMaxPosition()));
+            updateSlidePosition();
+        }
+
+        function handleTouchEnd(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            photosGrid.style.transition = 'transform 0.3s ease';
+
+            const touchEndTime = Date.now();
+            const touchDuration = touchEndTime - touchStartTime;
+            const touchDistance = currentTouchX - startX;
+            const velocity = Math.abs(touchDistance) / touchDuration;
+
+            if (velocity > 0.5) {
+                const direction = touchDistance < 0 ? 1 : -1;
+                moveToNextSlide(direction);
+            } else {
+                snapToNearestSlide();
+            }
+
+            updateArrowVisibility();
+        }
+
+        function moveToNextSlide(direction) {
+            const slideWidth = 100 / getVisibleSlides();
+            currentPosition += direction * slideWidth;
+            currentPosition = Math.max(0, Math.min(currentPosition, getMaxPosition()));
+            updateSlidePosition();
+        }
+
+        function snapToNearestSlide() {
+            const slideWidth = 100 / getVisibleSlides();
+            const nearestSlide = Math.round(currentPosition / slideWidth);
+            currentPosition = nearestSlide * slideWidth;
+            updateSlidePosition();
+        }
+
+        function getMaxPosition() {
+            return (photoItems.length - getVisibleSlides()) * (100 / getVisibleSlides());
+        }
+
+        sliderContainer.addEventListener('touchstart', handleTouchStart, {
+            passive: false
+        });
+        sliderContainer.addEventListener('touchmove', handleTouchMove, {
+            passive: false
+        });
+        sliderContainer.addEventListener('touchend', handleTouchEnd);
+
+        window.addEventListener('resize', () => {
+            currentPosition = 0;
+            updateSliderLayout();
+        });
+
+        updateSliderLayout();
     });
     </script>
 </body>

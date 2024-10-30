@@ -178,16 +178,6 @@ body {
     margin-left: 0.5rem;
 }
 
-.checkbox-group {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.checkbox-group input {
-    width: auto;
-}
-
 .hr-line {
     border-top: 1px solid #583F99;
     border-bottom: 1px solid #583F99;
@@ -210,6 +200,28 @@ body {
 .submit-button:hover, .submit-button.active  {
     background-color: #8e44ad;
     color: white;
+}
+
+.check-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.check-box {
+    display: flex;
+    align-items: center;
+}
+
+.check-box input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+.checkbox-label {
+    font-weight: normal;
+    font-size: 0.7rem;
+    margin-top: 10px;
+    margin-right: 5px;
 }
 
 @media (max-width: 768px) {
@@ -272,7 +284,7 @@ body {
 
     .container-box {
         padding-bottom: 4rem;
-        margin-top: 10rem;
+        margin-top: 0;
         margin-left: 0;
         margin-right: 0;
     }
@@ -286,9 +298,20 @@ body {
         font-size: 1.75rem;
     }
 
+    .talent-list{
+        margin:0;
+        max-width: 100%;
+    }
+
     .talent-form {
         max-width: 100%;
     }
+
+    .check-area {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
 }
 
 @media (max-width: 576px) {

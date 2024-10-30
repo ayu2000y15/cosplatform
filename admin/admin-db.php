@@ -73,5 +73,67 @@
             return $row = $sql->fetchall(PDO::FETCH_ASSOC);
         }
 
+        //タレント情報を新規登録するSQL
+        public function insertTalent($talentInfo){
+            $sql = $this->db->prepare("insert into TALENT(TALENT_NAME         , "
+            . " TALENT_FURIGANA_JP  , "
+            . " TALENT_FURIGANA_EN  , "
+            . " LAYER_NAME          , "
+            . " LAYER_FURIGANA_JP   , "
+            . " LAYER_FURIGANA_EN   , "
+            . " FOLLOWERS           , "
+            . " STREAM_FLG          , "
+            . " COS_FLG             , "
+            . " HEIGHT              , "
+            . " AGE                 , "
+            . " BIRTHDAY            , "
+            . " THREE_SIZES_B       , "
+            . " THREE_SIZES_W       , "
+            . " THREE_SIZES_H       , "
+            . " HOBBY_SPECIALTY     , "
+            . " COMMENT             , "
+            . " AFFILIATION_DATE    , "
+            . " RETIREMENT_DATE     , "
+            . " MAIL                , "
+            . " TEL_NO              , "
+            . " SNS_1               , "
+            . " SNS_2               , "
+            . " SNS_3                "
+            . " )                     "
+            . " values (    "
+            . " :TALENT_NAME            , "
+            . " :TALENT_FURIGANA_JP     , "
+            . " :TALENT_FURIGANA_EN     , "
+            . " :LAYER_NAME             , "
+            . " :LAYER_FURIGANA_JP      , "
+            . " :LAYER_FURIGANA_EN      , "
+            . " :FOLLOWERS              , "
+            . " :STREAM_FLG             , "
+            . " :COS_FLG                , "
+            . " :HEIGHT                 , "
+            . " :AGE                    , "
+            . " :BIRTHDAY               , "
+            . " :THREE_SIZES_B          , "
+            . " :THREE_SIZES_W          , "
+            . " :THREE_SIZES_H          , "
+            . " :HOBBY_SPECIALTY        , "
+            . " :COMMENT                , "
+            . " :AFFILIATION_DATE       , "
+            . " :RETIREMENT_DATE        , "
+            . " :MAIL                   , "
+            . " :TEL_NO                 , "
+            . " :SNS_1                  , "
+            . " :SNS_2                  , "
+            . " :SNS_3                   "
+            . " );");
+
+            foreach($talentInfo as $key => $value){
+                $sql -> bindValue($key, $value);
+            }
+
+            $sql -> execute();
+            return $sql -> rowCount();
+        }
+
     }
 ?>

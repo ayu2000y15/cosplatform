@@ -17,6 +17,7 @@
             <span></span>
         </button>
         <nav class="main-nav">
+            <a href="index.php">TOP</a>
             <a href="about.php">ABOUT</a>
             <a href="talent.php">TALENT</a>
             <a href="cosplay.php">COSPLAY</a>

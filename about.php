@@ -40,7 +40,9 @@
                     <div class="company-philosophy">
                         <h2 class="about-h2">コスプレで世界とコネクト</h2>
                         <?php foreach ($aboutImg as $row): ?>
-                        <img style="width:100%; height:auto;" src="<?php echo htmlspecialchars($row['FILE_PATH'] . $row['FILE_NAME'] ); ?>" alt="<?php echo htmlspecialchars($row['ALT']); ?>" class="about-diagram">
+                        <div class="about-diagram">
+                            <img src="<?php echo htmlspecialchars($row['FILE_PATH'] . $row['FILE_NAME'] ); ?>" alt="<?php echo htmlspecialchars($row['ALT']); ?>" >
+                        </div>
                         <?php endforeach; ?>
                         <p>日本のポップカルチャーとして浸透しているアニメ、ゲーム、マンガ。</p>
                         <p>そこから生まれた新たな文化"コスプレ"を通じて世界とつながる。</p>
