@@ -35,13 +35,13 @@
             <h1>ABOUT</h1>
         </section>
         <div class="container">
-            <div class="container-box">
+            <div class="container-box about">
                 <section class="about-content">
                     <div class="company-philosophy">
-                        <h2 class="about-h2">コスプレで世界とコネクト</h2>
                         <?php foreach ($aboutImg as $row): ?>
                         <div class="about-diagram">
-                            <img src="<?php echo htmlspecialchars($row['FILE_PATH'] . $row['FILE_NAME'] ); ?>" alt="<?php echo htmlspecialchars($row['ALT']); ?>" >
+                            <img src="<?php echo htmlspecialchars($row['FILE_PATH'] . $row['FILE_NAME'] ); ?>"
+                                alt="<?php echo htmlspecialchars($row['ALT']); ?>" class="about-diagram-img">
                         </div>
                         <?php endforeach; ?>
                         <p>日本のポップカルチャーとして浸透しているアニメ、ゲーム、マンガ。</p>

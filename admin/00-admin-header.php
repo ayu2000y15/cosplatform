@@ -17,7 +17,7 @@
             <span></span>
         </button>
         <nav class="main-nav">
-            <a href="admin.php">管理画面トップ</a>
+            <a href="00-admin.php">管理画面トップ</a>
             <a href="../index.php">HPのトップページに戻る</a>
             <a href="#"></a>
             <a href="#"></a>

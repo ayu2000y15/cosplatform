@@ -73,9 +73,36 @@
             return $row = $sql->fetchall(PDO::FETCH_ASSOC);
         }
 
+        //タレント情報を取得するSQL
+        public function getTalentInfoCtl($talentId){
+            $sql = $this->db->prepare(  "select "
+            . "    TALENT_ID           ,    "
+            . "    FOLLOWERS_FLG       ,    "
+            . "    HEIGHT_FLG          ,    "
+            . "    AGE_FLG             ,    "
+            . "    BIRTHDAY_FLG        ,    "
+            . "    THREE_SIZES_FLG     ,    "
+            . "    THREE_SIZES_B_FLG   ,    "
+            . "    THREE_SIZES_W_FLG   ,    "
+            . "    THREE_SIZES_H_FLG   ,    "
+            . "    HOBBY_SPECIALTY_FLG ,    "
+            . "    COMMENT_FLG         ,    "
+            . "    SNS_1_FLG           ,    "
+            . "    SNS_2_FLG           ,    "
+            . "    SNS_3_FLG                "
+            . " from TALENT_INFO_CTL        "
+            . " where TALENT_ID = ?;          ");
+
+            // SQL文を実行
+            $sql->bindValue(1, $talentId);
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
+
         //タレント情報を新規登録するSQL
         public function insertTalent($talentInfo){
-            $sql = $this->db->prepare("insert into TALENT(TALENT_NAME         , "
+            $sql = $this->db->prepare(
+            "insert into TALENT(TALENT_NAME         , "
             . " TALENT_FURIGANA_JP  , "
             . " TALENT_FURIGANA_EN  , "
             . " LAYER_NAME          , "
@@ -128,6 +155,48 @@
             . " );");
 
             foreach($talentInfo as $key => $value){
+                $sql -> bindValue($key, $value);
+            }
+            $sql -> execute();
+
+        }
+
+        //タレント情報の表示を新規登録するSQL
+        public function insertTalentInfoCtl($viewInfo){
+            $sql = $this->db->prepare(  
+            "insert into TALENT_INFO_CTL( "
+            . "    TALENT_ID           ,    "
+            . "    FOLLOWERS_FLG       ,    "
+            . "    HEIGHT_FLG          ,    "
+            . "    AGE_FLG             ,    "
+            . "    BIRTHDAY_FLG        ,    "
+            . "    THREE_SIZES_FLG     ,    "
+            . "    THREE_SIZES_B_FLG   ,    "
+            . "    THREE_SIZES_W_FLG   ,    "
+            . "    THREE_SIZES_H_FLG   ,    "
+            . "    HOBBY_SPECIALTY_FLG ,    "
+            . "    COMMENT_FLG         ,    "
+            . "    SNS_1_FLG           ,    "
+            . "    SNS_2_FLG           ,    "
+            . "    SNS_3_FLG                "
+            . ") values (                   "
+            . "    (select MAX(TALENT_ID) from TALENT),"
+            . "    :FOLLOWERS_FLG       ,   "
+            . "    :HEIGHT_FLG          ,   "
+            . "    :AGE_FLG             ,   "
+            . "    :BIRTHDAY_FLG        ,   "
+            . "    :THREE_SIZES_FLG     ,   "
+            . "    :THREE_SIZES_B_FLG   ,   "
+            . "    :THREE_SIZES_W_FLG   ,   "
+            . "    :THREE_SIZES_H_FLG   ,   "
+            . "    :HOBBY_SPECIALTY_FLG ,   "
+            . "    :COMMENT_FLG         ,   "
+            . "    :SNS_1_FLG           ,   "
+            . "    :SNS_2_FLG           ,   "
+            . "    :SNS_3_FLG               "
+            . ");");
+
+            foreach($viewInfo as $key => $value){
                 $sql -> bindValue($key, $value);
             }
 

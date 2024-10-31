@@ -95,6 +95,12 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                         <td><?php echo date('Y/n/j',strtotime($talentInfo['BIRTHDAY'])); ?></td>
                                     </tr>
                                     <?php endif; ?>
+                                    <?php if($talentInfo['FOLLOWERS_FLG'] ==='1') :?>
+                                    <tr>
+                                        <th>Followers</th>
+                                        <td><?php echo htmlspecialchars($talentInfo['FOLLOWERS']); ?></td>
+                                    </tr>
+                                    <?php endif; ?>
                                     <?php if($talentInfo['HEIGHT_FLG'] ==='1' || $talentInfo['THREE_SIZES_FLG'] ==='1') :?>
                                     <?php  
                                             $rowspan = 0;
@@ -105,17 +111,27 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                             }
                                         ?>
                                     <tr>
-                                        <th rowspan="<?php echo $rowspan ?>">SIZE</th>
-                                        <?php if($talentInfo['HEIGHT_FLG'] ==='1'):?>
-                                        <td colspan="1">Height:<?php echo htmlspecialchars($talentInfo['HEIGHT']); ?>
-                                        </td>
-                                        <?php endif; ?>
+                                        <th rowspan="<?php echo $rowspan+1 ?>">SIZE</th>
+                                        <td style="display: none;"></td>
                                     </tr>
+                                    <?php if($talentInfo['HEIGHT_FLG'] ==='1'):?>
+                                        <tr>
+                                            <td colspan="1">Height:<?php echo htmlspecialchars($talentInfo['HEIGHT']); ?>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
                                     <?php if($talentInfo['THREE_SIZES_FLG'] ==='1'):?>
                                     <tr>
-                                        <td colspan="1">B:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_B']); ?>
+                                        <td colspan="1">
+                                            <?php if($talentInfo['THREE_SIZES_B_FLG'] ==='1'):?>
+                                            B:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_B']); ?>
+                                            <?php endif; ?>
+                                            <?php if($talentInfo['THREE_SIZES_W_FLG'] ==='1'):?>
                                             W:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_W']); ?>
+                                            <?php endif; ?>
+                                            <?php if($talentInfo['THREE_SIZES_H_FLG'] ==='1'):?>
                                             H:<?php echo htmlspecialchars($talentInfo['THREE_SIZES_H']); ?>
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                     <?php endif; ?>

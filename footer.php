@@ -46,7 +46,7 @@
         </div>
         <p class="copyright">&copy; 2024 COSPLATFORM. All rights reserved.</p>
         <div class="admin">
-            <a href="admin/admin.php">管理者ページ</a>
+            <a href="admin/00-admin.php">管理者ページ</a>
         </div>
     </div>
 </footer>

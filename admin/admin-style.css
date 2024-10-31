@@ -146,16 +146,20 @@ body {
 }
 
 .talent-list{
+    max-height: calc(100vh - 300px); /* ビューポートの高さから、ヘッダー、action-buttons、余白を引いた高さ */
+    overflow-y: auto;
+    padding-right: 1rem; /* スクロールバーのスペース */
     margin-left: 8rem;
 }
 
-.talent-form {
+.form-area{
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     max-width: 600px;
     margin: 0 auto;
 }
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -196,16 +200,38 @@ body {
     
 }
 
+.button {
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    color: #8e44ad;
+    border: 2px solid #8e44ad;
+    border-radius: 100px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+    
+}
+
 .button:hover, .button.active,
-.submit-button:hover, .submit-button.active  {
+.submit-button:hover, .submit-button.active {
     background-color: #8e44ad;
     color: white;
 }
 
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
 .check-area {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .check-box {
@@ -213,15 +239,14 @@ body {
     align-items: center;
 }
 
-.check-box input[type="checkbox"] {
-    margin-right: 0.5rem;
+.check-box input[type="radio"] {
+    margin-right: 5px;
 }
 
 .checkbox-label {
     font-weight: normal;
-    font-size: 0.7rem;
-    margin-top: 10px;
-    margin-right: 5px;
+    font-size: 0.8rem;
+    margin-right: 2rem;
 }
 
 @media (max-width: 768px) {
@@ -301,15 +326,28 @@ body {
     .talent-list{
         margin:0;
         max-width: 100%;
+        max-height: calc(100vh - 200px); /* モバイルでの調整 */
     }
 
-    .talent-form {
+    .form-area {
         max-width: 100%;
     }
 
     .check-area {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .check-box {
+        margin-top: 0.5rem;
+    }
+
+    .button {
+        width: 100%;
+        max-width: 250px;
+
+        font-size: 1rem;
+        padding: 0.5rem 2rem;
     }
 
 }

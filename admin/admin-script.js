@@ -64,3 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
         plusSlides(1);
     }, 5000);
 });
+
+function checkSubmit(){
+    if(confirm('登録しますか？')){ 
+        return true; 
+    }else{
+        alert('キャンセルされました'); 
+        return false; 
+    }
+}
