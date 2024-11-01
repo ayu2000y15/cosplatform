@@ -11,6 +11,9 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+<head>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
 
 <body>
     <main>
@@ -19,7 +22,7 @@
             <h2>タレント情報編集</h2>
             <?php foreach ($talent as $row): ?>
             <?php foreach ($viewInfo as $view): ?>
-            <form onsubmit="return checkSubmit();" action="11-talent-admin.php" method="POST">
+            <form onsubmit="return checkSubmit('登録');" action="11-talent-admin.php" method="POST">
                 <input type="hidden" name="EXE_ID" value="11">
                 <div class="form-group">
                     <label for="TALENT_NAME">タレント名（本名）<span class="required">※HPには表示されません</span></label>

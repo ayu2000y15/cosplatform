@@ -13,7 +13,7 @@
             }
         }
 
-        //ヘッダーとフッターのロゴを取得するSQL
+        //ヘッダーのロゴを取得するSQL
         public function getLogoImg(){
         
             $sql = "select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
@@ -100,6 +100,7 @@
             return $row = $sql->fetchall(PDO::FETCH_ASSOC);
         }
 
+        /* EXE_ID = '02' */
         //タレントの表示情報を新規登録するSQL
         public function insertTalent($talentInfo){
             $sql = $this->db->prepare(
@@ -206,7 +207,7 @@
         }
 
         //タレント登録時にタグ（男装・女装）を登録するSQL
-        public function insertTalentTag($tagName){
+        public function insertTalentTagF($tagName){
             $sql = $this->db->prepare(  
                 " insert into TALENT_TAG(TALENT_ID, TAG_ID) values( "
                     . " (select MAX(TALENT_ID) from TALENT), "
@@ -219,6 +220,75 @@
             return $sql -> rowCount();
         }
 
+        /* EXE_ID = '14' */
+        //タレントに登録されているタグを取得するSQL
+        public function getTalentTag(String $talentId){
+            
+            $sql = $this->db->prepare("select mtag.TAG_ID, mtag.TAG_NAME TAG_NAME, mtag.TAG_COLOR TAG_COLOR "
+                            . " from TALENT t, TALENT_TAG tag, M_TAG mtag"
+                            . "  where t.TALENT_ID = tag.TALENT_ID "
+                            . "  and tag.TAG_ID = mtag.TAG_ID "
+                            . "  and tag.TALENT_ID= ? ;");
+            // SQL文を実行
+            $sql->bindValue(1, $talentId);
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
+
+        //タレントに登録されていないタグを取得するSQL(プルダウンに設定)
+        public function getTalentNotTag(String $talentId){
+            
+            $sql = $this->db->prepare("select TAG_ID, TAG_NAME,TAG_COLOR from M_TAG "
+                . " where TAG_ID not in (select TAG_ID from TALENT_TAG where TALENT_ID= ? ); ");
+            
+            // SQL文を実行
+            $sql->bindValue(1, $talentId);
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
+
+        //タレント情報にタグを追加する
+        public function insertTalentTag($talentId, $tagId){
+            try{
+            $sql = $this->db->prepare(  
+                " insert into TALENT_TAG(TALENT_ID, TAG_ID) values( "
+                    . " ?, "
+                    . " ? "
+                    . ");");
+
+            $sql -> bindValue(1, $talentId);
+            $sql -> bindValue(2, $tagId);
+    
+            $sql -> execute();
+            return $sql -> rowCount();
+            }catch(Exception $e){
+                return "既にこのタグは登録済みです。変更してください。";
+            }
+        }
+
+        //タグの新規登録
+        public function insertMTag($tagName, $tagColor){
+            $sql = $this->db->prepare(  
+                " insert into M_TAG(TAG_NAME, TAG_COLOR) values (?, ?);");
+            
+            $sql -> bindValue(1, $tagName);
+            $sql -> bindValue(2, $tagColor);
+            $sql -> execute();
+
+        }
+
+        //タグの新規登録
+        public function deleteTalentTag($talentId, $tagId){
+            $sql = $this->db->prepare(  
+                " delete from TALENT_TAG where TALENT_ID = ? and TAG_ID = ?;");
+            
+            $sql -> bindValue(1, $talentId);
+            $sql -> bindValue(2, $tagId);
+            $sql -> execute();
+
+        }
+
+        /* EXE_ID = '15' */
         //タレント削除（物理削除ではなく論理削除）
         //RETIREMENT_DATEとDEL_FLGを更新
         public function deleteTalent($retireDate, $talentId){

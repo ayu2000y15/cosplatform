@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function checkSubmit(){
-    if(confirm('登録しますか？')){ 
+function checkSubmit(type){
+    if(confirm(type.concat('しますか？'))){ 
         return true; 
     }else{
         alert('キャンセルされました'); 

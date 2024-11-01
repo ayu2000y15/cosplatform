@@ -140,6 +140,7 @@
                     . "and vi1.VIEW_FLG = '03' "
                     . "and vi2.VIEW_FLG = '13' "
                     . "and t.DEL_FLG = '0' "
+                    . "and t.RETIREMENT_DATE > CURDATE() "
                     . "order by vi1.PRIORITY ; ";
 
             // SQL文を実行
@@ -156,6 +157,8 @@
                     . " and img.FILE_NAME = vi.FILE_NAME "
                     . " and vi.VIEW_FLG = ? "
                     . " and img.DEL_FLG = '0' "
+                    . " and t.DEL_FLG = '0' "
+                    . " and t.RETIREMENT_DATE > CURDATE() "
                     . " order by vi.PRIORITY ");
 
             // SQL文を実行
@@ -216,6 +219,7 @@
                     . " and vi.VIEW_FLG = ?                       "
                     . " and t.TALENT_ID = ?                       "
                     . " and t.DEL_FLG = '0'                       "
+                    . " and t.RETIREMENT_DATE > CURDATE()         "
                     . " order by vi.PRIORITY                      ");
 
             // SQL文を実行
@@ -232,6 +236,7 @@
                             . "  where t.TALENT_ID = tag.TALENT_ID "
                             . "  and tag.TAG_ID = mtag.TAG_ID "
                             . "  and t.DEL_FLG = '0' "
+                            . "  and t.RETIREMENT_DATE > CURDATE() "
                             . "  and tag.TALENT_ID= ? ;");
             // SQL文を実行
             $sql->bindValue(1, $talentId);
@@ -247,6 +252,7 @@
                             . " where t.TALENT_ID = cr.TALENT_ID "
                             . " and cr.CAREER_CATEGORY_ID = mcr.CAREER_CATEGORY_ID "
                             . " and t.DEL_FLG = '0' "
+                            . " and t.RETIREMENT_DATE > CURDATE() "
                             . " and cr.TALENT_ID= ? ;");
             // SQL文を実行
             $sql->bindValue(1, $talentId);
@@ -262,6 +268,7 @@
                             . " where t.TALENT_ID = cr.TALENT_ID "
                             . " and cr.CAREER_CATEGORY_ID = mcr.CAREER_CATEGORY_ID "
                             . " and t.DEL_FLG = '0' "
+                            . " and t.RETIREMENT_DATE > CURDATE() "
                             . " and cr.TALENT_ID= ? ;");
             // SQL文を実行
             $sql->bindValue(1, $talentId);

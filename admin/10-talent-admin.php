@@ -1,6 +1,7 @@
 <?php
     $talentId = (string)$_POST['TALENT_ID'];
     $exeId = $_POST['EXE_ID'];
+    $checkMess = null;
 
     require_once('admin-db.php'); 
     $obj = new DbController();
@@ -8,6 +9,22 @@
     $talent = $obj->getTalent($talentId);
     foreach ($talent as $row){
         $layerName = $row['LAYER_NAME'];
+    }
+    
+    //タレントのタグを削除
+    if ($exeId === '14_1') {
+        $exeId = '14_1 ok'; 
+        $obj->deleteTalentTag($talentId, $_POST['TAG_ID']);
+    }
+    //タレント情報にタグを登録
+    if ($exeId === '14_2') {
+        $exeId = '14_2 ok'; 
+        $obj->insertTalentTag($talentId, $_POST['TAG_ID']);
+    }
+    //新規タグを登録
+    if ($exeId === '14_3') {
+        $exeId = '14_3 ok'; 
+        $obj->insertMTag($_POST['TAG_NAME'], $_POST['TAG_COLOR']);
     }
 
     //タレント削除処理
@@ -19,7 +36,7 @@
 ?>
 
 <script>
-    console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
+console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
 </script>
 <!DOCTYPE html>
 <html lang="ja">
@@ -43,14 +60,17 @@
                     <a href="00-admin.php">管理画面トップに戻る</a>
                     <h3>タレントID：<?php echo htmlspecialchars($talentId); ?></h3>
                     <h3>レイヤーネーム：<?php echo htmlspecialchars($layerName); ?></h3>
-
-                    <!-- 送信が行われたらメッセージを表示する -->
-                    <?php if(isset($_POST["MESS"])): ?>
-                    <br>
-                    <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
-                    <?php endif; ?>
-
                 </div>
+                <!-- 送信が行われたらメッセージを表示する -->
+                <?php if(isset($_POST["MESS"])): ?>
+                <br>
+                <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
+                <?php endif; ?>
+
+                <?php if( is_null($checkMess)): ?>
+                <br>
+                <h4 style="color:blue;"><?php echo $checkMess; ?></h4>
+                <?php endif; ?>
 
                 <div class="tabs">
                     <div class="tab-buttons">

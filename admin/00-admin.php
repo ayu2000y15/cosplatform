@@ -64,16 +64,16 @@
         //TALENT_TAGに登録
         //COS_FLG = '1' 男装
         if($_POST['COS_FLG'] === '1'){
-            $obj->insertTalentTag('男装');
+            $obj->insertTalentTagF('男装');
         }
         //COS_FLG = '2' 女装
         if($_POST['COS_FLG'] === '2'){
-            $obj->insertTalentTag('女装');
+            $obj->insertTalentTagF('女装');
         }
         //COS_FLG = '3' 男装・女装
         if($_POST['COS_FLG'] === '3'){
-            $obj->insertTalentTag('男装');
-            $obj->insertTalentTag('女装');
+            $obj->insertTalentTagF('男装');
+            $obj->insertTalentTagF('女装');
         }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

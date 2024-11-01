@@ -8,12 +8,15 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+<head>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
 
 <body>
     <main>
         <script src="admin-script.js"></script>
         <div class="form-area">
-            <form onsubmit="return checkSubmit();" action="00-admin.php" method="POST">
+            <form onsubmit="return checkSubmit('登録');" action="00-admin.php" method="POST">
                 <input type="hidden" name="EXE_ID" value="02">
                 <h2>新規タレント登録</h2>
                 <p>※タレントの写真や経歴、ハッシュタグについては、<br>　タレント登録完了後、タレント詳細情報から登録してください。<br>

@@ -25,15 +25,29 @@
                         <th>レイヤーネーム</th>
                         <th>所属日</th>
                         <th>退職日</th>
-                        <th>削除フラグ</th>
+                        <th>在籍状況</th>
                     </tr>
                     <?php foreach ($talentList as $row): ?>
                     <tr data-talent-id="<?php echo htmlspecialchars($row['TALENT_ID']); ?>">
                         <td><?php echo htmlspecialchars($row['TALENT_ID']) ; ?></td>
                         <td><?php echo htmlspecialchars($row['LAYER_NAME']); ?></td>
                         <td><?php echo htmlspecialchars($row['AFFILIATION_DATE']); ?></td>
-                        <td><?php echo htmlspecialchars($row['RETIREMENT_DATE']); ?></td>
-                        <td><?php echo htmlspecialchars($row['DEL_FLG']); ?></td>
+                        <td>
+                            <?php 
+                                if($row['RETIREMENT_DATE'] <> '2099-01-01'){
+                                    echo htmlspecialchars($row['RETIREMENT_DATE']);
+                                }
+                            ?>
+                        </td>
+                        <td>
+                            <?php 
+                            if( $row['RETIREMENT_DATE'] <= date("Y-m-d") && $row['DEL_FLG'] === '1') {
+                                echo '退職済み';
+                            }else{
+                                echo '在籍';
+                            }
+                            ?>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
