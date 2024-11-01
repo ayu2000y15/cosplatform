@@ -1,8 +1,5 @@
 <?php
 
-    require_once('admin-db.php'); 
-    $obj = new DbController();
-
 ?>
 
 <!DOCTYPE html>
@@ -12,9 +9,11 @@
     <main>
         <script src="admin-script.js"></script>
         <div class="form-area">
-            <h2>ハッシュタグ登録・変更</h2>
             <form onsubmit="return checkSubmit();" action="00-admin.php" method="POST">
-                <input type="hidden" name="EXE_ID" value="14">
+                <h2>ニュース登録・変更</h2>
+                <p>※ここではニュースの登録・変更を行うことができます</p>
+
+                <input type="hidden" name="EXE_ID" value="03">
             </form>
         </div>
     </main>

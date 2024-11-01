@@ -12,9 +12,9 @@
     <main>
         <script src="admin-script.js"></script>
         <div class="form-area">
-            <h2>ハッシュタグ登録・変更</h2>
+        <h2></h2>
             <form onsubmit="return checkSubmit();" action="00-admin.php" method="POST">
-                <input type="hidden" name="EXE_ID" value="14">
+                
             </form>
         </div>
     </main>

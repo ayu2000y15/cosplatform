@@ -29,40 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // スライドショーの機能
-    let slideIndex = 1;
-    showSlides(slideIndex);
-
-    // 次/前のコントロール
-    window.plusSlides = function(n) {
-        showSlides(slideIndex += n);
-    }
-
-    // サムネイルイメージコントロール
-    window.currentSlide = function(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("slide");
-        let dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.opacity = "0";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex-1].style.opacity = "1";
-        dots[slideIndex-1].className += " active";
-    }
-
-    // 自動スライドショー
-    setInterval(function() {
-        plusSlides(1);
-    }, 5000);
 });
 
 //タブ切り替えの動き

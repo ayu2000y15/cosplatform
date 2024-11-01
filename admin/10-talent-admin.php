@@ -1,5 +1,7 @@
 <?php
-    $talentId = (string)$_REQUEST['TALENT_ID'];
+    $talentId = (string)$_POST['TALENT_ID'];
+    $exeId = $_POST['EXE_ID'];
+
     require_once('admin-db.php'); 
     $obj = new DbController();
 
@@ -8,9 +10,17 @@
         $layerName = $row['LAYER_NAME'];
     }
 
-    $viewInfo = $obj->getTalentInfoCtl($talentId);
+    //タレント削除処理
+    if($exeId === '15'){
+        $exeId = '15 ok'; 
+        $obj->deleteTalent( $_POST["RETIREMENT_DATE"],$talentId);
+    }
 
 ?>
+
+<script>
+    console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
+</script>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -29,10 +39,18 @@
         </section>
         <div class="container">
             <div class="container-box">
-                <a href="00-admin.php">管理画面トップに戻る</a>
-                
-                <h3>タレントID：<?php echo htmlspecialchars($talentId); ?></h3>
-                <h3>レイヤーネーム：<?php echo htmlspecialchars($layerName); ?></h3>
+                <div class="talent-header">
+                    <a href="00-admin.php">管理画面トップに戻る</a>
+                    <h3>タレントID：<?php echo htmlspecialchars($talentId); ?></h3>
+                    <h3>レイヤーネーム：<?php echo htmlspecialchars($layerName); ?></h3>
+
+                    <!-- 送信が行われたらメッセージを表示する -->
+                    <?php if(isset($_POST["MESS"])): ?>
+                    <br>
+                    <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
+                    <?php endif; ?>
+
+                </div>
 
                 <div class="tabs">
                     <div class="tab-buttons">
@@ -40,6 +58,7 @@
                         <button class="tab-button" data-tab="talent-photos">タレント写真登録・変更</button>
                         <button class="tab-button" data-tab="talent-career">タレント経歴登録・変更</button>
                         <button class="tab-button" data-tab="talent-tag">ハッシュタグ登録・変更</button>
+                        <button class="tab-button" data-tab="talent-retire">タレント退職</button>
                     </div>
 
                     <div class="tab-content active" id="talent-edit">
@@ -56,6 +75,10 @@
 
                     <div class="tab-content" id="talent-tag">
                         <?php include '14-talent-tag.php'; ?>
+                    </div>
+
+                    <div class="tab-content" id="talent-retire">
+                        <?php include '15-talent-retire.php'; ?>
                     </div>
                 </div>
             </div>

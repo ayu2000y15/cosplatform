@@ -27,7 +27,7 @@
         //タレント情報を取得するSQL
         public function getTalentList(){
             //直近登録された人順
-            $sql = " select TALENT_ID ,LAYER_NAME from TALENT order by TALENT_ID desc;";
+            $sql = " select TALENT_ID ,LAYER_NAME, AFFILIATION_DATE, RETIREMENT_DATE, DEL_FLG from TALENT order by TALENT_ID desc;";
             
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
@@ -74,7 +74,7 @@
             return $row = $sql->fetchall(PDO::FETCH_ASSOC);
         }
 
-        //タレント情報を取得するSQL
+        //タレントの表示情報を取得するSQL
         public function getTalentInfoCtl($talentId){
             $sql = $this->db->prepare(  "select "
             . "    TALENT_ID           ,    "
@@ -100,7 +100,7 @@
             return $row = $sql->fetchall(PDO::FETCH_ASSOC);
         }
 
-        //タレント情報を新規登録するSQL
+        //タレントの表示情報を新規登録するSQL
         public function insertTalent($talentInfo){
             $sql = $this->db->prepare(
             "insert into TALENT(TALENT_NAME         , "
@@ -205,7 +205,7 @@
             return $sql -> rowCount();
         }
 
-        //鍛錬と登録時にタグ（男装・女装）を登録するSQL
+        //タレント登録時にタグ（男装・女装）を登録するSQL
         public function insertTalentTag($tagName){
             $sql = $this->db->prepare(  
                 " insert into TALENT_TAG(TALENT_ID, TAG_ID) values( "
@@ -217,6 +217,23 @@
     
             $sql -> execute();
             return $sql -> rowCount();
+        }
+
+        //タレント削除（物理削除ではなく論理削除）
+        //RETIREMENT_DATEとDEL_FLGを更新
+        public function deleteTalent($retireDate, $talentId){
+            //TALENT.
+            $sql = $this->db->prepare(  
+                " UPDATE TALENT "
+                    . " SET RETIREMENT_DATE = ? "
+                    . ", UPD_DATE = CURRENT_TIMESTAMP() "
+                    . ", DEL_FLG = '1' "
+                    . " where TALENT_ID = ? ;");
+            
+            $sql -> bindValue(1, $retireDate);
+            $sql -> bindValue(2, $talentId);
+            $sql -> execute();
+
         }
     }
 ?>

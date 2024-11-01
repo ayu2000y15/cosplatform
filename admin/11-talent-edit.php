@@ -14,11 +14,13 @@
 
 <body>
     <main>
-        <div class="talent-edit">
+        <script src="admin-script.js"></script>
+        <div class="form-area">
+            <h2>タレント情報編集</h2>
             <?php foreach ($talent as $row): ?>
             <?php foreach ($viewInfo as $view): ?>
-            <form class="form-area" onsubmit="return checkSubmit();" action="11-talent-admin.php" method="POST">
-                <h2>タレント情報編集</h2>
+            <form onsubmit="return checkSubmit();" action="11-talent-admin.php" method="POST">
+                <input type="hidden" name="EXE_ID" value="11">
                 <div class="form-group">
                     <label for="TALENT_NAME">タレント名（本名）<span class="required">※HPには表示されません</span></label>
                     <input type="text" id="TALENT_NAME" name="TALENT_NAME" placeholder="山田太郎"
@@ -54,11 +56,11 @@
                     <input type="date" id="AFFILIATION_DATE" name="AFFILIATION_DATE"
                         value="<?php echo htmlspecialchars($row['AFFILIATION_DATE']); ?>" />
                 </div>
-                <!-- <div class="form-group">
-                                <label for="RETIREMENT_DATE">退職日<span class="required"></span></label>
-                                <input type="date" id="RETIREMENT_DATE" name="RETIREMENT_DATE"
-                                    value="<?//php echo htmlspecialchars($row['RETIREMENT_DATE']); ?>" />
-                            </div> -->
+                <div class="form-group">
+                    <label for="RETIREMENT_DATE">退職日<span class="required"></span></label>
+                    <input type="date" id="RETIREMENT_DATE" name="RETIREMENT_DATE"
+                        value="<?php echo htmlspecialchars($row['RETIREMENT_DATE']); ?>" />
+                </div>
                 <div class="form-group">
                     <label for="MAIL">メールアドレス<span class="required"></span></label>
                     <input type="mail" id="MAIL" name="MAIL" placeholder="example@gmail.com"

@@ -188,8 +188,11 @@ body {
     display: block;
 }
 
-.talent-list{
-    margin-left: 8rem;
+.talent-header{
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 1rem;
 }
 
 .form-area{
@@ -197,12 +200,17 @@ body {
     flex-direction: column;
     gap: 1.5rem;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 1rem auto;
+}
+
+.form-area.list{
+    gap:0;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
+    margin-top: 1.5rem;
 }
 .form-group label {
     margin-bottom: 0.5rem;
@@ -229,6 +237,8 @@ body {
 }
 
 .submit-button {
+    width: 100%;
+    margin-top: 1.5rem;
     padding: 0.5rem 2rem;
     background-color: white;
     color: #8e44ad;
@@ -289,6 +299,58 @@ body {
     margin-right: 2rem;
 }
 
+
+/* テーブルのスタイルを追加 */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* 横スクロールを可能にする */
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #8e44ad;
+    text-align: center;
+    color:white;
+    font-weight: bold;
+}
+
+/* 奇数行と偶数行で背景色を変える */
+tr:nth-child(odd) {
+    background-color: #f4d3f4;
+}
+
+/* ホバー時の行のスタイル */
+tr:hover {
+    background-color: #e6e6e6;
+    cursor: pointer;
+}
+
+/* 選択された行のスタイル */
+tr.selected {
+    background-color: #d4e6f1;
+}
+
+/* リンクのスタイルを削除 */
+table a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
 
 
 @media (max-width: 768px) {
@@ -372,11 +434,6 @@ body {
         padding: 0.5rem 2rem;
     }
 
-    .talent-list{
-        margin:0;
-        max-width: 100%;
-    }
-
     .form-area {
         max-width: 100%;
     }
@@ -398,6 +455,20 @@ body {
         padding: 0.5rem 2rem;
     }
 
+    table {
+        font-size: 0.9rem; /* フォントサイズを少し小さくする */
+    }
+    
+    th, td {
+        padding: 0.5rem; /* パディングを少し小さくする */
+    }
+    
+    /* タレントIDと削除フラグの列を非表示にする */
+    th:first-child, td:first-child,
+    th:last-child, td:last-child {
+        display: none;
+    }
+
 }
 
 @media (max-width: 576px) {
@@ -408,5 +479,22 @@ body {
     .logo img {
         width: 40px;
         height: 40px;
+    }
+}
+
+
+/* さらに小さな画面向けのスタイル */
+@media (max-width: 480px) {
+    table {
+      font-size: 0.8rem; /* フォントサイズをさらに小さくする */
+    }
+
+    th, td {
+      padding: 0.4rem; /* パディングをさらに小さくする */
+    }
+
+    /* 退職日の列も非表示にする */
+    th:nth-child(4), td:nth-child(4) {
+    display: none;
     }
 }
