@@ -11,7 +11,7 @@
 <body>
     <main>
         <div class="talent-photos">
-            <form class="form-area" onsubmit="checkSubmit();" action="00-admin.php" method="POST">
+            <form class="form-area" onsubmit="return checkSubmit();" action="00-admin.php" method="POST">
                 <h2>タレント写真登録・変更</h2>
             </form>
         </div>

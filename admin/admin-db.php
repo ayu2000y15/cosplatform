@@ -26,7 +26,8 @@
 
         //タレント情報を取得するSQL
         public function getTalentList(){
-            $sql = " select TALENT_ID ,LAYER_NAME from TALENT;";
+            //直近登録された人順
+            $sql = " select TALENT_ID ,LAYER_NAME from TALENT order by TALENT_ID desc;";
             
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
@@ -204,5 +205,18 @@
             return $sql -> rowCount();
         }
 
+        //鍛錬と登録時にタグ（男装・女装）を登録するSQL
+        public function insertTalentTag($tagName){
+            $sql = $this->db->prepare(  
+                " insert into TALENT_TAG(TALENT_ID, TAG_ID) values( "
+                    . " (select MAX(TALENT_ID) from TALENT), "
+                    . " (select TAG_ID from M_TAG where TAG_NAME = ?) "
+                    . ");");
+
+            $sql -> bindValue(1, $tagName);
+    
+            $sql -> execute();
+            return $sql -> rowCount();
+        }
     }
 ?>

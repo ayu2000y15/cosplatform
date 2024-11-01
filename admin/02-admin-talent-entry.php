@@ -52,9 +52,26 @@
             "SNS_2_FLG"           => $_POST['SNS_2_FLG'],
             "SNS_3_FLG"           => $_POST['SNS_3_FLG']
         ];
-        
+
+        //TALENTに登録
         $obj->insertTalent($talentInfo);
+        //TALENT_INFO_CTLに登録
         $obj->insertTalentInfoCtl($viewInfo);
+
+        //TALENT_TAGに登録
+        //COS_FLG = '1' 男装
+        if($_POST['COS_FLG'] === '1'){
+            $obj->insertTalentTag('男装');
+        }
+        //COS_FLG = '2' 女装
+        if($_POST['COS_FLG'] === '2'){
+            $obj->insertTalentTag('女装');
+        }
+        //COS_FLG = '3' 男装・女装
+        if($_POST['COS_FLG'] === '3'){
+            $obj->insertTalentTag('男装');
+            $obj->insertTalentTag('女装');
+        }
 
     }
 
@@ -69,10 +86,13 @@ console.log("<?php echo $key . ':' . $value ;?>");
 
 <body>
     <main>
+        <script src="admin-script.js"></script>
         <div class="admin-talent-insert">
-            <form class="form-area" onsubmit="checkSubmit();" action="00-admin.php" method="POST">
+            <form class="form-area" onsubmit="return checkSubmit();" action="01-admin-talent-list.php" method="POST">
                 <h2>新規タレント登録</h2>
-                <p>※タレントの写真や経歴、ハッシュタグについては<br>　タレント登録完了後、タレント詳細情報から登録してください<br></p>
+                <p>※タレントの写真や経歴、ハッシュタグについては、<br>　タレント登録完了後、タレント詳細情報から登録してください。<br>
+                　写真を登録しないとHPには表示されません。
+                </p>
                 <div class="form-group">
                     <label for="TALENT_NAME">タレント名（本名）<span class="required">※HPには表示されません</span></label>
                     <input type="text" id="TALENT_NAME" name="TALENT_NAME" placeholder="山田太郎" />

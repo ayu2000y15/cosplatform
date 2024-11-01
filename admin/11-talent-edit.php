@@ -17,7 +17,7 @@
         <div class="talent-edit">
             <?php foreach ($talent as $row): ?>
             <?php foreach ($viewInfo as $view): ?>
-            <form class="form-area" action="11-talent-admin.php" method="POST">
+            <form class="form-area" onsubmit="return checkSubmit();" action="11-talent-admin.php" method="POST">
                 <h2>タレント情報編集</h2>
                 <div class="form-group">
                     <label for="TALENT_NAME">タレント名（本名）<span class="required">※HPには表示されません</span></label>

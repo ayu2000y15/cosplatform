@@ -29,70 +29,39 @@
         </section>
         <div class="container">
             <div class="container-box">
+                <a href="00-admin.php">管理画面トップに戻る</a>
+                
                 <h3>タレントID：<?php echo htmlspecialchars($talentId); ?></h3>
                 <h3>レイヤーネーム：<?php echo htmlspecialchars($layerName); ?></h3>
 
-                <div class="action-buttons">
-                    <?php
-                    $buttons = [
-                        ['class' => 'talent-edit-button', 'text' => 'タレント情報変更'],
-                        ['class' => 'talent-photos-button', 'text' => 'タレント写真登録・変更'],
-                        ['class' => 'talent-career-button', 'text' => 'タレント経歴登録・変更'],
-                        ['class' => 'talent-tag-button', 'text' => 'ハッシュタグ登録・変更']
-                    ];
-                    foreach ($buttons as $button) {
-                        echo "<button class='button {$button['class']}'>{$button['text']}</button>";
-                    }
-                ?>
-                </div>
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="talent-edit">タレント情報変更</button>
+                        <button class="tab-button" data-tab="talent-photos">タレント写真登録・変更</button>
+                        <button class="tab-button" data-tab="talent-career">タレント経歴登録・変更</button>
+                        <button class="tab-button" data-tab="talent-tag">ハッシュタグ登録・変更</button>
+                    </div>
 
-                <div class="talent-edit-info" style="display: none;">
-                    <?php include '11-talent-edit.php'; ?>
-                </div>
+                    <div class="tab-content active" id="talent-edit">
+                        <?php include '11-talent-edit.php'; ?>
+                    </div>
 
-                <div class="talent-photos-info" style="display: none;">
-                    <?php include '12-talent-photos.php'; ?>
-                </div>
+                    <div class="tab-content" id="talent-photos">
+                        <?php include '12-talent-photos.php'; ?>
+                    </div>
 
-                <div class="talent-career-info" style="display: none;">
-                    <?php include '13-talent-career.php'; ?>
-                </div>
+                    <div class="tab-content" id="talent-career">
+                        <?php include '13-talent-career.php'; ?>
+                    </div>
 
-                <div class="talent-tag-info" style="display: none;">
-                    <?php include '14-talent-tag.php'; ?>
+                    <div class="tab-content" id="talent-tag">
+                        <?php include '14-talent-tag.php'; ?>
+                    </div>
                 </div>
-
             </div>
         </div>
     </main>
     <script src="admin-script.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.action-buttons .button');
-        const sections = {
-            'talent-edit-button': '.talent-edit-info',
-            'talent-photos-button': '.talent-photos-info',
-            'talent-career-button': '.talent-career-info',
-            'talent-tag-button' : '.talent-tag-info'
-        };
-
-        function hideAllSections() {
-            Object.values(sections).forEach(selector => {
-                document.querySelector(selector).style.display = 'none';
-            });
-            buttons.forEach(btn => btn.classList.remove('active'));
-        }
-
-        buttons.forEach(button => {
-            button.addEventListener('click', function() {
-                hideAllSections();
-                const sectionSelector = sections[this.classList[1]];
-                document.querySelector(sectionSelector).style.display = 'block';
-                this.classList.add('active');
-            });
-        });
-    });
-    </script>
 </body>
 
 </html>

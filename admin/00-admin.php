@@ -1,11 +1,7 @@
 <?php
 
-    require_once('admin-db.php'); 
-    $obj = new DbController();
-    $talentList = $obj->getTalentList();
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        header("Location:admin.php");
+        header("Location:00-admin.php");
     }
 ?>
 
@@ -28,80 +24,35 @@
         <div class="container">
             <div class="container-box">
                 <section class="admin">
-                    <div class="talent-list">
-                        <h2>登録済みタレント一覧</h2>
-                        <p>※リンクをクリックすることでタレント詳細ページに遷移します<br>
-                            　タレント詳細ページではタレントの写真や経歴、ハッシュタグの情報の更新が行えます<br></p>
-                        <br>
-                        <?php foreach ($talentList as $row): ?>
-                        <form method="post" name="<?php echo 'talent' . $row['TALENT_ID'] ?>" action="10-talent-admin.php">
-                            <input type="hidden" name="TALENT_ID"
-                                value="<?php echo htmlspecialchars($row['TALENT_ID']); ?>">
-                            <a href="<?php echo 'javascript:talent' . $row['TALENT_ID'] . '.submit()'?>">
-                                <?php echo htmlspecialchars($row['TALENT_ID']) . '：' . htmlspecialchars($row['LAYER_NAME']); ?>
-                            </a>
-                        </form>
-                        <?php endforeach; ?>
-                    </div>
+                    <div class="tabs">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" data-tab="talent-list">タレント一覧</button>
+                            <button class="tab-button" data-tab="talent-entry">タレント登録</button>
+                            <button class="tab-button" data-tab="retire-entry">タレント退職・削除登録</button>
+                            <button class="tab-button" data-tab="photos-entry">HP画像登録・変更</button>
+                        </div>
 
-                    <hr class="hr-line">
-                    <div class="action-buttons">
-                        <?php
-                        $buttons = [
-                            ['class' => 'talent-entry-button', 'text' => 'タレント登録'],
-                            ['class' => 'retire-entry-button', 'text' => 'タレント退職・削除登録'],
-                            ['class' => 'photos-entry-button', 'text' => 'HP画像登録・変更']
-                        ];
-                        foreach ($buttons as $button) {
-                            echo "<button class='button {$button['class']}'>{$button['text']}</button>";
-                        }
-                        ?>
-                    </div>
+                        <div class="tab-content active" id="talent-list">
+                            <?php include '01-admin-talent-list.php'; ?>
+                        </div>
 
-                    <div class="talent-entry-info" style="display: none;">
-                        <?php include '01-admin-talent-entry.php'; ?>
-                    </div>
+                        <div class="tab-content" id="talent-entry">
+                            <?php include '02-admin-talent-entry.php'; ?>
+                        </div>
 
-                    <div class="retire-entry-info" style="display: none;">
-                        <?php include '02-admin-retire-entry.php'; ?>
-                    </div>
+                        <div class="tab-content" id="retire-entry">
+                            <?php include '03-admin-retire-entry.php'; ?>
+                        </div>
 
-                    <div class="photos-entry-info" style="display: none;">
-                        <?php include '03-admin-photos-entry.php'; ?>
+                        <div class="tab-content" id="photos-entry">
+                            <?php include '04-admin-photos-entry.php'; ?>
+                        </div>
                     </div>
-
                 </section>
             </div>
         </div>
     </main>
     <script src="admin-script.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.action-buttons .button');
-        const sections = {
-            'talent-entry-button': '.talent-entry-info',
-            'retire-entry-button': '.retire-entry-info',
-            'photos-entry-button': '.photos-entry-info'
-        };
-
-        function hideAllSections() {
-            Object.values(sections).forEach(selector => {
-                document.querySelector(selector).style.display = 'none';
-            });
-            buttons.forEach(btn => btn.classList.remove('active'));
-        }
-
-        buttons.forEach(button => {
-            button.addEventListener('click', function() {
-                hideAllSections();
-                const sectionSelector = sections[this.classList[1]];
-                document.querySelector(sectionSelector).style.display = 'block';
-                this.classList.add('active');
-            });
-        });
-    });
-    </script>
-
 </body>
 
 </html>
