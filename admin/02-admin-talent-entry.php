@@ -8,6 +8,7 @@
 
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <link rel="stylesheet" href="admin-style.css">
 </head>
@@ -16,12 +17,13 @@
     <main>
         <script src="admin-script.js"></script>
         <div class="form-area">
+            <h2>新規タレント登録</h2>
+            <p>※タレントの写真や経歴、ハッシュタグについては、<br>　タレント登録完了後、タレント詳細情報から登録してください。<br>
+                　写真を登録しないとHPには表示されません。
+            </p>
             <form onsubmit="return checkSubmit('登録');" action="00-admin.php" method="POST">
                 <input type="hidden" name="EXE_ID" value="02">
-                <h2>新規タレント登録</h2>
-                <p>※タレントの写真や経歴、ハッシュタグについては、<br>　タレント登録完了後、タレント詳細情報から登録してください。<br>
-                    　写真を登録しないとHPには表示されません。
-                </p>
+                <input type="hidden" name="active_tab" value="talent-list">
                 <div class="form-group">
                     <label for="TALENT_NAME">タレント名（本名）<span class="required">※HPには表示されません</span></label>
                     <input type="text" id="TALENT_NAME" name="TALENT_NAME" placeholder="山田太郎" />

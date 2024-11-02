@@ -1,4 +1,7 @@
 <?php
+    // アクティブなタブを保持する変数を追加
+    $activeTab = isset($_POST['active_tab']) ? $_POST['active_tab'] : 'talent-list';
+
     require_once('admin-db.php'); 
     $obj = new DbController();
 
@@ -112,26 +115,41 @@ console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
                     <?php endif; ?>
                     <div class="tabs">
                         <div class="tab-buttons">
-                            <button class="tab-button active" data-tab="talent-list">タレント一覧</button>
-                            <button class="tab-button" data-tab="talent-entry">タレント登録</button>
-                            <button class="tab-button" data-tab="news-entry">ニュース登録・変更</button>
-                            <button class="tab-button" data-tab="photos-entry">HP画像登録・変更</button>
+                            <button class="tab-button <?php echo $activeTab === 'talent-list' ? 'active' : ''; ?>"
+                                data-tab="talent-list">タレント一覧</button>
+                            <button class="tab-button <?php echo $activeTab === 'talent-entry' ? 'active' : ''; ?>"
+                                data-tab="talent-entry">タレント登録</button>
+                            <button class="tab-button <?php echo $activeTab === 'news-entry' ? 'active' : ''; ?>"
+                                data-tab="news-entry">ニュース登録・変更</button>
+                            <button class="tab-button <?php echo $activeTab === 'photos-entry' ? 'active' : ''; ?>"
+                                data-tab="photos-entry">HP画像登録・変更</button>
+                            <button class="tab-button <?php echo $activeTab === 'tag-entry' ? 'active' : ''; ?>"
+                                data-tab="tag-entry">ハッシュタグ登録・変更</button>
                         </div>
 
-                        <div class="tab-content active" id="talent-list">
+                        <div class="tab-content <?php echo $activeTab === 'talent-list' ? 'active' : ''; ?>"
+                            id="talent-list">
                             <?php include '01-admin-talent-list.php'; ?>
                         </div>
 
-                        <div class="tab-content" id="talent-entry">
+                        <div class="tab-content <?php echo $activeTab === 'talent-entry' ? 'active' : ''; ?>"
+                            id="talent-entry">
                             <?php include '02-admin-talent-entry.php'; ?>
                         </div>
 
-                        <div class="tab-content" id="news-entry">
+                        <div class="tab-content <?php echo $activeTab === 'news-entry' ? 'active' : ''; ?>"
+                            id="news-entry">
                             <?php include '03-admin-news-entry.php'; ?>
                         </div>
 
-                        <div class="tab-content" id="photos-entry">
+                        <div class="tab-content <?php echo $activeTab === 'photos-entry' ? 'active' : ''; ?>"
+                            id="photos-entry">
                             <?php include '04-admin-photos-entry.php'; ?>
+                        </div>
+
+                        <div class="tab-content <?php echo $activeTab === 'tag-entry' ? 'active' : ''; ?>"
+                            id="tag-entry">
+                            <?php include '05-admin-tag-entry.php'; ?>
                         </div>
                     </div>
                 </section>

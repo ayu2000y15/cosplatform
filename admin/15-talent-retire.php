@@ -20,6 +20,7 @@
             
             <form method="post" onsubmit="return checkSubmit('登録');" action="10-talent-admin.php">
                 <input type="hidden" name="EXE_ID" value="15">
+                <input type="hidden" name="active_tab" value="talent-retire">
                 <div class="form-group">
                     <input type="hidden" name="TALENT_ID" value="<?php echo $talentId ?>">
                     <input type="hidden" name="MESS" value="退職日を登録しました">

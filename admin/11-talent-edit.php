@@ -24,6 +24,7 @@
             <?php foreach ($viewInfo as $view): ?>
             <form onsubmit="return checkSubmit('登録');" action="11-talent-admin.php" method="POST">
                 <input type="hidden" name="EXE_ID" value="11">
+                <input type="hidden" name="active_tab" value="talent-edit">
                 <div class="form-group">
                     <label for="TALENT_NAME">タレント名（本名）<span class="required">※HPには表示されません</span></label>
                     <input type="text" id="TALENT_NAME" name="TALENT_NAME" placeholder="山田太郎"

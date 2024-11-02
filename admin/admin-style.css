@@ -198,14 +198,14 @@ body {
 .form-area{
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
     max-width: 600px;
     margin: 1rem auto;
 }
 
-.form-area.list{
-    gap:0;
+.form-area h2 {
+    margin-bottom: 0.8rem;
 }
+
 
 .form-group {
     display: flex;
@@ -355,6 +355,8 @@ body {
 
 .tag-container {
     display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .tag {
@@ -367,10 +369,76 @@ body {
     margin-top:1rem;
 }
 
-.tag-table{
-    
+.multi-button {
+    padding: 0.5rem 1rem;
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    width: 100px;
 }
 
+.multi-button:hover {
+    background-color: #9b59b6;
+    transform: translateY(-2px);
+}
+
+.multi-button.delete-button {
+    background-color: #e74c3c;
+}
+
+.multi-button.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.multi-button.submit-button {
+    background-color: #2ecc71;
+    width: auto;
+    display: inline-block;
+}
+
+.multi-button.submit-button:hover {
+    background-color: #27ae60;
+}
+
+.tag-table{
+    margin-right: 1rem;
+}
+
+/* カラーピッカー */
+.color-input-wrapper {
+    display: flex;
+    align-items: center;
+}
+.color-preview {
+    padding: 4px 12px;
+    border-radius: 9999px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+#TAG_COLOR {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+#TAG_COLOR::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+#TAG_COLOR::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
 
 @media (max-width: 768px) {
     .header-container {
@@ -483,8 +551,10 @@ body {
     }
     
     /* タレントIDと削除フラグの列を非表示にする */
-    th:first-child, td:first-child,
-    th:last-child, td:last-child {
+    .table-container th:first-child,
+    .table-container td:first-child,
+    .table-container th:last-child,
+    .table-container td:last-child {
         display: none;
     }
 
@@ -513,7 +583,8 @@ body {
     }
 
     /* 退職日の列も非表示にする */
-    th:nth-child(4), td:nth-child(4) {
+    .table-container th:nth-child(4), 
+    .table-container td:nth-child(4) {
     display: none;
     }
 }

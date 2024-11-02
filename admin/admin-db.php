@@ -228,6 +228,7 @@
                             . " from TALENT t, TALENT_TAG tag, M_TAG mtag"
                             . "  where t.TALENT_ID = tag.TALENT_ID "
                             . "  and tag.TAG_ID = mtag.TAG_ID "
+                            . "  and mtag.DEL_FLG = '0' "
                             . "  and tag.TALENT_ID= ? ;");
             // SQL文を実行
             $sql->bindValue(1, $talentId);
@@ -294,8 +295,8 @@
         public function deleteTalent($retireDate, $talentId){
             //TALENT.
             $sql = $this->db->prepare(  
-                " UPDATE TALENT "
-                    . " SET RETIREMENT_DATE = ? "
+                " update TALENT "
+                    . " set RETIREMENT_DATE = ? "
                     . ", UPD_DATE = CURRENT_TIMESTAMP() "
                     . ", DEL_FLG = '1' "
                     . " where TALENT_ID = ? ;");

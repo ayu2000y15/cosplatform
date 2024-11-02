@@ -16,12 +16,12 @@
     <main>
         <script src="admin-script.js"></script>
         <div class="form-area">
-            <h2>HP画像登録・変更</h2>
-            <p>※タレントに紐つく写真はタレント編集より行ってください。<br>
-                　ここではHP全体の画像登録が行えます。</p>
+            <h2>ハッシュタグ登録・変更</h2>
+            <p>※タレントに紐つくハッシュタグはタレント編集より行ってください。<br>
+                　ここではハッシュタグの登録や削除が行えます。</p>
             <form onsubmit="return checkSubmit('登録');" action="00-admin.php" method="POST">
-                <input type="hidden" name="EXE_ID" value="04">
-                <input type="hidden" name="active_tab" value="photos-entry">
+                <input type="hidden" name="EXE_ID" value="05">
+                <input type="hidden" name="active_tab" value="tag-entry">
             </form>
         </div>
     </main>
