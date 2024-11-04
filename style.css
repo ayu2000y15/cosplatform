@@ -9,19 +9,17 @@ html {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Noto Sans JP', Arial, sans-serif;
     line-height: 1.6;
     color: #333;
-    background:white;
+    background: white;
     min-height: 100vh;
     font-size: 1rem;
-    padding-top: 80px;
-
     margin: 0;
-    padding: 0;
-    background-image:url(img/hp/background.png);
-    background-size: cover;               /* 全画面 */
-    background-position: center center;   /* 縦横中央 */
+    background-image: url(img/hp/background.png);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 .container {
@@ -269,8 +267,7 @@ h2 {
 }
 
 .subpage-hero {
-    margin-top: 4rem;
-    margin-: 4rem;
+    margin-bottom: 4rem;
     height: 300px;
     background-size: cover;
     background-position: center;
@@ -687,41 +684,43 @@ h2 {
 
 .profile-content {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     gap: 2rem;
-    align-items: flex-start;
-    width: 100%;
 }
 
 .profile-image {
-    flex-shrink: 0;
-    width: 300px;
+    flex: 1;
+    min-width: 250px;
 }
 
 .talent-name{
-    margin-bottom: 0;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .talent-name-en{
-    margin-top: 0;
     font-style:italic;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 
 .profile-image img {
     width: 100%;
-    height: 400px;
+    height: auto;
     object-fit: cover;
-    border-radius: 28px;
-    margin-top:1rem;
+    border-radius: 10px;
 }
 
 .profile-info {
-    flex-grow: 1;
+    flex: 2;
+    min-width: 300px;
 }
 
 .talent-details table {
     width: 100%;
-    border-collapse: collapse;
+    margin-bottom: 1.5rem;
 }
 
 .talent-details th, .talent-details td {
@@ -733,6 +732,7 @@ h2 {
     text-align: left;
     width: 30%;
     font-weight: bold;
+    color: #444;
 }
 
 .action-buttons {
@@ -773,16 +773,18 @@ h2 {
 
 .tag-container {
     display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
 }
 
 .tag {
-    padding: 4px 12px;
-    border-radius: 9999px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
     color: white;
-    font-size: 14px;
-    font-weight: bold;
-    margin-right: 8px;
-    margin-top:1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
 }
 
 .career-info, .photos-info {

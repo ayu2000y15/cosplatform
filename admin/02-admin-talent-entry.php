@@ -18,6 +18,13 @@
         <script src="admin-script.js"></script>
         <div class="form-area">
             <h2>新規タレント登録</h2>
+
+            <!-- 送信が行われたらメッセージを表示する -->
+            <?php if(isset($_POST["MESS"])): ?>
+            <br>
+            <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
+            <?php endif; ?>
+
             <p>※タレントの写真や経歴、ハッシュタグについては、<br>　タレント登録完了後、タレント詳細情報から登録してください。<br>
                 　写真を登録しないとHPには表示されません。
             </p>

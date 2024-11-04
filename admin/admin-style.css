@@ -9,19 +9,17 @@ html {
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Noto Sans JP', Arial, sans-serif;
     line-height: 1.6;
     color: #333;
-    background:white;
+    background: white;
     min-height: 100vh;
     font-size: 1rem;
-    padding-top: 80px;
-
     margin: 0;
-    padding: 0;
-    background-image:url(../img/hp/background.png);
-    background-size: cover;               /* 全画面 */
-    background-position: center center;   /* 縦横中央 */
+    background-image: url(img/hp/background.png);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 .hr-line {
@@ -355,18 +353,18 @@ body {
 
 .tag-container {
     display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
 }
 
 .tag {
-    padding: 4px 12px;
-    border-radius: 9999px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
     color: white;
-    font-size: 14px;
-    font-weight: bold;
-    margin-right: 8px;
-    margin-top:1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-block;
 }
 
 .multi-button {

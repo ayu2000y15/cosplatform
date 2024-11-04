@@ -4,7 +4,6 @@
 
     $talentId = (string)$_POST['TALENT_ID'];
     $exeId = $_POST['EXE_ID'];
-    $checkMess = null;
 
     require_once('admin-db.php'); 
     $obj = new DbController();
@@ -64,16 +63,6 @@ console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
                     <h3>タレントID：<?php echo htmlspecialchars($talentId); ?></h3>
                     <h3>レイヤーネーム：<?php echo htmlspecialchars($layerName); ?></h3>
                 </div>
-                <!-- 送信が行われたらメッセージを表示する -->
-                <?php if(isset($_POST["MESS"])): ?>
-                <br>
-                <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
-                <?php endif; ?>
-
-                <?php if( is_null($checkMess)): ?>
-                <br>
-                <h4 style="color:blue;"><?php echo $checkMess; ?></h4>
-                <?php endif; ?>
 
                 <div class="tabs">
                     <div class="tab-buttons">

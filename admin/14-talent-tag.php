@@ -21,6 +21,13 @@
             <h2>ハッシュタグ登録・変更</h2>
 
             <h3>◆登録済みのハッシュタグ一覧</h3>
+
+            <!-- 送信が行われたらメッセージを表示する -->
+            <?php if(isset($_POST["MESS"])): ?>
+            <br>
+            <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
+            <?php endif; ?>
+
             <table class="tag-table">
                 <?php foreach ($tagList as $tag): ?>
                 <form onsubmit="return checkSubmit('削除');" action="10-talent-admin.php" method="POST">
