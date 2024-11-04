@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group">
                     <label for="AFFILIATION_DATE">所属日<span class="required"></span></label>
-                    <input type="date" value="2024-01-01" id="AFFILIATION_DATE" name="AFFILIATION_DATE" />
+                    <input type="date" value="<?php echo date('Y-m-d'); ?>" id="AFFILIATION_DATE" name="AFFILIATION_DATE" />
                 </div>
                 <!-- <div class="form-group">
                                     <label for="RETIREMENT_DATE">退職日<span class="required"></span></label>

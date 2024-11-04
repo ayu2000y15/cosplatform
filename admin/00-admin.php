@@ -30,7 +30,7 @@
             "HOBBY_SPECIALTY"       => $_POST['HOBBY_SPECIALTY'],
             "COMMENT"               => $_POST['COMMENT'],
             "AFFILIATION_DATE"      => $_POST['AFFILIATION_DATE'],
-            "RETIREMENT_DATE"       => null,
+            "RETIREMENT_DATE"       => '2099-01-01',
             "MAIL"                  => $_POST['MAIL'],
             "TEL_NO"                => $_POST['TEL_NO'],
             "SNS_1"                 => $_POST['SNS_1'],
