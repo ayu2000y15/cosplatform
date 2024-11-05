@@ -13,6 +13,17 @@
             }
         }
 
+        //空文字やNULLのチェックメソッド
+        public function isNullOrEmpty($str){
+            if($str == null){
+                return true;
+            }
+            if($str == ""){
+                return true;
+            }
+                return false;
+        }
+
         //ヘッダーのロゴを取得するSQL
         public function getLogoImg(){
         
@@ -157,6 +168,9 @@
             . " );");
 
             foreach($talentInfo as $key => $value){
+                if($this->isNullOrEmpty($value)){
+                    $value = null;
+                }
                 $sql -> bindValue($key, $value);
             }
             $sql -> execute();
@@ -199,6 +213,9 @@
             . ");");
 
             foreach($viewInfo as $key => $value){
+                if($this->isNullOrEmpty($value)){
+                    $value = null;
+                }
                 $sql -> bindValue($key, $value);
             }
 

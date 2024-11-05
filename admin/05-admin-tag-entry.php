@@ -18,12 +18,6 @@
         <div class="form-area">
             <h2>ハッシュタグ登録・変更</h2>
 
-            <!-- 送信が行われたらメッセージを表示する -->
-            <?php if(isset($_POST["MESS"])): ?>
-            <br>
-            <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
-            <?php endif; ?>
-
             <p>※タレントに紐つくハッシュタグはタレント編集より行ってください。<br>
                 　ここではハッシュタグの登録や削除が行えます。</p>
             <form onsubmit="return checkSubmit('登録');" action="00-admin.php" method="POST">

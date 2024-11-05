@@ -19,12 +19,6 @@
         <div class="form-area">
             <h2>タレント退職</h2>
 
-            <!-- 送信が行われたらメッセージを表示する -->
-            <?php if(isset($_POST["MESS"])): ?>
-            <br>
-            <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
-            <?php endif; ?>
-
             <form method="post" onsubmit="return checkSubmit('登録');" action="10-talent-admin.php">
                 <input type="hidden" name="EXE_ID" value="15">
                 <input type="hidden" name="active_tab" value="talent-retire">

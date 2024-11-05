@@ -64,24 +64,38 @@ console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
                     <h3>レイヤーネーム：<?php echo htmlspecialchars($layerName); ?></h3>
                 </div>
 
+                <!-- 送信が行われたらメッセージを表示する -->
+                <?php if(isset($_POST["MESS"])): ?>
+                <br>
+                <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
+                <?php endif; ?>
+
                 <div class="tabs">
                     <div class="tab-buttons">
-                        <button class="tab-button <?php echo $activeTab === 'talent-edit' ? 'active' : ''; ?>" data-tab="talent-edit">タレント情報変更</button>
-                        <button class="tab-button <?php echo $activeTab === 'talent-photos' ? 'active' : ''; ?>" data-tab="talent-photos">タレント写真登録・変更</button>
-                        <button class="tab-button <?php echo $activeTab === 'talent-career' ? 'active' : ''; ?>" data-tab="talent-career">タレント経歴登録・変更</button>
-                        <button class="tab-button <?php echo $activeTab === 'talent-tag' ? 'active' : ''; ?>" data-tab="talent-tag">ハッシュタグ登録・変更</button>
-                        <button class="tab-button <?php echo $activeTab === 'talent-retire' ? 'active' : ''; ?>" data-tab="talent-retire">タレント退職</button>
+                        <button class="tab-button <?php echo $activeTab === 'talent-edit' ? 'active' : ''; ?>"
+                            data-tab="talent-edit">タレント情報変更</button>
+                        <button class="tab-button <?php echo $activeTab === 'talent-photos' ? 'active' : ''; ?>"
+                            data-tab="talent-photos">タレント写真登録・変更</button>
+                        <button class="tab-button <?php echo $activeTab === 'talent-career' ? 'active' : ''; ?>"
+                            data-tab="talent-career">タレント経歴登録・変更</button>
+                        <button class="tab-button <?php echo $activeTab === 'talent-tag' ? 'active' : ''; ?>"
+                            data-tab="talent-tag">ハッシュタグ登録・変更</button>
+                        <button class="tab-button <?php echo $activeTab === 'talent-retire' ? 'active' : ''; ?>"
+                            data-tab="talent-retire">タレント退職</button>
                     </div>
 
-                    <div class="tab-content <?php echo $activeTab === 'talent-edit' ? 'active' : ''; ?>" id="talent-edit">
+                    <div class="tab-content <?php echo $activeTab === 'talent-edit' ? 'active' : ''; ?>"
+                        id="talent-edit">
                         <?php include '11-talent-edit.php'; ?>
                     </div>
 
-                    <div class="tab-content <?php echo $activeTab === 'talent-photos' ? 'active' : ''; ?>" id="talent-photos">
+                    <div class="tab-content <?php echo $activeTab === 'talent-photos' ? 'active' : ''; ?>"
+                        id="talent-photos">
                         <?php include '12-talent-photos.php'; ?>
                     </div>
 
-                    <div class="tab-content <?php echo $activeTab === 'talent-career' ? 'active' : ''; ?>" id="talent-career">
+                    <div class="tab-content <?php echo $activeTab === 'talent-career' ? 'active' : ''; ?>"
+                        id="talent-career">
                         <?php include '13-talent-career.php'; ?>
                     </div>
 
@@ -89,7 +103,8 @@ console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
                         <?php include '14-talent-tag.php'; ?>
                     </div>
 
-                    <div class="tab-content <?php echo $activeTab === 'talent-retire' ? 'active' : ''; ?>" id="talent-retire">
+                    <div class="tab-content <?php echo $activeTab === 'talent-retire' ? 'active' : ''; ?>"
+                        id="talent-retire">
                         <?php include '15-talent-retire.php'; ?>
                     </div>
                 </div>
