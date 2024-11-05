@@ -12,27 +12,148 @@
     foreach ($talent as $row){
         $layerName = $row['LAYER_NAME'];
     }
-    
+
+    //タレント情報更新
+    if ($exeId === '11'){
+        $exeId = '11 ok';
+
+        $talentInfo = [
+            "TALENT_NAME"           => $_POST['TALENT_NAME'],
+            "TALENT_FURIGANA_JP"    => $_POST['TALENT_FURIGANA_JP'],
+            "TALENT_FURIGANA_EN"    => $_POST['TALENT_FURIGANA_EN'],
+            "LAYER_NAME"            => $_POST['LAYER_NAME'],
+            "LAYER_FURIGANA_JP"     => $_POST['LAYER_FURIGANA_JP'],
+            "LAYER_FURIGANA_EN"     => $_POST['LAYER_FURIGANA_EN'],
+            "FOLLOWERS"             => (int)$_POST['FOLLOWERS'],
+            "STREAM_FLG"            => $_POST['STREAM_FLG'],
+            "COS_FLG"               => $_POST['COS_FLG'],
+            "HEIGHT"                => (int)$_POST['HEIGHT'],
+            "AGE"                   => (int)$_POST['AGE'],
+            "BIRTHDAY"              => $_POST['BIRTHDAY'],
+            "THREE_SIZES_B"         => (int)$_POST['THREE_SIZES_B'],
+            "THREE_SIZES_W"         => (int)$_POST['THREE_SIZES_W'],
+            "THREE_SIZES_H"         => (int)$_POST['THREE_SIZES_H'],
+            "HOBBY_SPECIALTY"       => $_POST['HOBBY_SPECIALTY'],
+            "COMMENT"               => $_POST['COMMENT'],
+            "AFFILIATION_DATE"      => $_POST['AFFILIATION_DATE'],
+            "RETIREMENT_DATE"       => $_POST['RETIREMENT_DATE'],
+            "MAIL"                  => $_POST['MAIL'],
+            "TEL_NO"                => $_POST['TEL_NO'],
+            "SNS_1"                 => $_POST['SNS_1'],
+            "SNS_2"                 => $_POST['SNS_2'],
+            "SNS_3"                 => $_POST['SNS_3']
+        ];
+
+        $threeSizesFlg = '0';
+        if($_POST['THREE_SIZES_B_FLG'] === '1' || $_POST['THREE_SIZES_W_FLG'] === '1' || $_POST['THREE_SIZES_H_FLG'] === '1'){
+            $threeSizesFlg = '1';
+        }
+
+        $viewInfo = [
+            "FOLLOWERS_FLG"       => $_POST['FOLLOWERS_FLG'],
+            "HEIGHT_FLG"          => $_POST['HEIGHT_FLG'],
+            "AGE_FLG"             => $_POST['AGE_FLG'],
+            "BIRTHDAY_FLG"        => $_POST['BIRTHDAY_FLG'],
+            "THREE_SIZES_FLG"     => $threeSizesFlg,
+            "THREE_SIZES_B_FLG"   => $_POST['THREE_SIZES_B_FLG'],
+            "THREE_SIZES_W_FLG"   => $_POST['THREE_SIZES_W_FLG'],
+            "THREE_SIZES_H_FLG"   => $_POST['THREE_SIZES_H_FLG'],
+            "HOBBY_SPECIALTY_FLG" => $_POST['HOBBY_SPECIALTY_FLG'],
+            "COMMENT_FLG"         => $_POST['COMMENT_FLG'],
+            "SNS_1_FLG"           => $_POST['SNS_1_FLG'],
+            "SNS_2_FLG"           => $_POST['SNS_2_FLG'],
+            "SNS_3_FLG"           => $_POST['SNS_3_FLG']
+        ];
+
+        //TALENT更新
+        $obj->updateTalent($talentId, $talentInfo);
+        //TALENT_INFO_CTL更新
+        $obj->updateTalentInfoCtl($talentId, $viewInfo);
+
+        //TALENT_TAG更新(更新前に一度削除する)
+        $obj->deleteTalentTag($talentId, '1');
+        $obj->deleteTalentTag($talentId, '2');
+        //COS_FLG = '1' 男装
+        if($_POST['COS_FLG'] === '1'){
+            $obj->insertTalentTag($talentId, '1');
+        }
+        //COS_FLG = '2' 女装
+        if($_POST['COS_FLG'] === '2'){
+            $obj->insertTalentTag($talentId, '2');
+        }
+        //COS_FLG = '3' 男装・女装
+        if($_POST['COS_FLG'] === '3'){
+            $obj->insertTalentTag($talentId, '1');
+            $obj->insertTalentTag($talentId, '2');
+        }
+        $message = "タレント情報の更新が行われました。";
+    }
+
+    //タレント写真削除
+    if ($exeId === '12_1'){
+        $exeId = '12_1 ok';
+        $obj->deleteTalentImg($_POST["FILE_NAME"], $_POST["VIEW_FLG"], $talentId);
+        $message = "タレントの写真が削除されました。";
+    }
+
+    //タレント写真変更
+    if ($exeId === '12_2'){
+        $exeId = '12_2 ok';
+        $obj->updateTalentImg($_POST["FILE_NAME"], $_POST["VIEW_FLG_BEF"], $_POST["VIEW_FLG_AFT"]);
+        $message = "タレントの写真が変更されました。";
+    }
+
+    //タレント写真登録
+    if ($exeId === '12_3'){
+        $exeId = '12_3 ok';
+        // ディレクトリの命名規則
+        $dirName = $talentId . '_' . $layerName = $row['LAYER_NAME'];
+        $uploadDir = '../img/' . $dirName; 
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_FILES['upfile'])) {
+                $uploadedFiles = $_FILES['upfile'];
+                require_once('file-upload.php'); 
+                $obj = new FileUpload();
+                $result = $obj->uploadFiles($uploadedFiles, $uploadDir);
+                if ($result['success']) {
+                    $message = "ファイルが正常にアップロードされました。";
+                } else {
+                    $error = "ファイルのアップロードに失敗しました: " . $result['message'];
+                }
+            }
+        }
+        
+
+    }
+
     //タレントのタグを削除
     if ($exeId === '14_1') {
         $exeId = '14_1 ok'; 
         $obj->deleteTalentTag($talentId, $_POST['TAG_ID']);
+        $message = "タグが削除されました。";
     }
     //タレント情報にタグを登録
     if ($exeId === '14_2') {
         $exeId = '14_2 ok'; 
         $obj->insertTalentTag($talentId, $_POST['TAG_ID']);
+        $message = "タグが登録されました。";
     }
     //新規タグを登録
     if ($exeId === '14_3') {
         $exeId = '14_3 ok'; 
         $obj->insertMTag($_POST['TAG_NAME'], $_POST['TAG_COLOR']);
+        $message = "新しいタグが追加されました。タレントにタグを追加してください。";
     }
 
     //タレント削除処理
     if($exeId === '15'){
         $exeId = '15 ok'; 
         $obj->deleteTalent( $_POST["RETIREMENT_DATE"],$talentId);
+        $message = "タレントの退職日を登録しました。";
     }
 
 ?>
@@ -65,9 +186,11 @@ console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
                 </div>
 
                 <!-- 送信が行われたらメッセージを表示する -->
-                <?php if(isset($_POST["MESS"])): ?>
-                <br>
-                <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
+                <?php if (isset($message)): ?>
+                <div class="success-message"><?php echo $message; ?></div>
+                <?php endif; ?>
+                <?php if (isset($error)): ?>
+                <div class="error-message"><?php echo $error; ?></div>
                 <?php endif; ?>
 
                 <div class="tabs">

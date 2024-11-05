@@ -24,7 +24,6 @@
                 <input type="hidden" name="active_tab" value="talent-retire">
                 <div class="form-group">
                     <input type="hidden" name="TALENT_ID" value="<?php echo $talentId ?>">
-                    <input type="hidden" name="MESS" value="退職日を登録しました">
                     <label for="RETIREMENT_DATE">退職日</label>
                     <input type="date" id="RETIREMENT_DATE" name="RETIREMENT_DATE" />
                 </div>

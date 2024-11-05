@@ -23,14 +23,14 @@
             <h3>◆登録済みのハッシュタグ一覧</h3>
 
             <table class="tag-table">
-                <?php foreach ($tagList as $tag): ?>
-                <form onsubmit="return checkSubmit('削除');" action="10-talent-admin.php" method="POST">
-                    <input type="hidden" name="EXE_ID" value="14_1">
-                    <input type="hidden" name="active_tab" value="talent-tag">
-                    <input type="hidden" name="MESS" value="タグを削除しました">
-                    <input type="hidden" name="TALENT_ID" value="<?php echo $talentId ?>">
-                    <input type="hidden" name="TAG_ID" value="<?php echo htmlspecialchars($tag['TAG_ID']);  ?>">
-                    <div class="tag-container">
+                <div class="tag-container">
+                    <?php foreach ($tagList as $tag): ?>
+                    <form onsubmit="return checkSubmit('削除');" action="10-talent-admin.php" method="POST">
+                        <input type="hidden" name="EXE_ID" value="14_1">
+                        <input type="hidden" name="active_tab" value="talent-tag">
+                        <input type="hidden" name="TALENT_ID" value="<?php echo $talentId ?>">
+                        <input type="hidden" name="TAG_ID" value="<?php echo htmlspecialchars($tag['TAG_ID']);  ?>">
+
                         <tr>
                             <td>
                                 <span class="tag"
@@ -42,9 +42,10 @@
                                 <button type="submit" class="multi-button delete-button">削除する</button>
                             </td>
                         </tr>
-                    </div>
-                </form>
-                <?php endforeach; ?>
+
+                    </form>
+                    <?php endforeach; ?>
+                </div>
             </table>
 
             <hr class="hr-line">
@@ -52,7 +53,6 @@
             <form onsubmit="return checkSubmit('登録');" action="10-talent-admin.php" method="POST">
                 <input type="hidden" name="EXE_ID" value="14_2">
                 <input type="hidden" name="active_tab" value="talent-tag">
-                <input type="hidden" name="MESS" value="タレント情報にタグを追加しました">
                 <input type="hidden" name="TALENT_ID" value="<?php echo $talentId ?>">
                 <div class="form-group">
                     <select id="TAG_ID" name="TAG_ID">
@@ -72,7 +72,6 @@
             <form onsubmit="return checkSubmit('登録');" action="10-talent-admin.php" method="POST">
                 <input type="hidden" name="EXE_ID" value="14_3">
                 <input type="hidden" name="active_tab" value="talent-tag">
-                <input type="hidden" name="MESS" value="タグを新しく追加しました">
                 <input type="hidden" name="TALENT_ID" value="<?php echo $talentId ?>">
                 <div class="form-group">
                     <label for="TAG_NAME">タグ名<span class="required"></span></label>

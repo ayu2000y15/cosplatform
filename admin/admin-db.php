@@ -237,6 +237,153 @@
             return $sql -> rowCount();
         }
 
+        /* EXE_ID = '11' */
+        //タレント情報変更
+        public function updateTalent($talentId, $talentInfo){
+            //TALENT.
+            $sql = $this->db->prepare(  
+                " update TALENT "
+                . " set "
+                . "   TALENT_NAME          = :TALENT_NAME         , "
+                . "   TALENT_FURIGANA_JP   = :TALENT_FURIGANA_JP  , "
+                . "   TALENT_FURIGANA_EN   = :TALENT_FURIGANA_EN  , "
+                . "   LAYER_NAME           = :LAYER_NAME          , "
+                . "   LAYER_FURIGANA_JP    = :LAYER_FURIGANA_JP   , "
+                . "   LAYER_FURIGANA_EN    = :LAYER_FURIGANA_EN   , "
+                . "   FOLLOWERS            = :FOLLOWERS           , "
+                . "   STREAM_FLG           = :STREAM_FLG          , "
+                . "   COS_FLG              = :COS_FLG             , "
+                . "   HEIGHT               = :HEIGHT              , "
+                . "   AGE                  = :AGE                 , "
+                . "   BIRTHDAY             = :BIRTHDAY            , "
+                . "   THREE_SIZES_B        = :THREE_SIZES_B       , "
+                . "   THREE_SIZES_W        = :THREE_SIZES_W       , "
+                . "   THREE_SIZES_H        = :THREE_SIZES_H       , "
+                . "   HOBBY_SPECIALTY      = :HOBBY_SPECIALTY     , "
+                . "   COMMENT              = :COMMENT             , "
+                . "   AFFILIATION_DATE     = :AFFILIATION_DATE    , "
+                . "   RETIREMENT_DATE      = :RETIREMENT_DATE     , "
+                . "   MAIL                 = :MAIL                , "
+                . "   TEL_NO               = :TEL_NO              , "
+                . "   SNS_1                = :SNS_1               , "
+                . "   SNS_2                = :SNS_2               , "
+                . "   SNS_3                = :SNS_3               , "
+                . "   UPD_DATE             = CURRENT_TIMESTAMP()    "
+                . " where TALENT_ID = :TALENT_ID;                   "
+                );
+            
+            foreach($talentInfo as $key => $value){
+                if($this->isNullOrEmpty($value)){
+                    $value = null;
+                }
+                $sql -> bindValue($key, $value);
+            }
+            $sql -> bindValue("TALENT_ID", $talentId);
+            $sql -> execute();
+
+        }
+
+        //タレント情報の表示情報変更
+        public function updateTalentInfoCtl($talentId, $viewInfo){
+            //TALENT.
+            $sql = $this->db->prepare(  
+                "update TALENT_INFO_CTL "
+                    . " set "
+                    . "    FOLLOWERS_FLG       = :FOLLOWERS_FLG       , "
+                    . "    HEIGHT_FLG          = :HEIGHT_FLG          , "
+                    . "    AGE_FLG             = :AGE_FLG             , "
+                    . "    BIRTHDAY_FLG        = :BIRTHDAY_FLG        , "
+                    . "    THREE_SIZES_FLG     = :THREE_SIZES_FLG     , "
+                    . "    THREE_SIZES_B_FLG   = :THREE_SIZES_B_FLG   , "
+                    . "    THREE_SIZES_W_FLG   = :THREE_SIZES_W_FLG   , "
+                    . "    THREE_SIZES_H_FLG   = :THREE_SIZES_H_FLG   , "
+                    . "    HOBBY_SPECIALTY_FLG = :HOBBY_SPECIALTY_FLG , "
+                    . "    COMMENT_FLG         = :COMMENT_FLG         , "
+                    . "    SNS_1_FLG           = :SNS_1_FLG           , "
+                    . "    SNS_2_FLG           = :SNS_2_FLG           , "
+                    . "    SNS_3_FLG           = :SNS_3_FLG             "
+                    . " where TALENT_ID = :TALENT_ID; "
+                );
+
+            foreach($viewInfo as $key => $value){
+                if($this->isNullOrEmpty($value)){
+                    $value = null;
+                }
+                $sql -> bindValue($key, $value);
+            }
+            $sql -> bindValue("TALENT_ID", $talentId);
+            $sql -> execute();
+            
+        }
+
+        /* EXE_ID = '12' */
+        //タレントに登録された写真を取得するSQL
+        public function getTalentImg(String $talentId){
+            
+            $sql = $this->db->prepare(
+                "select "
+                    . " t.LAYER_NAME LAYER_NAME, "
+                    . " img.FILE_NAME FILE_NAME, "
+                    . " img.FILE_PATH FILE_PATH, "
+                    . " vi.COMMENT ALT, "
+                    . " vi.VIEW_FLG VIEW_FLG, "
+                    . " vi.PRIORITY PRIORITY, "
+                    . " mv.COMMENT COMMENT, "
+                    . " img.DEL_FLG = '0' "
+                    . " from TALENT t, IMG_LIST img, IMG_VIEW vi, M_VIEW_FLG mv "
+                    . " where t.TALENT_ID = img.TALENT_ID "
+                    . " and vi.VIEW_FLG = mv.VIEW_FLG "
+                    . " and img.FILE_NAME = vi.FILE_NAME "
+                    . " and t.TALENT_ID = ? "
+                    . " order by cast(vi.VIEW_FLG as signed), vi.PRIORITY "
+                    );
+            // SQL文を実行
+            $sql->bindValue(1, $talentId);
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
+
+        //タレント写真の削除
+        public function deleteTalentImg($fileName, $viewFlg, $talentId){
+            $sql = $this->db->prepare(  
+                " delete from IMG_VIEW v, IMG_LIST i "
+                . " where v.FILE_NAME = i.FILE_NAME "
+                . " and v.FILE_NAME = ? "
+                . " and v.VIEW_FLG = ? "
+                . " and i.TALENT_ID = ?;"
+                );
+            
+            $sql -> bindValue(1, $fileName);
+            $sql -> bindValue(2, $viewFlg);
+            $sql -> bindValue(3, $talentId);
+            $sql -> execute();
+
+        }
+        
+        //VIEW_FLGの一覧を取得
+        public function getViewFlg(){
+            $sql = " select VIEW_FLG, COMMENT from M_VIEW_FLG where VIEW_FLG like '__' order by cast(VIEW_FLG as signed);";
+            
+            return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
+        }
+
+        //タレント写真の削除
+        public function updateTalentImg($fileName, $viewFlg_bef, $viewFlg_aft){
+            $sql = $this->db->prepare(  
+                " update IMG_VIEW "
+                . " set "
+                . " VIEW_FLG = ? "
+                . " where FILE_NAME = ? "
+                . " and VIEW_FLG = ? ;"
+                );
+            
+            $sql -> bindValue(1, $viewFlg_aft);
+            $sql -> bindValue(2, $fileName);
+            $sql -> bindValue(3, $viewFlg_bef);
+            $sql -> execute();
+
+        }
+
         /* EXE_ID = '14' */
         //タレントに登録されているタグを取得するSQL
         public function getTalentTag(String $talentId){
@@ -295,7 +442,7 @@
 
         }
 
-        //タグの新規登録
+        //タグの削除
         public function deleteTalentTag($talentId, $tagId){
             $sql = $this->db->prepare(  
                 " delete from TALENT_TAG where TALENT_ID = ? and TAG_ID = ?;");
