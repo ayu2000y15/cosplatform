@@ -241,7 +241,7 @@
                             </label>
                         </div>
                     </div>
-                    <input type="text" id="SNS_1" name="SNS_1" placeholder="twitter" />
+                    <input type="text" id="SNS_1" name="SNS_1" value="https://x.com/" />
                 </div>
                 <div class="form-group">
                     <div class="check-area">
@@ -257,7 +257,7 @@
                             </label>
                         </div>
                     </div>
-                    <input type="text" id="SNS_2" name="SNS_2" placeholder="insta_000" />
+                    <input type="text" id="SNS_2" name="SNS_2" value="https://www.instagram.com/" />
                 </div>
                 <div class="form-group">
                     <div class="check-area">
@@ -273,7 +273,7 @@
                             </label>
                         </div>
                     </div>
-                    <input type="text" id="SNS_3" name="SNS_3" placeholder="tiktok1212" />
+                    <input type="text" id="SNS_3" name="SNS_3" value="https://www.tiktok.com/" />
                 </div>
                 <button type="submit" class="submit-button">送信する</button>
             </form>

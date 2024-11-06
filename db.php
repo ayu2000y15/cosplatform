@@ -19,19 +19,19 @@
             $sql = "select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
                 . " from IMG_LIST img, IMG_VIEW vi "
                 . " where img.FILE_NAME = vi.FILE_NAME "
-                . " and vi.VIEW_FLG = '999' and PRIORITY=1 ";
+                . " and vi.VIEW_FLG = 'S999' and PRIORITY=1 ";
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
 
         //TOPページのスライドショーを取得するSQL
-        //VIEW_FLG in ('101')
+        //VIEW_FLG in ('S101')
         public function getSlideImg(){
             
             $sql = "select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT, vi.SPARE1 TITLE, vi.SPARE2 DISCRIPTION"
                 . " from IMG_LIST img, IMG_VIEW vi "
                 . " where img.FILE_NAME = vi.FILE_NAME "
-                . "   and vi.VIEW_FLG in ('101') "
+                . "   and vi.VIEW_FLG in ('S101') "
                 . "   and img.DEL_FLG = '0'"
                 . " order by vi.PRIORITY; ";
             // SQL文を実行
@@ -39,13 +39,13 @@
         }
 
         //TOPページのスライドショーの件数を取得するSQL
-        //VIEW_FLG in ('101')
+        //VIEW_FLG in ('S101')
         public function getSlideCnt(){
             
             $sql = "select count(*)"
                 . " from IMG_LIST img, IMG_VIEW vi "
                 . " where img.FILE_NAME = vi.FILE_NAME "
-                . "   and vi.VIEW_FLG in ('101') "
+                . "   and vi.VIEW_FLG in ('S101') "
                 . "   and img.DEL_FLG = '0' "
                 . " order by vi.PRIORITY; ";
             // SQL文を実行
@@ -70,8 +70,6 @@
         }
 
         //TOPページの写真を取得するSQL
-        //VIEW_FLG = '01' talent
-        //VIEW_FLG = '02' cosplay
         public function getTopImgValue(String $viewFlg='0', int $limit=0){
             
             $sql = $this->db->prepare("select t.LAYER_NAME LAYER_NAME, img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
@@ -137,8 +135,8 @@
                     . "and img1.FILE_NAME = vi1.FILE_NAME "
                     . "and t.TALENT_ID = img2.TALENT_ID "
                     . "and img2.FILE_NAME = vi2.FILE_NAME "
-                    . "and vi1.VIEW_FLG = '03' "
-                    . "and vi2.VIEW_FLG = '13' "
+                    . "and vi1.VIEW_FLG = '01' "
+                    . "and vi2.VIEW_FLG = '02' "
                     . "and t.DEL_FLG = '0' "
                     . "and t.RETIREMENT_DATE > CURDATE() "
                     . "order by vi1.PRIORITY ; ";
@@ -148,17 +146,13 @@
         }
 
         //COSPLAYページの写真を取得するSQL
-        //VIEW_FLG = '04' COSPLAYページに表示
         public function getCosplayImg(String $viewFlg='0'){
             
-            $sql = $this->db->prepare("select t.LAYER_NAME LAYER_NAME, img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
-                    . " from TALENT t, IMG_LIST img, IMG_VIEW vi "
-                    . " where t.TALENT_ID = img.TALENT_ID "
-                    . " and img.FILE_NAME = vi.FILE_NAME "
+            $sql = $this->db->prepare("select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
+                    . " from IMG_LIST img, IMG_VIEW vi "
+                    . " where img.FILE_NAME = vi.FILE_NAME "
                     . " and vi.VIEW_FLG = ? "
                     . " and img.DEL_FLG = '0' "
-                    . " and t.DEL_FLG = '0' "
-                    . " and t.RETIREMENT_DATE > CURDATE() "
                     . " order by vi.PRIORITY ");
 
             // SQL文を実行

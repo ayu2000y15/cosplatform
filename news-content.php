@@ -4,7 +4,7 @@ $newsId = (string)$_REQUEST['NEWS_ID'];
 
 require_once('db.php'); 
 $obj=new DbController(); 
-$topImg = $obj->getTopImg('205');
+$topImg = $obj->getTopImg('S205');
 $news = $obj->getNewsContent($newsId);
 
 ?>

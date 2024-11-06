@@ -4,9 +4,9 @@ $talentId = (string)$_REQUEST['TALENT_ID'];
 
 require_once('db.php'); 
 $obj=new DbController(); 
-$topImg=$obj->getTopImg('201');
-$talentProfile = $obj->getTalentProfile('03',$talentId);
-$talentImg = $obj->getTalentProfile('23',$talentId);
+$topImg=$obj->getTopImg('S201');
+$talentProfile = $obj->getTalentProfile('01',$talentId);
+$talentImg = $obj->getTalentProfile('03',$talentId);
 $talentTag = $obj->getTalentTag($talentId);
 $careerCategory = $obj->getCareerCategory($talentId);
 $talentCareer = $obj->getTalentCareer($talentId);
@@ -50,7 +50,7 @@ $talentCareer = $obj->getTalentCareer($talentId);
                         <div class="profile-info">
                             <div class="social-icons profile">
                                 <?php if($talentInfo['SNS_1_FLG'] ==='1') :?>
-                                <a href="https://x.com/<?php echo htmlspecialchars($talentInfo['SNS_1']); ?>"
+                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_1']); ?>"
                                     aria-label="X (Twitter)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -61,7 +61,7 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 </a>
                                 <?php endif; ?>
                                 <?php if($talentInfo['SNS_2_FLG'] ==='1') :?>
-                                <a href="https://www.instagram.com/<?php echo htmlspecialchars($talentInfo['SNS_2']); ?>"
+                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_2']); ?>"
                                     aria-label="Instagram">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -73,7 +73,7 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 </a>
                                 <?php endif; ?>
                                 <?php if($talentInfo['SNS_3_FLG'] ==='1') :?>
-                                <a href="https://www.tiktok.com/<?php echo htmlspecialchars($talentInfo['SNS_3']); ?>"
+                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_3']); ?>"
                                     aria-label="TikTok">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

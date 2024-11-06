@@ -2,11 +2,11 @@
 
 require_once('db.php');
 $obj = new DbController();
-$talent = $obj->getTopImgValue('01', 4);
-$cosplay = $obj->getTopImgValue('02', 6);
+$talent = $obj->getTopImgValue('S001', 4);
+$cosplay = $obj->getTopImgValue('S002', 6);
 $slides = $obj->getSlideImg();
 $slidesCnt = $obj->getSlideCnt();
-$topImg = $obj->getTopImg('200');
+$topImg = $obj->getTopImg('S200');
 $newsTitle = $obj->getNewsTitle();
 
 ?>

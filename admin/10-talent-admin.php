@@ -92,7 +92,7 @@
     //タレント写真削除
     if ($exeId === '12_1'){
         $exeId = '12_1 ok';
-        $obj->deleteTalentImg($_POST["FILE_NAME"], $_POST["VIEW_FLG"], $talentId);
+        $obj->deleteTalentImg($_POST["FILE_NAME"], $talentId);
         $message = "タレントの写真が削除されました。";
     }
 
@@ -108,9 +108,9 @@
         $exeId = '12_3 ok';
         // ディレクトリの命名規則
         $dirName = $talentId . '_' . $layerName = $row['LAYER_NAME'];
-        $uploadDir = '../img/' . $dirName; 
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+        $uploadDir = 'img/' . $dirName . '/' ; 
+        if (!file_exists('../' . $uploadDir)) {
+            mkdir('../' .$uploadDir, 0777, true);
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -118,9 +118,9 @@
                 $uploadedFiles = $_FILES['upfile'];
                 require_once('file-upload.php'); 
                 $obj = new FileUpload();
-                $result = $obj->uploadFiles($uploadedFiles, $uploadDir);
+                $result = $obj->uploadFiles($uploadedFiles, $uploadDir, $talentId);
                 if ($result['success']) {
-                    $message = "ファイルが正常にアップロードされました。";
+                    $message = "ファイルが正常にアップロードされました。登録済みの写真一覧から表示先を設定してください。";
                 } else {
                     $error = "ファイルのアップロードに失敗しました: " . $result['message'];
                 }
@@ -128,6 +128,20 @@
         }
         
 
+    }
+
+    //タレント経歴登録
+    if ($exeId === '13_1'){
+        $exeId = '13_1 ok';
+        $obj->insertTalentCareer($talentId, $_POST["CAREER_CATEGORY_ID"], $_POST["CONTENT"], $_POST["DETAIL"]);
+        $message = "タレントの経歴が登録されました。";
+    }
+
+    //タレント経歴削除
+    if ($exeId === '13_2'){
+        $exeId = '13_2 ok';
+        $obj->deleteTalentCareer($talentId, $_POST["CAREER_CATEGORY_ID"], $_POST["CONTENT"]);
+        $message = "タレントの経歴が削除されました。";
     }
 
     //タレントのタグを削除

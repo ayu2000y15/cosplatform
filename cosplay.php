@@ -2,9 +2,9 @@
 
     require_once('db.php'); 
     $obj = new DbController();
-    $topImg = $obj->getTopImg('202');
-    $cosplayImg1 = $obj->getCosplayImg('04');
-    $cosplayImg2 = $obj->getCosplayImg(viewFlg: '14');
+    $topImg = $obj->getTopImg('S202');
+    $cosplayImg1 = $obj->getCosplayImg('S111');
+    $cosplayImg2 = $obj->getCosplayImg(viewFlg: 'S112');
 
 ?>
 <!DOCTYPE html>

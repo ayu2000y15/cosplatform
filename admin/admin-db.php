@@ -13,6 +13,10 @@
             }
         }
 
+        public function close(){
+            $this->db->close();
+        }
+
         //空文字やNULLのチェックメソッド
         public function isNullOrEmpty($str){
             if($str == null){
@@ -30,7 +34,7 @@
             $sql = "select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
                     . " from IMG_LIST img, IMG_VIEW vi "
                     . " where img.FILE_NAME = vi.FILE_NAME "
-                    . " and vi.VIEW_FLG = '999' and PRIORITY=1 ";
+                    . " and vi.VIEW_FLG = 'S999' and PRIORITY=1 ";
                 // SQL文を実行
                 return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
@@ -321,21 +325,24 @@
         public function getTalentImg(String $talentId){
             
             $sql = $this->db->prepare(
-                "select "
-                    . " t.LAYER_NAME LAYER_NAME, "
-                    . " img.FILE_NAME FILE_NAME, "
-                    . " img.FILE_PATH FILE_PATH, "
-                    . " vi.COMMENT ALT, "
-                    . " vi.VIEW_FLG VIEW_FLG, "
-                    . " vi.PRIORITY PRIORITY, "
-                    . " mv.COMMENT COMMENT, "
-                    . " img.DEL_FLG = '0' "
-                    . " from TALENT t, IMG_LIST img, IMG_VIEW vi, M_VIEW_FLG mv "
-                    . " where t.TALENT_ID = img.TALENT_ID "
-                    . " and vi.VIEW_FLG = mv.VIEW_FLG "
-                    . " and img.FILE_NAME = vi.FILE_NAME "
-                    . " and t.TALENT_ID = ? "
-                    . " order by cast(vi.VIEW_FLG as signed), vi.PRIORITY "
+                " select "
+                . "       t.LAYER_NAME LAYER_NAME,                          "
+                . "       img.FILE_NAME FILE_NAME,                          "
+                . "       img.FILE_PATH FILE_PATH,                          "
+                . "       vi.COMMENT ALT,                                   "
+                . "       vi.VIEW_FLG VIEW_FLG,                             "
+                . "       vi.PRIORITY PRIORITY,                             "
+                . "       mv.COMMENT COMMENT,                               "
+                . "       img.DEL_FLG DEL_FLG                               "
+                . "       from TALENT t left outer join IMG_LIST img        "
+                . "       on t.TALENT_ID = img.TALENT_ID                    "
+                . "       left outer join IMG_VIEW vi                       "
+                . "       on img.FILE_NAME = vi.FILE_NAME                   "
+                . "       left outer join M_VIEW_FLG mv                     "
+                . "       on vi.VIEW_FLG = mv.VIEW_FLG                      "
+                . "       where t.TALENT_ID = ?                             "
+                . "         and img.DEL_FLG = '0'                           "
+                . "       order by img.FILE_NAME desc"
                     );
             // SQL文を実行
             $sql->bindValue(1, $talentId);
@@ -344,18 +351,15 @@
         }
 
         //タレント写真の削除
-        public function deleteTalentImg($fileName, $viewFlg, $talentId){
+        public function deleteTalentImg($fileName, $talentId){
             $sql = $this->db->prepare(  
-                " delete from IMG_VIEW v, IMG_LIST i "
-                . " where v.FILE_NAME = i.FILE_NAME "
-                . " and v.FILE_NAME = ? "
-                . " and v.VIEW_FLG = ? "
-                . " and i.TALENT_ID = ?;"
+                " delete from IMG_LIST "
+                . " where FILE_NAME = ? "
+                . " and TALENT_ID = ?;"
                 );
             
             $sql -> bindValue(1, $fileName);
-            $sql -> bindValue(2, $viewFlg);
-            $sql -> bindValue(3, $talentId);
+            $sql -> bindValue(2, $talentId);
             $sql -> execute();
 
         }
@@ -367,7 +371,7 @@
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
 
-        //タレント写真の削除
+        //タレント写真の表示先更新
         public function updateTalentImg($fileName, $viewFlg_bef, $viewFlg_aft){
             $sql = $this->db->prepare(  
                 " update IMG_VIEW "
@@ -380,6 +384,87 @@
             $sql -> bindValue(1, $viewFlg_aft);
             $sql -> bindValue(2, $fileName);
             $sql -> bindValue(3, $viewFlg_bef);
+            $sql -> execute();
+
+        }
+
+        //写真の登録
+        public function insertImgList($fileName, $talentId, $filePath){
+            $sql = $this->db->prepare(  
+                " insert into IMG_LIST(FILE_NAME, TALENT_ID, FILE_PATH) "
+                . " values (?, ?, ?); "
+                );
+
+            $sql2 = $this->db->prepare(
+                " insert into IMG_VIEW(FILE_NAME, VIEW_FLG, PRIORITY) "
+                . " values (?, '00', 0); ");
+
+            if($this->isNullOrEmpty($talentId)){
+                $talentId = null;
+            }
+
+            $sql -> bindValue(1, $fileName);
+            $sql -> bindValue(2, $talentId);
+            $sql -> bindValue(3, $filePath);
+            $sql -> execute();
+
+            $sql2 -> bindValue(1, $fileName);
+            $sql2 -> execute();
+        }
+
+        /* EXE_ID = '13' */
+        //経歴カテゴリを取得(ドロップダウンにいれる)
+        public function getCareerCategory(){
+            $sql = " select CAREER_CATEGORY_ID, CAREER_CATEGORY_NAME"
+                    . " from M_CAREER_CATEGORY "
+                    . " where DEL_FLG = '0';";
+            
+            return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
+        }
+
+        //タレント経歴の登録
+        public function insertTalentCareer($talentId, $categoryId, $content, $detail){
+            $sql = $this->db->prepare(  
+                " insert into TALENT_CAREER(TALENT_ID, CAREER_CATEGORY_ID, CONTENT, DETAIL) "
+                . " values (?, ?, ?, ?); "
+                );
+
+            if($this->isNullOrEmpty($detail)){
+                $detail = null;
+            }
+            $sql -> bindValue(1, $talentId);
+            $sql -> bindValue(2, $categoryId);
+            $sql -> bindValue(3, $content);
+            $sql -> bindValue(4, $detail);
+            $sql -> execute();
+
+        }
+
+        //タレント経歴取得
+        public function getTalentCareer($talentId){
+            $sql = $this->db->prepare("select mcr.CAREER_CATEGORY_ID CAREER_CATEGORY_ID, mcr.CAREER_CATEGORY_NAME CAREER_CATEGORY_NAME, cr.CONTENT CONTENT, cr.DETAIL DETAIL"
+                            . " from TALENT t, TALENT_CAREER cr, M_CAREER_CATEGORY mcr "
+                            . " where t.TALENT_ID = cr.TALENT_ID "
+                            . " and cr.CAREER_CATEGORY_ID = mcr.CAREER_CATEGORY_ID "
+                            . " and cr.TALENT_ID= ? ;");
+            
+            $sql -> bindValue(1, $talentId);
+            $sql->execute();
+            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
+        }
+
+        //タレント経歴の削除
+        public function deleteTalentCareer($talentId, $categoryId, $content){
+            $sql = $this->db->prepare(  
+                " delete from TALENT_CAREER "
+                . " where TALENT_ID = ? "
+                . " and CAREER_CATEGORY_ID = ? "
+                . " and CONTENT = ? ;"
+                );
+            
+            $sql -> bindValue(1, $talentId);
+            $sql -> bindValue(2, $categoryId);
+            $sql -> bindValue(3,  $content);
             $sql -> execute();
 
         }
