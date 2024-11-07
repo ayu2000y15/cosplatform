@@ -240,6 +240,66 @@
             return $sql -> rowCount();
         }
 
+        /* EXE_ID = '04' */
+        //VIEW_FLGの一覧を取得
+        public function getHpViewFlg(){
+            $sql = " select VIEW_FLG, COMMENT from M_VIEW_FLG where VIEW_FLG like 'S%' or VIEW_FLG='00' order by VIEW_FLG;";
+            
+            return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
+        }
+        //HPに設定している写真を取得するSQL
+        public function getHpImg(){
+            
+            $sql =  " select "
+                . "       img.FILE_NAME FILE_NAME,                          "
+                . "       img.FILE_PATH FILE_PATH,                          "
+                . "       img.COMMENT ALT,                                  "
+                . "       img.VIEW_FLG VIEW_FLG,                            "
+                . "       img.PRIORITY PRIORITY,                            "
+                . "       mv.COMMENT COMMENT,                               "
+                . "       img.DEL_FLG DEL_FLG                               "
+                . "       from IMG_LIST img, M_VIEW_FLG mv                  "
+                . "       where img.VIEW_FLG = mv.VIEW_FLG                  "
+                . "         and img.TALENT_ID is null                       "
+                . "       order by img.VIEW_FLG";
+
+            // SQL文を実行
+            return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
+        }
+
+        //HP写真の削除
+        public function deleteHpImg($fileName, $viewFlg){
+            $sql = $this->db->prepare(  
+                " delete from IMG_LIST "
+                . " where FILE_NAME = ? "
+                . " and VIEW_FLG = ?;"
+                );
+            
+            $sql -> bindValue(1, $fileName);
+            $sql -> bindValue(2, $viewFlg);
+            $sql -> execute();
+
+        }
+
+        //HP写真の表示先更新
+        public function updateHpImg($fileName, $priority,  $viewFlg_bef, $viewFlg_aft){
+            $sql = $this->db->prepare(  
+                " update IMG_LIST "
+                . " set "
+                . " VIEW_FLG = ?, "
+                . " PRIORITY = ?  "
+                . " where FILE_NAME = ? "
+                . " and VIEW_FLG = ? ;"
+                );
+            
+            $sql -> bindValue(1, $viewFlg_aft);
+            $sql -> bindValue(2, $priority);
+            $sql -> bindValue(3, $fileName);
+            $sql -> bindValue(4, $viewFlg_bef);
+            $sql -> execute();
+
+        }
+
         /* EXE_ID = '05' */
         //登録されているタグを取得するSQL
         public function getMTag(){
@@ -378,7 +438,7 @@
                 . "       on img.VIEW_FLG = mv.VIEW_FLG                      "
                 . "       where t.TALENT_ID = ?                             "
                 . "         and img.DEL_FLG = '0'                           "
-                . "       order by img.FILE_NAME desc"
+                . "       order by img.VIEW_FLG"
                     );
             // SQL文を実行
             $sql->bindValue(1, $talentId);

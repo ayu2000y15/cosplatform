@@ -2,9 +2,10 @@
 
     require_once('db.php'); 
     $obj = new DbController();
-    $topImg = $obj->getTopImg('S203');
-    $cosplayImg1 = $obj->getTopImg('S111');
-    $cosplayImg2 = $obj->getTopImg(viewFlg: 'S112');
+    $topImg = $obj->getTopImg('S104');
+    $cosplayImg1 = $obj->getTopImg('S401');
+    $cosplayImg2 = $obj->getTopImg(viewFlg: 'S402');
+    $backImg = $obj->getTopImg('S004');
 
 ?>
 <!DOCTYPE html>
@@ -16,13 +17,19 @@
     <title>COSPLAY - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
-    .subpage-hero {
-        <?php foreach ($topImg as $row) {
-            echo 'background-image: url("'. htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
+        body {
+            <?php foreach ($backImg as $row) {
+                echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+            }
+            ?>
         }
 
-        ?>
-    }
+        .subpage-hero {
+            <?php foreach ($topImg as $row) {
+                echo 'background-image: url("'. htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
+            }
+            ?>
+        }
     </style>
 </head>
 

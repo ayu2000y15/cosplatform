@@ -86,6 +86,45 @@
         $message = "タレントが登録されました。タレント詳細ページで各種登録を行ってください。";
     }
 
+    //新規写真を登録
+    if ($exeId === '04_1') {
+        $exeId = '04_1 ok'; 
+
+        $uploadDir = 'img/hp/' ; 
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_FILES['upfile'])) {
+                $uploadedFiles = $_FILES['upfile'];
+                require_once('file-upload.php'); 
+                $obj = new FileUpload();
+                $result = $obj->uploadFiles($uploadedFiles, $uploadDir, null);
+                if ($result['success']) {
+                    $message = "ファイルが正常にアップロードされました。登録済みの写真一覧から表示先を設定してください。";
+                } else {
+                    $error = "ファイルのアップロードに失敗しました: " . $result['message'];
+                }
+            }
+        }
+    }
+
+    //写真の表示先を変更
+    if ($exeId === '04_2') {
+        $exeId = '04_2 ok'; 
+        $obj->updateHpImg($_POST['FILE_NAME'], $_POST['PRIORITY'], $_POST['VIEW_FLG_BEF'], $_POST['VIEW_FLG_AFT']);
+        $message = "写真の表示先が変更されました。";
+    }
+
+    //写真の削除
+    if ($exeId === '04_3') {
+        $exeId = '04_3 ok'; 
+        if (unlink('../img/hp/' . $_POST['FILE_NAME'])){
+            $obj->deleteHpImg($_POST['FILE_NAME'], $_POST['VIEW_FLG']);
+            $message = $_POST['FILE_NAME'].'の削除に成功しました。';
+        }else{
+            $error = $_POST['FILE_NAME'].'の削除に失敗しました。';
+        }
+    }
+
     //新規タグを登録
     if ($exeId === '05_1') {
         $exeId = '05_1 ok'; 

@@ -24,12 +24,12 @@
         }
 
         //TOPページのスライドショーを取得するSQL
-        //VIEW_FLG in ('S101')
+        //VIEW_FLG in ('S201')
         public function getSlideImg(){
             
             $sql = "select FILE_NAME , FILE_PATH , COMMENT ALT, SPARE1 TITLE, SPARE2 DISCRIPTION"
                 . " from IMG_LIST "
-                . " where VIEW_FLG in ('S101') "
+                . " where VIEW_FLG in ('S201') "
                 . "   and DEL_FLG = '0'"
                 . " order by PRIORITY; ";
             // SQL文を実行
@@ -37,12 +37,12 @@
         }
 
         //TOPページのスライドショーの件数を取得するSQL
-        //VIEW_FLG in ('S101')
+        //VIEW_FLG in ('S201')
         public function getSlideCnt(){
             
             $sql = "select count(*)"
                 . " from IMG_LIST  "
-                . " where VIEW_FLG in ('S101') "
+                . " where VIEW_FLG in ('S201') "
                 . "   and DEL_FLG = '0' "
                 . " order by PRIORITY; ";
             // SQL文を実行
@@ -78,7 +78,7 @@
                         . " limit ? ;");
             }
 
-            if($viewFlg === 'S002'){
+            if($viewFlg === 'S203'){
                 $sql = $this->db->prepare("select FILE_NAME, FILE_PATH, COMMENT ALT"
                         . " from IMG_LIST "
                         . " where VIEW_FLG = ? "

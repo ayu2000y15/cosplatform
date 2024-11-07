@@ -1,11 +1,13 @@
 <?php 
 
-$newsId = (string)$_REQUEST['NEWS_ID'];
+    $newsId = (string)$_REQUEST['NEWS_ID'];
 
-require_once('db.php'); 
-$obj=new DbController(); 
-$topImg = $obj->getTopImg('S205');
-$news = $obj->getNewsContent($newsId);
+    require_once('db.php'); 
+    $obj=new DbController(); 
+    $news = $obj->getNewsContent($newsId);
+
+    $topImg = $obj->getTopImg('S106');
+    $backImg = $obj->getTopImg('S006');
 
 ?>
 <!DOCTYPE html>
@@ -17,11 +19,16 @@ $news = $obj->getNewsContent($newsId);
     <title>NEWS - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
+    body {
+        <?php foreach ($backImg as $row) {
+            echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+        }
+        ?>
+    }
     .subpage-hero {
         <?php foreach ($topImg as $row) {
             echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
         }
-
         ?>
     }
     </style>

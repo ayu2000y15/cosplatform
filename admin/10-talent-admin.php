@@ -89,11 +89,16 @@
         $message = "タレント情報の更新が行われました。";
     }
 
+    $dirName = $talentId . '_' . $row['LAYER_NAME'];
     //タレント写真削除
     if ($exeId === '12_1'){
         $exeId = '12_1 ok';
-        $obj->deleteTalentImg($_POST["FILE_NAME"], $talentId);
-        $message = "タレントの写真が削除されました。";
+        if (unlink('../img/' . $dirName . '/' . $_POST["FILE_NAME"])){
+            $obj->deleteTalentImg($_POST["FILE_NAME"], $talentId);
+            $message = $_POST['FILE_NAME'].'の削除に成功しました。';
+        }else{
+            $error = $_POST['FILE_NAME'].'の削除に失敗しました。';
+        }
     }
 
     //タレント写真変更
@@ -107,7 +112,6 @@
     if ($exeId === '12_3'){
         $exeId = '12_3 ok';
         // ディレクトリの命名規則
-        $dirName = $talentId . '_' . $layerName = $row['LAYER_NAME'];
         $uploadDir = 'img/' . $dirName . '/' ; 
         if (!file_exists('../' . $uploadDir)) {
             mkdir('../' .$uploadDir, 0777, true);

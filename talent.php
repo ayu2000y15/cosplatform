@@ -1,9 +1,11 @@
 <?php
+    require_once('db.php');
+    $obj = new DbController();
+    $talentImg = $obj->getTalentImg();
 
-require_once('db.php');
-$obj = new DbController();
-$topImg = $obj->getTopImg('S202');
-$talentImg = $obj->getTalentImg();
+    $topImg = $obj->getTopImg('S103');
+    $backImg = $obj->getTopImg('S003');
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -14,13 +16,18 @@ $talentImg = $obj->getTalentImg();
     <title>TALENT - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
-    .subpage-hero {
-        <?php foreach ($topImg as $row) {
-            echo 'background-image: url("'. htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
+        body {
+            <?php foreach ($backImg as $row) {
+                echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+            }
+            ?>
         }
-
-        ?>
-    }
+        .subpage-hero {
+            <?php foreach ($topImg as $row) {
+                echo 'background-image: url("'. htmlspecialchars($row['FILE_PATH']) . htmlspecialchars($row['FILE_NAME']) . '");';
+            }
+            ?>
+        }
     </style>
 </head>
 

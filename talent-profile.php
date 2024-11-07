@@ -1,16 +1,15 @@
 <?php 
+    $talentId = (string)$_REQUEST['TALENT_ID'];
 
-$talentId = (string)$_REQUEST['TALENT_ID'];
-
-require_once('db.php'); 
-$obj=new DbController(); 
-$topImg=$obj->getTopImg('S201');
-$talentProfile = $obj->getTalentProfile('01',$talentId);
-$talentImg = $obj->getTalentProfile('03',$talentId);
-$talentTag = $obj->getTalentTag($talentId);
-$careerCategory = $obj->getCareerCategory($talentId);
-$talentCareer = $obj->getTalentCareer($talentId);
-
+    require_once('db.php'); 
+    $obj=new DbController(); 
+    $topImg=$obj->getTopImg('S103');
+    $talentProfile = $obj->getTalentProfile('01',$talentId);
+    $talentImg = $obj->getTalentProfile('03',$talentId);
+    $talentTag = $obj->getTalentTag($talentId);
+    $careerCategory = $obj->getCareerCategory($talentId);
+    $talentCareer = $obj->getTalentCareer($talentId);
+    $backImg = $obj->getTopImg('S003');
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -21,13 +20,19 @@ $talentCareer = $obj->getTalentCareer($talentId);
     <title>TALENT - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
-    .subpage-hero {
-        <?php foreach ($topImg as $row) {
-            echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+        body {
+            <?php foreach ($backImg as $row) {
+                echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+            }
+            ?>
         }
 
-        ?>
-    }
+        .subpage-hero {
+            <?php foreach ($topImg as $row) {
+                echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+            }
+            ?>
+        }
     </style>
 </head>
 

@@ -22,6 +22,7 @@ $imgList = $obj->getTalentImg($talentId);
             <!-- 写真登録 -->
             <div class="photo-upload-section">
                 <h3 class="subsection-title">◆写真新規登録</h3>
+                <p>※最大5Mまで。それ以上大きいファイルはアップロードできません。</p>
                 <form onsubmit="return checkSubmit('登録');" action="10-talent-admin.php" method="POST"
                     enctype="multipart/form-data" class="upload-form">
                     <input type="hidden" name="TALENT_ID" value="<?php echo $talentId ?>">
@@ -104,7 +105,9 @@ $imgList = $obj->getTalentImg($talentId);
                 fileList.className = 'file-list';
                 for (let i = 0; i < input.files.length; i++) {
                     const li = document.createElement('li');
-                    li.textContent = input.files[i].name;
+                    const file = input.files[i];
+                    const fileSize = (file.size / 1024 / 1024).toFixed(2); // サイズをMBに変換
+                    li.textContent = `${file.name} (${fileSize} MB)`;
                     fileList.appendChild(li);
                 }
                 filesDiv.appendChild(fileList);

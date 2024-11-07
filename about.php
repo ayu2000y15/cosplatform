@@ -2,10 +2,11 @@
 
     require_once('db.php'); 
     $obj = new DbController();
-    $topImg = $obj->getTopImg('S201');
+    $topImg = $obj->getTopImg('S102');
     $company = $obj->getCompany();
-    $aboutImg = $obj->getTopImg('S401');
+    $aboutImg = $obj->getTopImg('S301');
 
+    $backImg = $obj->getTopImg('S002');
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -16,13 +17,19 @@
     <title>ABOUT - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
-    .subpage-hero {
-        <?php foreach ($topImg as $row) {
-            echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+        body {
+            <?php foreach ($backImg as $row) {
+                echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+            }
+            ?>
         }
 
-        ?>
-    }
+        .subpage-hero {
+            <?php foreach ($topImg as $row) {
+                echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+            }
+            ?>
+        }
     </style>
 
 </head>

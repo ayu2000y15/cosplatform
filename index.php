@@ -1,13 +1,16 @@
 <?php
 
-require_once('db.php');
-$obj = new DbController();
-$talent = $obj->getTopImgValue('01', 4);
-$cosplay = $obj->getTopImgValue('S002', 6);
-$slides = $obj->getSlideImg();
-$slidesCnt = $obj->getSlideCnt();
-$topImg = $obj->getTopImg('S200');
-$newsTitle = $obj->getNewsTitle();
+    require_once('db.php');
+    $obj = new DbController();
+    $talent = $obj->getTopImgValue('01', 4);
+    $cosplay = $obj->getTopImgValue('S203', 6);
+    $slides = $obj->getSlideImg();
+    $slidesCnt = $obj->getSlideCnt();
+    $newsTitle = $obj->getNewsTitle();
+
+    $topImg = $obj->getTopImg('S204');
+    $backImg = $obj->getTopImg('S001');
+
 
 ?>
 <!DOCTYPE html>
@@ -18,6 +21,14 @@ $newsTitle = $obj->getNewsTitle();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ホーム - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            <?php foreach ($backImg as $row) {
+                echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
+            }
+            ?>
+        }
+    </style>
 </head>
 
 <body>
