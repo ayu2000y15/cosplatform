@@ -438,7 +438,7 @@
                         </div>
                     </div>
                     <input type="text" id="SNS_2" name="SNS_2" value="<?php echo htmlspecialchars($row['SNS_2']); ?>"
-                        placeholder="https://www.instagram.com/" />
+                        placeholder="https://instagram.com/" />
                 </div>
                 <div class="form-group">
                     <div class="check-area">
@@ -467,7 +467,7 @@
                         </div>
                     </div>
                     <input type="text" id="SNS_3" name="SNS_3" value="<?php echo htmlspecialchars($row['SNS_3']); ?>"
-                        placeholder="https://www.tiktok.com/" />
+                        placeholder="https://tiktok.com/" />
                 </div>
                 <?php endforeach; ?>
                 <?php endforeach; ?>

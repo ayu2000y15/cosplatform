@@ -2,7 +2,7 @@
 
     require_once('db.php'); 
     $obj = new DbController();
-    $topImg = $obj->getTopImg('S202');
+    $topImg = $obj->getTopImg('S204');
 
 ?>
 <!DOCTYPE html>

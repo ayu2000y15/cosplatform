@@ -10,6 +10,7 @@
         $exeId = (string)$_POST['EXE_ID'];
     }
 
+    //新規タレント登録
     if ($exeId === '02') {
         $talentInfo = [
             "TALENT_NAME"           => $_POST['TALENT_NAME'],
@@ -82,6 +83,26 @@
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location:00-admin.php");
         }
+        $message = "タレントが登録されました。タレント詳細ページで各種登録を行ってください。";
+    }
+
+    //新規タグを登録
+    if ($exeId === '05_1') {
+        $exeId = '05_1 ok'; 
+        $obj->insertMTag($_POST['TAG_NAME'], $_POST['TAG_COLOR']);
+        $message = "新しいタグが追加されました。";
+    }
+
+    //タグの削除
+    if ($exeId === '05_2') {
+        $exeId = '05_2 ok'; 
+        try{
+            $obj->deleteMTag($_POST['TAG_ID']);
+            $message = "タグが削除されました。";
+        }catch(Exception $e){
+            $error = "タグが使われているため削除できません。";
+        
+        }
     }
 ?>
 
@@ -109,10 +130,13 @@ console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
             <div class="container-box">
                 <section class="admin">
                     <!-- 送信が行われたらメッセージを表示する -->
-                    <?php if(isset($_POST["MESS"])): ?>
-                    <br>
-                    <h4 style="color:blue;"><?php echo htmlspecialchars($_POST["MESS"]); ?></h4>
+                    <?php if (isset($message)): ?>
+                    <div class="success-message"><?php echo $message; ?></div>
                     <?php endif; ?>
+                    <?php if (isset($error)): ?>
+                    <div class="error-message"><?php echo $error; ?></div>
+                    <?php endif; ?>
+
                     <div class="tabs">
                         <div class="tab-buttons">
                             <button class="tab-button <?php echo $activeTab === 'talent-list' ? 'active' : ''; ?>"

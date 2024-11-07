@@ -2,9 +2,9 @@
 
     require_once('db.php'); 
     $obj = new DbController();
-    $topImg = $obj->getTopImg('201');
+    $topImg = $obj->getTopImg('S201');
     $company = $obj->getCompany();
-    $aboutImg = $obj->getTopImg('401');
+    $aboutImg = $obj->getTopImg('S401');
 
 ?>
 <!DOCTYPE html>

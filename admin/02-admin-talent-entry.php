@@ -22,6 +22,7 @@
             <p>※タレントの写真や経歴、ハッシュタグについては、<br>　タレント登録完了後、タレント詳細情報から登録してください。<br>
                 　写真を登録しないとHPには表示されません。
             </p>
+            <hr class="hr-line">
             <form onsubmit="return checkSubmit('登録');" action="00-admin.php" method="POST">
                 <input type="hidden" name="EXE_ID" value="02">
                 <input type="hidden" name="active_tab" value="talent-list">
@@ -257,7 +258,7 @@
                             </label>
                         </div>
                     </div>
-                    <input type="text" id="SNS_2" name="SNS_2" value="https://www.instagram.com/" />
+                    <input type="text" id="SNS_2" name="SNS_2" value="https://instagram.com/" />
                 </div>
                 <div class="form-group">
                     <div class="check-area">
@@ -273,7 +274,7 @@
                             </label>
                         </div>
                     </div>
-                    <input type="text" id="SNS_3" name="SNS_3" value="https://www.tiktok.com/" />
+                    <input type="text" id="SNS_3" name="SNS_3" value="https://tiktok.com/" />
                 </div>
                 <button type="submit" class="submit-button">送信する</button>
             </form>

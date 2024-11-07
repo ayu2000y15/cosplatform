@@ -2,9 +2,9 @@
 
     require_once('db.php'); 
     $obj = new DbController();
-    $topImg = $obj->getTopImg('S202');
-    $cosplayImg1 = $obj->getCosplayImg('S111');
-    $cosplayImg2 = $obj->getCosplayImg(viewFlg: 'S112');
+    $topImg = $obj->getTopImg('S203');
+    $cosplayImg1 = $obj->getTopImg('S111');
+    $cosplayImg2 = $obj->getTopImg(viewFlg: 'S112');
 
 ?>
 <!DOCTYPE html>
@@ -54,6 +54,7 @@
                         ?>
                     </div>
 
+                    <hr class="hr-line">
                     <div class="cosplay-content2">
                         <h2>コスプレ・衣装の制作</h2>
                         <div class="cosplay-content-box2">

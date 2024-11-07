@@ -82,8 +82,8 @@
                     <div class="color-input-wrapper">
                         <input type="color" id="TAG_COLOR" name="TAG_COLOR" value="#999999" required />
                         <div id="colorPreview" class="color-preview">サンプル</div>
-                        <p>※文字色は白になります。
                     </div>
+                    <p>※文字色は白になります。</p>
                 </div>
                 <button type="submit" class="submit-button">送信する</button>
             </form>

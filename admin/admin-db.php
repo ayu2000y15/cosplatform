@@ -31,10 +31,9 @@
         //ヘッダーのロゴを取得するSQL
         public function getLogoImg(){
         
-            $sql = "select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
-                    . " from IMG_LIST img, IMG_VIEW vi "
-                    . " where img.FILE_NAME = vi.FILE_NAME "
-                    . " and vi.VIEW_FLG = 'S999' and PRIORITY=1 ";
+            $sql = "select FILE_NAME, FILE_PATH, COMMENT ALT"
+                    . " from IMG_LIST "
+                    . " where VIEW_FLG = 'S999' and PRIORITY=1 ";
                 // SQL文を実行
                 return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
@@ -241,6 +240,45 @@
             return $sql -> rowCount();
         }
 
+        /* EXE_ID = '05' */
+        //登録されているタグを取得するSQL
+        public function getMTag(){
+            
+            $sql = "select TAG_ID, TAG_NAME, TAG_COLOR, DEL_FLG "
+                            . " from M_TAG ;";
+            // SQL文を実行
+            return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
+        }
+
+        //タグを変更
+        public function updateMTag($tagName, $tagColor, $tagId){
+            //TALENT.
+            $sql = $this->db->prepare(  
+                " update M_TAG "
+                . " set "
+                . "   TAG_NAME    = ?   , "
+                . "   TAG_COLOR   = ?   , "
+                . " where TAG_ID = ?;       "
+                );
+            
+            $sql -> bindValue(1, $tagName);
+            $sql -> bindValue(2, $tagColor);
+            $sql -> bindValue(3, $tagId);
+            $sql -> execute();
+        }
+
+        //タグを削除
+        public function deleteMTag($tagId){
+            //TALENT.
+            $sql = $this->db->prepare(  
+                " delete from M_TAG "
+                . " where TAG_ID = ?; "
+                );
+            
+            $sql -> bindValue(1, $tagId);
+            $sql -> execute();
+        }
+
         /* EXE_ID = '11' */
         //タレント情報変更
         public function updateTalent($talentId, $talentInfo){
@@ -329,17 +367,15 @@
                 . "       t.LAYER_NAME LAYER_NAME,                          "
                 . "       img.FILE_NAME FILE_NAME,                          "
                 . "       img.FILE_PATH FILE_PATH,                          "
-                . "       vi.COMMENT ALT,                                   "
-                . "       vi.VIEW_FLG VIEW_FLG,                             "
-                . "       vi.PRIORITY PRIORITY,                             "
+                . "       img.COMMENT ALT,                                   "
+                . "       img.VIEW_FLG VIEW_FLG,                             "
+                . "       img.PRIORITY PRIORITY,                             "
                 . "       mv.COMMENT COMMENT,                               "
                 . "       img.DEL_FLG DEL_FLG                               "
                 . "       from TALENT t left outer join IMG_LIST img        "
                 . "       on t.TALENT_ID = img.TALENT_ID                    "
-                . "       left outer join IMG_VIEW vi                       "
-                . "       on img.FILE_NAME = vi.FILE_NAME                   "
                 . "       left outer join M_VIEW_FLG mv                     "
-                . "       on vi.VIEW_FLG = mv.VIEW_FLG                      "
+                . "       on img.VIEW_FLG = mv.VIEW_FLG                      "
                 . "       where t.TALENT_ID = ?                             "
                 . "         and img.DEL_FLG = '0'                           "
                 . "       order by img.FILE_NAME desc"
@@ -374,7 +410,7 @@
         //タレント写真の表示先更新
         public function updateTalentImg($fileName, $viewFlg_bef, $viewFlg_aft){
             $sql = $this->db->prepare(  
-                " update IMG_VIEW "
+                " update IMG_LIST "
                 . " set "
                 . " VIEW_FLG = ? "
                 . " where FILE_NAME = ? "
@@ -391,13 +427,9 @@
         //写真の登録
         public function insertImgList($fileName, $talentId, $filePath){
             $sql = $this->db->prepare(  
-                " insert into IMG_LIST(FILE_NAME, TALENT_ID, FILE_PATH) "
-                . " values (?, ?, ?); "
+                " insert into IMG_LIST(FILE_NAME, TALENT_ID, FILE_PATH, VIEW_FLG, PRIORITY) "
+                . " values (?, ?, ?, '00', 0); "
                 );
-
-            $sql2 = $this->db->prepare(
-                " insert into IMG_VIEW(FILE_NAME, VIEW_FLG, PRIORITY) "
-                . " values (?, '00', 0); ");
 
             if($this->isNullOrEmpty($talentId)){
                 $talentId = null;
@@ -408,8 +440,6 @@
             $sql -> bindValue(3, $filePath);
             $sql -> execute();
 
-            $sql2 -> bindValue(1, $fileName);
-            $sql2 -> execute();
         }
 
         /* EXE_ID = '13' */

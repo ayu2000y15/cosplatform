@@ -91,13 +91,13 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                 <table>
                                     <?php if($talentInfo['BIRTHDAY_FLG'] ==='1') :?>
                                     <tr>
-                                        <th>Birthday</th>
+                                        <th>BIRTHDAY</th>
                                         <td><?php echo date('Y/n/j',strtotime($talentInfo['BIRTHDAY'])); ?></td>
                                     </tr>
                                     <?php endif; ?>
                                     <?php if($talentInfo['FOLLOWERS_FLG'] ==='1') :?>
                                     <tr>
-                                        <th>Followers</th>
+                                        <th>FOLLOWERS</th>
                                         <td><?php echo htmlspecialchars($talentInfo['FOLLOWERS']); ?></td>
                                     </tr>
                                     <?php endif; ?>
@@ -140,6 +140,12 @@ $talentCareer = $obj->getTalentCareer($talentId);
                                     <tr>
                                         <th>HOBBY / SPECIALTY</th>
                                         <td><?php echo htmlspecialchars($talentInfo['HOBBY_SPECIALTY']); ?></td>
+                                    </tr>
+                                    <?php endif; ?>
+                                    <?php if($talentInfo['COMMENT_FLG'] ==='1'):?>
+                                    <tr>
+                                        <th>COMMENT</th>
+                                        <td><?php echo htmlspecialchars($talentInfo['TALENT_COMMENT']); ?></td>
                                     </tr>
                                     <?php endif; ?>
                                 </table>

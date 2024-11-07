@@ -16,10 +16,9 @@
         //ヘッダーとフッターのロゴを取得するSQL
         public function getLogoImg(){
             
-            $sql = "select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
-                . " from IMG_LIST img, IMG_VIEW vi "
-                . " where img.FILE_NAME = vi.FILE_NAME "
-                . " and vi.VIEW_FLG = 'S999' and PRIORITY=1 ";
+            $sql = "select FILE_NAME, FILE_PATH , COMMENT ALT"
+                . " from IMG_LIST "
+                . " where VIEW_FLG = 'S999' and PRIORITY=1;  ";
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
@@ -28,12 +27,11 @@
         //VIEW_FLG in ('S101')
         public function getSlideImg(){
             
-            $sql = "select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT, vi.SPARE1 TITLE, vi.SPARE2 DISCRIPTION"
-                . " from IMG_LIST img, IMG_VIEW vi "
-                . " where img.FILE_NAME = vi.FILE_NAME "
-                . "   and vi.VIEW_FLG in ('S101') "
-                . "   and img.DEL_FLG = '0'"
-                . " order by vi.PRIORITY; ";
+            $sql = "select FILE_NAME , FILE_PATH , COMMENT ALT, SPARE1 TITLE, SPARE2 DISCRIPTION"
+                . " from IMG_LIST "
+                . " where VIEW_FLG in ('S101') "
+                . "   and DEL_FLG = '0'"
+                . " order by PRIORITY; ";
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
@@ -43,11 +41,10 @@
         public function getSlideCnt(){
             
             $sql = "select count(*)"
-                . " from IMG_LIST img, IMG_VIEW vi "
-                . " where img.FILE_NAME = vi.FILE_NAME "
-                . "   and vi.VIEW_FLG in ('S101') "
-                . "   and img.DEL_FLG = '0' "
-                . " order by vi.PRIORITY; ";
+                . " from IMG_LIST  "
+                . " where VIEW_FLG in ('S101') "
+                . "   and DEL_FLG = '0' "
+                . " order by PRIORITY; ";
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
@@ -55,12 +52,11 @@
         //タレントと紐つかない画像を取得するSQL
         public function getTopImg(String $viewFlg='0'){
             
-            $sql = $this->db->prepare("select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
-                . " from IMG_LIST img, IMG_VIEW vi "
-                . " where img.FILE_NAME = vi.FILE_NAME "
-                . "   and vi.VIEW_FLG in ( ? ) "
-                . "   and img.DEL_FLG = '0'"
-                . " order by vi.PRIORITY; ");
+            $sql = $this->db->prepare("select FILE_NAME, FILE_PATH, COMMENT ALT"
+                . " from IMG_LIST "
+                . " where VIEW_FLG in ( ? ) "
+                . "   and DEL_FLG = '0'"
+                . " order by PRIORITY; ");
             
             // SQL文を実行
             $sql->bindValue(1, $viewFlg);
@@ -70,16 +66,26 @@
         }
 
         //TOPページの写真を取得するSQL
-        public function getTopImgValue(String $viewFlg='0', int $limit=0){
+        public function getTopImgValue(String $viewFlg, int $limit){
             
-            $sql = $this->db->prepare("select t.LAYER_NAME LAYER_NAME, img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
-                    . " from TALENT t, IMG_LIST img, IMG_VIEW vi "
-                    . " where t.TALENT_ID = img.TALENT_ID "
-                    . " and img.FILE_NAME = vi.FILE_NAME "
-                    . " and vi.VIEW_FLG = ? "
-                    . " and img.DEL_FLG = '0'"
-                    . " order by vi.PRIORITY "
-                    . " limit ? ;");
+            if($viewFlg === '01'){
+                $sql = $this->db->prepare("select t.LAYER_NAME LAYER_NAME, img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, img.COMMENT ALT"
+                        . " from TALENT t, IMG_LIST img "
+                        . " where img.VIEW_FLG = ? "
+                        . " and img.DEL_FLG = '0' "
+                        . " and t.TALENT_ID = img.TALENT_ID "
+                        . " order by img.PRIORITY "
+                        . " limit ? ;");
+            }
+
+            if($viewFlg === 'S002'){
+                $sql = $this->db->prepare("select FILE_NAME, FILE_PATH, COMMENT ALT"
+                        . " from IMG_LIST "
+                        . " where VIEW_FLG = ? "
+                        . " and DEL_FLG = '0'"
+                        . " order by PRIORITY "
+                        . " limit ? ;");
+            }
 
             // SQL文を実行
             $sql->bindValue(1, $viewFlg);
@@ -126,43 +132,25 @@
                     . "t.TALENT_ID TALENT_ID, "
                     . "img1.FILE_NAME FILE_NAME1, "
                     . "img1.FILE_PATH FILE_PATH1, "
-                    . "vi2.COMMENT ALT1, "
+                    . "img1.COMMENT ALT1, "
                     . "img2.FILE_NAME FILE_NAME2, "
                     . "img2.FILE_PATH FILE_PATH2, "
-                    . "vi2.COMMENT ALT2 "
-                    . "from TALENT t, IMG_LIST img1, IMG_LIST img2, IMG_VIEW vi1, IMG_VIEW vi2 "
+                    . "img2.COMMENT ALT2 "
+                    . "from TALENT t, IMG_LIST img1, IMG_LIST img2 "
                     . " where t.TALENT_ID = img1.TALENT_ID "
-                    . "and img1.FILE_NAME = vi1.FILE_NAME "
                     . "and t.TALENT_ID = img2.TALENT_ID "
-                    . "and img2.FILE_NAME = vi2.FILE_NAME "
-                    . "and vi1.VIEW_FLG = '01' "
-                    . "and vi2.VIEW_FLG = '02' "
+                    . "and img1.VIEW_FLG = '01' "
+                    . "and img2.VIEW_FLG = '02' "
                     . "and t.DEL_FLG = '0' "
                     . "and t.RETIREMENT_DATE > CURDATE() "
-                    . "order by vi1.PRIORITY ; ";
+                    . "order by img1.PRIORITY ; ";
 
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
         }
 
-        //COSPLAYページの写真を取得するSQL
-        public function getCosplayImg(String $viewFlg='0'){
-            
-            $sql = $this->db->prepare("select img.FILE_NAME FILE_NAME, img.FILE_PATH FILE_PATH, vi.COMMENT ALT"
-                    . " from IMG_LIST img, IMG_VIEW vi "
-                    . " where img.FILE_NAME = vi.FILE_NAME "
-                    . " and vi.VIEW_FLG = ? "
-                    . " and img.DEL_FLG = '0' "
-                    . " order by vi.PRIORITY ");
-
-            // SQL文を実行
-            $sql->bindValue(1, $viewFlg);
-            $sql->execute();
-            return $row = $sql->fetchall(PDO::FETCH_ASSOC);
-        }
-
         //TALENT詳細ページのタレント情報を取得するSQL
-        public function getTalentProfile(String $viewFlg='0', String $talentId='0'){
+        public function getTalentProfile(String $viewFlg, String $talentId){
             
             $sql = $this->db->prepare("select              "
                     . "  t.TALENT_ID TALENT_ID                   ,"
@@ -192,7 +180,7 @@
                     . "  t.SNS_3 SNS_3                           ,"
                     . "  img.FILE_NAME FILE_NAME                 ,"
                     . "  img.FILE_PATH FILE_PATH                 ,"
-                    . "  vi.COMMENT ALT                          ,"
+                    . "  img.COMMENT ALT                          ,"
                     . " tctl.FOLLOWERS_FLG FOLLOWERS_FLG         ,"
                     . " tctl.HEIGHT_FLG HEIGHT_FLG               ,"
                     . " tctl.AGE_FLG AGE_FLG                     ,"
@@ -206,15 +194,14 @@
                     . " tctl.SNS_1_FLG SNS_1_FLG                 ,"
                     . " tctl.SNS_2_FLG SNS_2_FLG                 ,"
                     . " tctl.SNS_3_FLG SNS_3_FLG                  "
-                    . " from TALENT t, IMG_LIST img, IMG_VIEW vi, TALENT_INFO_CTL tctl "
+                    . " from TALENT t, IMG_LIST img, TALENT_INFO_CTL tctl "
                     . " where t.TALENT_ID = img.TALENT_ID         "
-                    . " and img.FILE_NAME = vi.FILE_NAME          "
                     . " and t.TALENT_ID = tctl.TALENT_ID          "
-                    . " and vi.VIEW_FLG = ?                       "
+                    . " and img.VIEW_FLG = ?                       "
                     . " and t.TALENT_ID = ?                       "
                     . " and t.DEL_FLG = '0'                       "
                     . " and t.RETIREMENT_DATE > CURDATE()         "
-                    . " order by vi.PRIORITY                      ");
+                    . " order by img.PRIORITY                      ");
 
             // SQL文を実行
             $sql->bindValue(1, $viewFlg);
