@@ -43,12 +43,12 @@
                     <input type="text" id="LAYER_NAME" name="LAYER_NAME" placeholder="やまだ" required />
                 </div>
                 <div class="form-group">
-                    <label for="LAYER_FURIGANA_JP">レイヤーネーム　ふりがな（ひらがな）<span class="required">必須</span></label>
-                    <input type="text" id="LAYER_FURIGANA_JP" name="LAYER_FURIGANA_JP" placeholder="やまだ" required />
+                    <label for="LAYER_FURIGANA_JP">レイヤーネーム　ふりがな（ひらがな）<span class="required"></span></label>
+                    <input type="text" id="LAYER_FURIGANA_JP" name="LAYER_FURIGANA_JP" placeholder="やまだ"  />
                 </div>
                 <div class="form-group">
-                    <label for="LAYER_FURIGANA_EN">レイヤーネーム　ふりがな（ローマ字）<span class="required">必須</span></label>
-                    <input type="text" id="LAYER_FURIGANA_EN" name="LAYER_FURIGANA_EN" placeholder="Yamada" required />
+                    <label for="LAYER_FURIGANA_EN">レイヤーネーム　ふりがな（ローマ字）<span class="required"></span></label>
+                    <input type="text" id="LAYER_FURIGANA_EN" name="LAYER_FURIGANA_EN" placeholder="Yamada" />
                 </div>
                 <div class="form-group">
                     <label for="AFFILIATION_DATE">所属日<span class="required"></span></label>
@@ -144,9 +144,13 @@
                                 <input type="radio" id="BIRTHDAY_FLG" name="BIRTHDAY_FLG" value="1" />
                                 公開する
                             </label>
+                            <label class="checkbox-label">
+                                <input type="radio" id="BIRTHDAY_FLG" name="BIRTHDAY_FLG" value="2" />
+                                年は非公開で日付だけ公開する
+                            </label>
                         </div>
                     </div>
-                    <input type="date" value="2000-01-01" id="BIRTHDAY" name="BIRTHDAY" />
+                    <input type="date" id="BIRTHDAY" name="BIRTHDAY" />
                 </div>
                 <div class="form-group">
                     <div class="check-area">
@@ -246,7 +250,7 @@
                 </div>
                 <div class="form-group">
                     <div class="check-area">
-                        <label for="SNS_1">X(旧Twitter) ID<span class="required"></span></label>
+                        <label for="SNS_2">instagram ID<span class="required"></span></label>
                         <div class="check-box">
                             <label class="checkbox-label">
                                 <input type="radio" name="SNS_2_FLG" value="0" checked />
@@ -262,7 +266,7 @@
                 </div>
                 <div class="form-group">
                     <div class="check-area">
-                        <label for="SNS_1">X(旧Twitter) ID<span class="required"></span></label>
+                        <label for="SNS_3">TikTok ID<span class="required"></span></label>
                         <div class="check-box">
                             <label class="checkbox-label">
                                 <input type="radio" name="SNS_3_FLG" value="0" checked />

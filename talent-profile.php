@@ -20,19 +20,21 @@
     <title>TALENT - COSPLATFORM</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            <?php foreach ($backImg as $row) {
-                echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
-            }
-            ?>
+    body {
+        <?php foreach ($backImg as $row) {
+            echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
         }
 
-        .subpage-hero {
-            <?php foreach ($topImg as $row) {
-                echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
-            }
-            ?>
+        ?>
+    }
+
+    .subpage-hero {
+        <?php foreach ($topImg as $row) {
+            echo 'background-image: url("'. $row['FILE_PATH'] . $row['FILE_NAME'] . '");';
         }
+
+        ?>
+    }
     </style>
 </head>
 
@@ -66,8 +68,7 @@
                                 </a>
                                 <?php endif; ?>
                                 <?php if($talentInfo['SNS_2_FLG'] ==='1') :?>
-                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_2']); ?>"
-                                    aria-label="Instagram">
+                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_2']); ?>" aria-label="Instagram">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -78,8 +79,7 @@
                                 </a>
                                 <?php endif; ?>
                                 <?php if($talentInfo['SNS_3_FLG'] ==='1') :?>
-                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_3']); ?>"
-                                    aria-label="TikTok">
+                                <a href="<?php echo htmlspecialchars($talentInfo['SNS_3']); ?>" aria-label="TikTok">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round">
@@ -94,10 +94,25 @@
                             <hr class="hr-line">
                             <div class="talent-details">
                                 <table>
-                                    <?php if($talentInfo['BIRTHDAY_FLG'] ==='1') :?>
+                                    <?php if($talentInfo['BIRTHDAY_FLG'] ==='1' || $talentInfo['BIRTHDAY_FLG'] ==='2') :?>
                                     <tr>
                                         <th>BIRTHDAY</th>
-                                        <td><?php echo date('Y/n/j',strtotime($talentInfo['BIRTHDAY'])); ?></td>
+                                        <td>
+                                            <?php 
+                                            if($talentInfo['BIRTHDAY_FLG'] === '1'){
+                                                echo date('Y/n/j',strtotime($talentInfo['BIRTHDAY'])); 
+                                            }
+                                            if($talentInfo['BIRTHDAY_FLG'] === '2'){
+                                                echo date('n/j',strtotime($talentInfo['BIRTHDAY'])); 
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <?php endif; ?>
+                                    <?php if($talentInfo['AGE_FLG'] ==='1') :?>
+                                    <tr>
+                                        <th>AGE</th>
+                                        <td><?php echo htmlspecialchars($talentInfo['AGE']); ?></td>
                                     </tr>
                                     <?php endif; ?>
                                     <?php if($talentInfo['FOLLOWERS_FLG'] ==='1') :?>
@@ -120,10 +135,10 @@
                                         <td style="display: none;"></td>
                                     </tr>
                                     <?php if($talentInfo['HEIGHT_FLG'] ==='1'):?>
-                                        <tr>
-                                            <td colspan="1">Height:<?php echo htmlspecialchars($talentInfo['HEIGHT']); ?>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="1">Height:<?php echo htmlspecialchars($talentInfo['HEIGHT']); ?>
+                                        </td>
+                                    </tr>
                                     <?php endif; ?>
                                     <?php if($talentInfo['THREE_SIZES_FLG'] ==='1'):?>
                                     <tr>
@@ -166,10 +181,10 @@
                         <?php endforeach; ?>
                     </div>
                     <div class="action-buttons">
-                        <button class="button photos-button">PHOTOS</button>
+                        <button class="button photos-button" active>PHOTOS</button>
                         <button class="button career-button">CAREER</button>
                     </div>
-                    <div class="photos-info" style="display: none;">
+                    <div class="photos-info" >
                         <div class="photos-slider-container">
                             <button class="slider-arrow prev-arrow" aria-label="前の画像へ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -198,30 +213,27 @@
                     </div>
                     <div class="career-info" style="display: none;">
                         <div class="career-categories">
-                            <?php 
-                            $count = 1;
-                            foreach ($careerCategory as $items): 
-                                if($count % 2 === 0) {
-                                    echo '<div class="career-category2">';
-                                }else{
-                                    echo '<div class="career-category">';
-                                }
-                            ?>
-                            <h3><?php echo htmlspecialchars($items['CAREER_CATEGORY_NAME']); ?></h3>
-                            <hr class="hr-line">
-                            <ul>
-                                <?php foreach ($talentCareer as $item){
-                                    if($items['CAREER_CATEGORY_NAME'] === $item['CAREER_CATEGORY_NAME']){
-                                        echo '<li>' . htmlspecialchars($item['CONTENT']) . '</li>';
-                                    }
-                                }
-                                ?>
-                            </ul>
-                            <?php 
-                            echo '</div>';
-                            $count++; 
-                            endforeach;
-                            ?>
+                            <?php foreach ($careerCategory as $category): ?>
+                            <div class="career-category">
+                                <h3><?php echo htmlspecialchars($category['CAREER_CATEGORY_NAME']); ?></h3>
+                                <hr class="hr-line">
+                                <ul>
+                                    <?php foreach ($talentCareer as $career):
+                                        if ($category['CAREER_CATEGORY_NAME'] === $career['CAREER_CATEGORY_NAME']):
+                                    ?>
+                                    <li>
+                                        <span
+                                            class="career-date"><?php echo htmlspecialchars($career['ACTIVE_DATE']); ?></span>
+                                        <span
+                                            class="career-content"><?php echo htmlspecialchars($career['CONTENT']); ?></span>
+                                    </li>
+                                    <?php
+                                        endif;
+                                    endforeach;
+                                    ?>
+                                </ul>
+                            </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </section>
@@ -277,6 +289,10 @@
             photosButton.classList.add('active');
             updateSliderLayout();
         });
+
+        hideAllSections();
+        photosInfo.style.display = 'block';
+        photosButton.classList.add('active');
 
         // プレビュー機能
         photoItems.forEach(item => {

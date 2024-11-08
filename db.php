@@ -40,13 +40,17 @@
         //VIEW_FLG in ('S201')
         public function getSlideCnt(){
             
-            $sql = "select count(*)"
+            $sql = "select count(*) CNT"
                 . " from IMG_LIST  "
                 . " where VIEW_FLG in ('S201') "
                 . "   and DEL_FLG = '0' "
                 . " order by PRIORITY; ";
             // SQL文を実行
-            return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
+            $row = $this->db->query($sql, PDO::FETCH_ASSOC);
+            foreach ($row as $cnt) {
+                $count = $cnt['CNT'];
+            }
+            return $count;
         }
 
         //タレントと紐つかない画像を取得するSQL
@@ -74,6 +78,7 @@
                         . " where img.VIEW_FLG = ? "
                         . " and img.DEL_FLG = '0' "
                         . " and t.TALENT_ID = img.TALENT_ID "
+                        . " and PRIORITY > 0 "
                         . " order by img.PRIORITY "
                         . " limit ? ;");
             }
@@ -83,6 +88,7 @@
                         . " from IMG_LIST "
                         . " where VIEW_FLG = ? "
                         . " and DEL_FLG = '0'"
+                        . " and PRIORITY > 0 "
                         . " order by PRIORITY "
                         . " limit ? ;");
             }
@@ -143,7 +149,7 @@
                     . "and img2.VIEW_FLG = '02' "
                     . "and t.DEL_FLG = '0' "
                     . "and t.RETIREMENT_DATE > CURDATE() "
-                    . "order by img1.PRIORITY ; ";
+                    . "order by img1.PRIORITY, t.LAYER_NAME ; ";
 
             // SQL文を実行
             return $row = $this->db->query($sql, PDO::FETCH_ASSOC);
@@ -244,13 +250,14 @@
         //TALENT詳細ページのタレントのキャリアを取得するSQL
         public function getTalentCareer(String $talentId='0'){
             
-            $sql = $this->db->prepare("select mcr.CAREER_CATEGORY_NAME CAREER_CATEGORY_NAME, cr.CONTENT CONTENT"
+            $sql = $this->db->prepare("select mcr.CAREER_CATEGORY_NAME CAREER_CATEGORY_NAME, cr.CONTENT CONTENT, cr.ACTIVE_DATE ACTIVE_DATE, cr.DETAIL DETAIL"
                             . " from TALENT t, TALENT_CAREER cr, M_CAREER_CATEGORY mcr "
                             . " where t.TALENT_ID = cr.TALENT_ID "
                             . " and cr.CAREER_CATEGORY_ID = mcr.CAREER_CATEGORY_ID "
                             . " and t.DEL_FLG = '0' "
                             . " and t.RETIREMENT_DATE > CURDATE() "
-                            . " and cr.TALENT_ID= ? ;");
+                            . " and cr.TALENT_ID= ? "
+                            . " order by cr.ACTIVE_DATE, cr.CAREER_ID;");
             // SQL文を実行
             $sql->bindValue(1, $talentId);
             $sql->execute();

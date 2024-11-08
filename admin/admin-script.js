@@ -66,7 +66,26 @@ function checkSubmit(type){
     if(confirm(type.concat('しますか？'))){ 
         return true; 
     }else{
-        alert('キャンセルされました'); 
         return false; 
     }
 }
+
+function checkSubmit(action) {
+    return confirm(action ? `この${itemName}を${action}してもよろしいですか？` : 'この操作を実行してもよろしいですか？');
+}
+
+function resetForm() {
+    document.getElementById('adminForm').reset();
+    document.getElementById('ITEM_ID').value = '';
+    document.getElementById('EXE_ID').value = submitExeId;
+    document.getElementById('submitBtn').textContent = '登録';
+}
+
+window.addEventListener('scroll', function() {
+    var backToTopButton = document.querySelector('.back-to-top');
+    if (window.pageYOffset > 300) {
+        backToTopButton.style.display = 'block';
+    } else {
+        backToTopButton.style.display = 'none';
+    }
+});

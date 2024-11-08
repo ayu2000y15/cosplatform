@@ -137,15 +137,29 @@
     //タレント経歴登録
     if ($exeId === '13_1'){
         $exeId = '13_1 ok';
-        $obj->insertTalentCareer($talentId, $_POST["CAREER_CATEGORY_ID"], $_POST["CONTENT"], $_POST["DETAIL"]);
+        $obj->insertTalentCareer($talentId, $_POST["CAREER_CATEGORY_ID"], $_POST["CONTENT"],$_POST["ACTIVE_DATE"], $_POST["DETAIL"]);
         $message = "タレントの経歴が登録されました。";
     }
 
     //タレント経歴削除
     if ($exeId === '13_2'){
         $exeId = '13_2 ok';
-        $obj->deleteTalentCareer($talentId, $_POST["CAREER_CATEGORY_ID"], $_POST["CONTENT"]);
+        $obj->deleteTalentCareer($_POST["CAREER_ID"]);
         $message = "タレントの経歴が削除されました。";
+    }
+
+    //タレント経歴更新
+    if ($exeId === '13_3'){
+        $exeId = '13_3 ok';
+        $careerList = [
+            "CAREER_ID"          => $_POST['CAREER_ID'],
+            "CAREER_CATEGORY_ID" => $_POST['CAREER_CATEGORY_ID'],
+            "CONTENT"            => $_POST['CONTENT'],
+            "ACTIVE_DATE"        => $_POST['ACTIVE_DATE'],
+            "DETAIL"             => $_POST['DETAIL']
+        ];
+        $obj->updateTalentCareer($careerList);
+        $message = "タレントの経歴が更新されました。";
     }
 
     //タレントのタグを削除
@@ -190,11 +204,13 @@ console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
 </head>
 
 <body>
+    <a id="top"></a>
     <?php include '00-admin-header.php'; ?>
     <main>
         <section class="subpage-hero">
-            <h1>タレント情報編集ページ</h1>
+            <h1>タレント管理</h1>
         </section>
+        <a href="#top" class="back-to-top">トップへ戻る</a>
         <div class="container">
             <div class="container-box">
                 <div class="talent-header">

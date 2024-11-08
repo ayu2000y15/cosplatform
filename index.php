@@ -41,11 +41,8 @@
                     <?php
                     foreach ($slides as $slide) {
                         echo '<div class="slide fade">';
+                        echo '<div class="slide-image-container">';
                         echo '<img src="' . htmlspecialchars($slide['FILE_PATH']) . htmlspecialchars($slide['FILE_NAME']) . '" alt="' . htmlspecialchars($slide['ALT']) . '">';
-                        echo '<div class="slide-content">';
-                        echo '<h1>' . htmlspecialchars($slide['TITLE']) . '</h1>';
-                        echo '<p>' . htmlspecialchars($slide['DISCRIPTION']) . '</p>';
-                        //echo '<button>詳細を見る</button>';
                         echo '</div>';
                         echo '</div>';
                     }
@@ -55,7 +52,7 @@
                 </div>
                 <div class="dot-container">
                     <?php
-                    for ($i = 0; $i < 3; $i++) {
+                    for ($i = 0; $i < $slidesCnt; $i++) {
                         echo '<span class="dot" onclick="currentSlide(' . ($i + 1) . ')"></span>';
                     }
                     ?>

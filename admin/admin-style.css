@@ -86,6 +86,21 @@ body {
     color: #ff69b4;
 }
 
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: none;
+}
+
+.back-to-top:hover {
+    background-color: #0056b3;
+}
 
 .social-icons {
     display: flex;
@@ -393,13 +408,13 @@ body {
 }
 
 .multi-button.submit-button {
-    background-color: #2ecc71;
+    background-color: #3498db;
     width: auto;
     display: inline-block;
 }
 
 .multi-button.submit-button:hover {
-    background-color: #27ae60;
+    background-color: #2980b9;
 }
 
 .tag-table{

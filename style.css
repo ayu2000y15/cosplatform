@@ -169,28 +169,6 @@ h2 {
     object-fit: cover;
 }
 
-.slide-content {
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.9);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: black;
-    z-index: 1;
-    padding: 2rem;
-}
-
-.slide-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.slide-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-}
-
 .connect-image {
     width: 100%;
     padding-top: 56.25%; /* 16:9のアスペクト比 */
@@ -797,49 +775,42 @@ h2 {
 }
 
 .career-categories {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
 .career-category {
-    width: 48%; /* 2列レイアウトのため */
-    margin-bottom: 2rem;
-    float: left; /* 左に配置 */
-    clear: left; /* 左側に確実に配置されるようにする */
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.career-category2 {
-    width: 48%; /* 2列レイアウトのため */
-    margin-bottom: 2rem;
-    float: right; /* 右に配置 */
-    clear: right; /* 右側に確実に配置されるようにする */
-}
-
-/* career-categoryとcareer-category2の共通スタイル */
-.career-category h3,
-.career-category2 h3 {
-    font-size: 1.2rem;
+.career-category h3 {
     color: #583F99;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
-.career-category ul,
-.career-category2 ul {
+.career-category ul {
     list-style-type: none;
     padding-left: 0;
 }
 
-.career-category li,
-.career-category2 li {
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
+.career-category li {
+    margin-bottom: 1rem;
 }
 
-/* クリアフィックスを追加して、フロートの問題を解決 */
-.career-categories::after {
-    content: "";
-    display: table;
-    clear: both;
+.career-date {
+    display: block;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.career-content {
+    display: block;
 }
 
 .photos-slider-container {
@@ -1162,8 +1133,7 @@ h2 {
     }
 
     .hero {
-        height: 50vh;
-        min-height: 300px;
+        padding-top: 56.25%;
     }
 
     .slide-content {
@@ -1307,11 +1277,8 @@ h2 {
         margin: 0 auto;
     }
 
-    .career-category,
-    .career-category2 {
-        width: 100%;
-        float: none;
-        clear: both;
+    .career-categories {
+        grid-template-columns: 1fr;
     }
 
     .button {

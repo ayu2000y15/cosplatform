@@ -50,14 +50,14 @@
                         value="<?php echo htmlspecialchars($row['LAYER_NAME']); ?>" required />
                 </div>
                 <div class="form-group">
-                    <label for="LAYER_FURIGANA_JP">レイヤーネーム　ふりがな（ひらがな）<span class="required">必須</span></label>
+                    <label for="LAYER_FURIGANA_JP">レイヤーネーム　ふりがな（ひらがな）<span class="required"></span></label>
                     <input type="text" id="LAYER_FURIGANA_JP" name="LAYER_FURIGANA_JP" placeholder="やまだ"
-                        value="<?php echo htmlspecialchars($row['LAYER_FURIGANA_JP']); ?>" required />
+                        value="<?php echo htmlspecialchars($row['LAYER_FURIGANA_JP']); ?>" />
                 </div>
                 <div class="form-group">
-                    <label for="LAYER_FURIGANA_EN">レイヤーネーム　ふりがな（ローマ字）<span class="required">必須</span></label>
+                    <label for="LAYER_FURIGANA_EN">レイヤーネーム　ふりがな（ローマ字）<span class="required"></span></label>
                     <input type="text" id="LAYER_FURIGANA_EN" name="LAYER_FURIGANA_EN" placeholder="Yamada"
-                        value="<?php echo htmlspecialchars($row['LAYER_FURIGANA_EN']); ?>" required />
+                        value="<?php echo htmlspecialchars($row['LAYER_FURIGANA_EN']); ?>" />
                 </div>
                 <div class="form-group">
                     <label for="AFFILIATION_DATE">所属日<span class="required"></span></label>
@@ -85,26 +85,14 @@
                     <div class="check-area">
                         <label for="FOLLOWERS">フォロワー数（およそ）<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['FOLLOWERS_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="FOLLOWERS_FLG" value="0" checked />
+                                <input type="radio" name="FOLLOWERS_FLG" value="0" <?php echo ($view['FOLLOWERS_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="FOLLOWERS_FLG" name="FOLLOWERS_FLG" value="1" />
+                                <input type="radio" name="FOLLOWERS_FLG" value="1" <?php echo ($view['FOLLOWERS_FLG'] == '1') ? 'checked' : ''; ?>/>
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['FOLLOWERS_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="FOLLOWERS_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="FOLLOWERS_FLG" name="FOLLOWERS_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="number" id="FOLLOWERS" name="FOLLOWERS" placeholder="100"
@@ -127,52 +115,24 @@
                 </div>
                 <div class="form-group">
                     <label for="COS_FLG">コスプレの種類（男装、女装）<span class="required"></span></label>
-                    <?php if($row['COS_FLG']==='1' || empty($row['COS_FLG'])) : ?>
                     <select id="COS_FLG" name="COS_FLG">
-                        <option value="1">男装</option>
-                        <option value="2">女装</option>
-                        <option value="3">男装・女装</option>
+                        <option value="1" <?php echo ($row['COS_FLG'] == '1') ? 'selected' : ''; ?>>男装</option>
+                        <option value="2" <?php echo ($row['COS_FLG'] == '2') ? 'selected' : ''; ?>>女装</option>
+                        <option value="3" <?php echo ($row['COS_FLG'] == '3') ? 'selected' : ''; ?>>男装・女装</option>
                     </select>
-                    <?php endif; ?>
-                    <?php if($row['COS_FLG']==='2') : ?>
-                    <select id="COS_FLG" name="COS_FLG">
-                        <option value="2">女装</option>
-                        <option value="1">男装</option>
-                        <option value="3">男装・女装</option>
-                    </select>
-                    <?php endif; ?>
-                    <?php if($row['COS_FLG']==='3') : ?>
-                    <select id="COS_FLG" name="COS_FLG">
-                        <option value="3">男装・女装</option>
-                        <option value="1">男装</option>
-                        <option value="2">女装</option>
-                    </select>
-                    <?php endif; ?>
                 </div>
                 <div class="form-group">
                     <div class="check-area">
                         <label for="HEIGHT">身長<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['HEIGHT_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="HEIGHT_FLG" value="0" checked />
+                                <input type="radio" name="HEIGHT_FLG" value="0" <?php echo ($view['HEIGHT_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="HEIGHT_FLG" name="HEIGHT_FLG" value="1" />
+                                <input type="radio" name="HEIGHT_FLG" value="1" <?php echo ($view['HEIGHT_FLG'] == '1') ? 'checked' : ''; ?> />
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['HEIGHT_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="HEIGHT_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="HEIGHT_FLG" name="HEIGHT_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="number" id="HEIGHT" name="HEIGHT"
@@ -182,26 +142,14 @@
                     <div class="check-area">
                         <label for="AGE">年齢<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['AGE_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="AGE_FLG" value="0" checked />
+                                <input type="radio" name="AGE_FLG" value="0" <?php echo ($view['AGE_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="AGE_FLG" name="AGE_FLG" value="1" />
+                                <input type="radio" name="AGE_FLG" value="1" <?php echo ($view['AGE_FLG'] == '1') ? 'checked' : ''; ?> />
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['AGE_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="AGE_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="AGE_FLG" name="AGE_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="number" id="AGE" name="AGE" value="<?php echo htmlspecialchars($row['AGE']); ?>"
@@ -211,26 +159,18 @@
                     <div class="check-area">
                         <label for="BIRTHDAY">誕生日<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['BIRTHDAY_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="BIRTHDAY_FLG" value="0" checked />
+                                <input type="radio" name="BIRTHDAY_FLG" value="0" <?php echo ($view['BIRTHDAY_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="BIRTHDAY_FLG" name="BIRTHDAY_FLG" value="1" />
+                                <input type="radio" name="BIRTHDAY_FLG" value="1" <?php echo ($view['BIRTHDAY_FLG'] == '1') ? 'checked' : ''; ?>/>
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['BIRTHDAY_FLG']==='1'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="BIRTHDAY_FLG" value="0" />
-                                非公開
+                                <input type="radio" name="BIRTHDAY_FLG" value="2" <?php echo ($view['BIRTHDAY_FLG'] == '2') ? 'checked' : ''; ?>/>
+                                年は非公開で日付だけ公開する
                             </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="BIRTHDAY_FLG" name="BIRTHDAY_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="date" id="BIRTHDAY" name="BIRTHDAY"
@@ -240,26 +180,14 @@
                     <div class="check-area">
                         <label for="THREE_SIZES_B">スリーサイズ　バスト<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['THREE_SIZES_B_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="THREE_SIZES_B_FLG" value="0" checked />
+                                <input type="radio" name="THREE_SIZES_B_FLG" value="0" <?php echo ($view['THREE_SIZES_B_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="THREE_SIZES_B_FLG" name="THREE_SIZES_B_FLG" value="1" />
+                                <input type="radio" name="THREE_SIZES_B_FLG" value="1" <?php echo ($view['THREE_SIZES_B_FLG'] == '1') ? 'checked' : ''; ?>/>
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['THREE_SIZES_B_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="THREE_SIZES_B_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="THREE_SIZES_B_FLG" name="THREE_SIZES_B_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="number" id="THREE_SIZES_B" name="THREE_SIZES_B"
@@ -269,26 +197,14 @@
                     <div class="check-area">
                         <label for="THREE_SIZES_W">スリーサイズ　ウエスト<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['THREE_SIZES_W_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="THREE_SIZES_W_FLG" value="0" checked />
+                                <input type="radio" name="THREE_SIZES_W_FLG" value="0" <?php echo ($view['THREE_SIZES_W_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="THREE_SIZES_W_FLG" name="THREE_SIZES_W_FLG" value="1" />
+                                <input type="radio" name="THREE_SIZES_W_FLG" value="1" <?php echo ($view['THREE_SIZES_W_FLG'] == '1') ? 'checked' : ''; ?> />
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['THREE_SIZES_W_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="THREE_SIZES_W_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="THREE_SIZES_W_FLG" name="THREE_SIZES_W_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="number" id="THREE_SIZES_W" name="THREE_SIZES_W"
@@ -298,26 +214,14 @@
                     <div class="check-area">
                         <label for="THREE_SIZES_H">スリーサイズ　ヒップ<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['THREE_SIZES_H_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="THREE_SIZES_H_FLG" value="0" checked />
+                                <input type="radio" name="THREE_SIZES_H_FLG" value="0" <?php echo ($view['THREE_SIZES_H_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="THREE_SIZES_H_FLG" name="THREE_SIZES_H_FLG" value="1" />
+                                <input type="radio" name="THREE_SIZES_H_FLG" value="1" <?php echo ($view['THREE_SIZES_H_FLG'] == '1') ? 'checked' : ''; ?>/>
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['THREE_SIZES_H_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="THREE_SIZES_H_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="THREE_SIZES_H_FLG" name="THREE_SIZES_H_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="number" id="THREE_SIZES_H" name="THREE_SIZES_H"
@@ -327,27 +231,14 @@
                     <div class="check-area">
                         <label for="HOBBY_SPECIALTY">趣味・特技<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['HOBBY_SPECIALTY_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="HOBBY_SPECIALTY_FLG" value="0" checked />
+                                <input type="radio" name="HOBBY_SPECIALTY_FLG" value="0" <?php echo ($view['HOBBY_SPECIALTY_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="HOBBY_SPECIALTY_FLG" name="HOBBY_SPECIALTY_FLG" value="1" />
+                                <input type="radio" name="HOBBY_SPECIALTY_FLG" value="1" <?php echo ($view['HOBBY_SPECIALTY_FLG'] == '1') ? 'checked' : ''; ?>/>
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['HOBBY_SPECIALTY_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="HOBBY_SPECIALTY_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="HOBBY_SPECIALTY_FLG" name="HOBBY_SPECIALTY_FLG" value="1"
-                                    checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="text" id="HOBBY_SPECIALTY" name="HOBBY_SPECIALTY"
@@ -357,26 +248,14 @@
                     <div class="check-area">
                         <label for="COMMENT">紹介文・コメント<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['COMMENT_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="COMMENT_FLG" value="0" checked />
+                                <input type="radio" name="COMMENT_FLG" value="0" <?php echo ($view['COMMENT_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="COMMENT_FLG" name="COMMENT_FLG" value="1" />
+                                <input type="radio" name="COMMENT_FLG" value="1" <?php echo ($view['COMMENT_FLG'] == '1') ? 'checked' : ''; ?>/>
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['COMMENT_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="COMMENT_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="COMMENT_FLG" name="COMMENT_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <textarea id="COMMENT" name="COMMENT" rows="5"
@@ -386,26 +265,14 @@
                     <div class="check-area">
                         <label for="SNS_1">X(旧Twitter) ID<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['SNS_1_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="SNS_1_FLG" value="0" checked />
+                                <input type="radio" name="SNS_1_FLG" value="0" <?php echo ($view['SNS_1_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="SNS_1_FLG" name="SNS_1_FLG" value="1" />
+                                <input type="radio" name="SNS_1_FLG" value="1" <?php echo ($view['SNS_1_FLG'] == '1') ? 'checked' : ''; ?>/>
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['SNS_1_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="SNS_1_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="SNS_1_FLG" name="SNS_1_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="text" id="SNS_1" name="SNS_1" value="<?php echo htmlspecialchars($row['SNS_1']); ?>"
@@ -415,26 +282,14 @@
                     <div class="check-area">
                         <label for="SNS_2">Instagram ID<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['SNS_2_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="SNS_2_FLG" value="0" checked />
+                                <input type="radio" name="SNS_2_FLG" value="0" <?php echo ($view['SNS_2_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="SNS_2_FLG" name="SNS_2_FLG" value="1" />
+                                <input type="radio" name="SNS_2_FLG" value="1" <?php echo ($view['SNS_2_FLG'] == '1') ? 'checked' : ''; ?>/>
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['SNS_2_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="SNS_2_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="SNS_2_FLG" name="SNS_2_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="text" id="SNS_2" name="SNS_2" value="<?php echo htmlspecialchars($row['SNS_2']); ?>"
@@ -444,26 +299,14 @@
                     <div class="check-area">
                         <label for="SNS_3">TikTok ID<span class="required"></span></label>
                         <div class="check-box">
-                            <?php if($view['SNS_3_FLG']==='0'): ?>
                             <label class="checkbox-label">
-                                <input type="radio" name="SNS_3_FLG" value="0" checked />
+                                <input type="radio" name="SNS_3_FLG" value="0" <?php echo ($view['SNS_3_FLG'] == '0') ? 'checked' : ''; ?> />
                                 非公開
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" id="SNS_3_FLG" name="SNS_3_FLG" value="1" />
+                                <input type="radio" name="SNS_3_FLG" value="1" <?php echo ($view['SNS_3_FLG'] == '1') ? 'checked' : ''; ?>/>
                                 公開する
                             </label>
-                            <?php endif; ?>
-                            <?php if($view['SNS_3_FLG']==='1'): ?>
-                            <label class="checkbox-label">
-                                <input type="radio" name="SNS_3_FLG" value="0" />
-                                非公開
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="radio" id="SNS_3_FLG" name="SNS_3_FLG" value="1" checked />
-                                公開する
-                            </label>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <input type="text" id="SNS_3" name="SNS_3" value="<?php echo htmlspecialchars($row['SNS_3']); ?>"

@@ -86,6 +86,27 @@
         $message = "タレントが登録されました。タレント詳細ページで各種登録を行ってください。";
     }
 
+    //ニュース登録
+    if ($exeId === '03_1') {
+        $exeId = '03_1 ok'; 
+        $obj->insertNews($_POST['TITLE'], $_POST['CONTENT'], $_POST['POST_DATE']);
+        $message = "ニュースが登録されました。";
+    }
+
+    //ニュース内容変更
+    if ($exeId === '03_2') {
+        $exeId = '03_2 ok'; 
+        $obj->updateNews($_POST['TITLE'], $_POST['CONTENT'], $_POST['POST_DATE'], $_POST['NEWS_ID']);
+        $message = "ニュースが更新されました。";
+    }
+
+    //ニュース削除
+    if ($exeId === '03_3') {
+        $exeId = '03_3 ok'; 
+        $obj->deleteNews($_POST['NEWS_ID']);
+        $message = "ニュースが削除されました。";
+    }
+
     //新規写真を登録
     if ($exeId === '04_1') {
         $exeId = '04_1 ok'; 
@@ -160,11 +181,13 @@ console.log('<?php echo $_SERVER["REQUEST_METHOD"] . ':' . $exeId; ?>')
 </head>
 
 <body>
+    <a id="top"></a>
     <?php include '00-admin-header.php'; ?>
     <main>
         <section class="subpage-hero">
-            <h1>管理者ページ</h1>
+            <h1>全体管理</h1>
         </section>
+        <a href="#top" class="back-to-top">トップへ戻る</a>
         <div class="container">
             <div class="container-box">
                 <section class="admin">

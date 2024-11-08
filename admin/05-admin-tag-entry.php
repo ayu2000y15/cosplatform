@@ -21,7 +21,6 @@
             <p>※タレントに紐つくハッシュタグはタレント編集より行ってください。<br>
                 　ここではハッシュタグの登録や削除が行えます。</p>
 
-            <hr class="hr-line">
             <h3>◆タグを新しく作成</h3>
             <form onsubmit="return checkSubmit('登録');" action="00-admin.php" method="POST">
                 <input type="hidden" name="EXE_ID" value="05_1">
